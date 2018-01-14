@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'articles', component: ArticlesComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'doctors', component: DoctorsComponent},
-  { path: 'staff', component: StaffComponent}
+  { path: 'staff', component: StaffComponent},
   { path: 'expect', component: ExpectComponent}
 ];
 
