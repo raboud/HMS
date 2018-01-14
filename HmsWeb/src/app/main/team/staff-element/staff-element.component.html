@@ -1,0 +1,9 @@
+<div [ngClass]="{ odd: odd, even: even }">
+    <img *ngIf='member.Picture' [src]='member.Picture' alt="" >
+    <h3>{{FullName}}</h3>
+    <h4 *ngIf='member.Title'>{{member.Title}}</h4>
+    <h5 *ngIf='member.Contact'><a href='mailto:{{member.Contact}}' >Contact: {{member.Contact}}</a></h5>
+    <p>{{member.Bio}}</p>
+    <div *ngIf='member.Quote'>"{{member.Quote}}"</div>
+    <div *ngIf='member.FullCreds'>{{member.FullCreds}}</div>
+</div>​

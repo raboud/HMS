@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+h1 {
+  color: orange;
+}
+
+h2 {
+  color: orange;
+}
+
+h3 {
+  color: orange;
+}
+
+h4 {
+  color: orange;
+}
+
+h5 {
+  color: orange;
+}
+
+ul {
+  color: orange;
+  font-size: 30px;
+  list-style-position: inside;
+  text-align: center;
+}
+
+li {
+  color: white;
+  font-size: 15px;
+}
+
+.content {
+  padding: 20px;
+  overflow: hidden;
+}
+
+.content h3 {
+  text-align: left;
+}
+
+.content img {
+  margin-right: 15px;
+  float: left;
+}
+
+.content:nth-child(odd) img {
+  margin-right: 15px;
+  float: right;
+}

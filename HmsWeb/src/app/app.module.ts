@@ -1,19 +1,50 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './main/header/header.component';
+import { FooterComponent } from './main/footer/footer.component';
+import { HomeComponent } from './main/home/home.component';
+import { ExpertiseComponent } from './main/expertise/expertise.component';
+import { TeamComponent } from './main/team/team.component';
+import { PracticeComponent } from './main/practice/practice.component';
+import { PatientsComponent } from './main/patients/patients.component';
+import { IvTherapyComponent } from './main/iv-therapy/iv-therapy.component';
+import { ArticlesComponent } from './main/articles/articles.component';
+import { ContactComponent } from './main/contact/contact.component';
+import { DoctorsComponent } from './main/team/doctors/doctors.component';
+import { StaffComponent } from './main/team/staff/staff.component';
+import { StaffElementComponent } from './main/team/staff-element/staff-element.component';
+import { ExpectComponent } from './main/expect/expect.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    HomeComponent,
+    ExpertiseComponent,
+    TeamComponent,
+    PracticeComponent,
+    PatientsComponent,
+    IvTherapyComponent,
+    ArticlesComponent,
+    ContactComponent,
+    DoctorsComponent,
+    StaffComponent,
+    StaffElementComponent,
+    ExpectComponent
   ],
   imports: [
+    NgbModule.forRoot(),
     BrowserModule,
     AppRoutingModule
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],
   bootstrap: [AppComponent]
 })

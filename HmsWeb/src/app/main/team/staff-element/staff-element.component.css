@@ -1,0 +1,27 @@
+.even img {
+  margin-right: 15px;
+  float: left;
+}
+
+.odd img {
+  margin-left: 15px;
+  float: right;
+}
+
+.odd {
+  padding: 20px;
+  overflow: hidden;
+}
+
+.even {
+  padding: 20px;
+  overflow: hidden;
+}
+
+.odd p {
+  text-align: right;
+}
+
+.even p {
+  text-align: left;
+}
