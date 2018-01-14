@@ -16,7 +16,7 @@ export class DoctorsComponent implements OnInit {
       It was during the later years of his conventional medical work that he recognized that short of immediate needs and true lifesaving emergencies, pharmaceutical-based medicine was a failure in healing any patient, and the numerous drug side effects and deaths were disturbing even though they were "approved."
       Opening his eyes to other long-practiced medical methods like Naturopathy excited him and he earned an N.M.D. (Naturopathic Medical Doctor) from Southern Graduate Institute of St. Luke's School of Medicine.  Over his career in medicine, he has been board-certified in Emergency Medicine and presently, Holistic and Integrative Medicine.  Interests in pain management as well as ozone therapies have earned him a Diplomate of the American Academy of Pain Management and advanced certifications as an ozone practitioner through the American Academy of Ozonotherapy.
       So what does all this mean to a patient?  For over 25 years, his heightened level of training in both conventional and alternative medicine with these additional certifications allows for a comprehensive healing approach to patient wellness. He regularly attends diverse medical conferences to stay abreast of his specialty.`,
-      Picture: '../../../../assets/frank.webp',
+      Picture: '../../../../assets/frank.jpg',
       Quote: `God designed the body to heal and I was put here by Him to assist in the process. I am thankful for the gifts He has given me.  If I can't help in your healing I will try to refer you to someone who perhaps can.`,
       FullCreds: 'D.O., N.M.D., A.B.I.H.M., D.A.A.P.M., F.A.A.O. A.P.T.'
     }
