@@ -1,5 +1,7 @@
-<div class='col-md-10 col-md-offset-1'>
+<div>
   <h1>Our Staff</h1>
+</div>
+<div class='col-12'>
   <div *ngFor='let mem of members; let index=index; let odd=odd, let even=even' class='row'>
     <app-staff-element [member]='mem' [even]='even' [odd]='odd'></app-staff-element>
   </div>

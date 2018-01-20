@@ -30,3 +30,23 @@ li {
   color: white;
   font-size: 15px;
 }
+
+.logo {
+  text-align:left;
+  color:white;
+}
+
+.phone {
+  text-align: right;
+}
+@media (mmax-width: 768px) {
+  logo {
+    text-align:center;
+  }
+
+  phone {
+    text-align: center;
+  }
+
+ }
+
