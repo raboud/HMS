@@ -14,12 +14,11 @@
 
 <header>
   <nav class="navbar navbar-expand-xl navbar-inverse bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample06" aria-controls="navbarsExample06"
-      aria-expanded="false" aria-label="Toggle navigation" (click)="menu()">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" (click)="menu()">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarsExample06" [ngbCollapse]="isActive">
+    <div class="collapse navbar-collapse" [ngbCollapse]="isActive">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" routerLink='home' routerLinkActive="active">Home</a>
@@ -56,36 +55,4 @@
       </ul>
     </div>
   </nav>
-  <!--  <div class='row'>
-  <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" (click)="menu()">
-           <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-
-      <div class="collapse navbar-collapse" [ngbCollapse]="isActive">
-        <ul class="nav navbar-nav">
-          <li ngbDropdown class='nav-item active dropdown'>
-            <a ngbDropdownToggle class='dropdown-toggle' data-toggle='dropdown'>
-              <span class='caret'></span>
-            </a>
-
-            <ul ngbDropdownMenu class='dropdown-menu' role='menu'>
-            </ul>
-          </li>
-          <li ngbDropdown class='nav-item active dropdown'>
-            <a ngbDropdownToggle class='dropdown-toggle' data-toggle='dropdown'>Our Patients
-              <span class='caret'></span>
-            </a>
-            <ul ngbDropdownMenu class='dropdown-menu' role='menu'>
-            </ul>
-          </li>
-
-        </ul>
-      </div>
-    </div>
-  </nav>
--->
 </header>
