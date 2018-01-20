@@ -21,35 +21,35 @@
     <div class="collapse navbar-collapse" [ngbCollapse]="isActive">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" routerLink='home' routerLinkActive="active">Home</a>
+          <a class="nav-link" routerLink='home' routerLinkActive="active" (click)="isActive = true">Home</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" routerLink='expertise' routerLinkActive="active">Areas of Expertise</a>
+          <a class="nav-link" routerLink='expertise' routerLinkActive="active" (click)="isActive = true">Areas of Expertise</a>
         </li>
         <li ngbDropdown class="nav-item dropdown active">
           <a ngbDropdownToggle class="nav-link dropdown-toggle active" id="dropdownPatient" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">Our Patients</a>
           <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownPatient">
-            <a class="dropdown-item" routerLink='expect' routerLinkActive="active">What to Expect</a>
-            <a class="dropdown-item" href='../../../assets/newpatient.pdf' target="_blank">New Patient form</a>
-            <a class="dropdown-item" href='../../../assets/recordrelease.pdf' target="_blank">Patient Record Release Form</a>
+            <a class="dropdown-item" routerLink='expect' routerLinkActive="active" (click)="isActive = true">What to Expect</a>
+            <a class="dropdown-item" href='../../../assets/newpatient.pdf' target="_blank" (click)="isActive = true">New Patient form</a>
+            <a class="dropdown-item" href='../../../assets/recordrelease.pdf' target="_blank" (click)="isActive = true">Patient Record Release Form</a>
           </div>
         </li>
 
         <li class="nav-item active">
-          <a class="nav-link" routerLink='iv_therapy' routerLinkActive="active">I./V. Therapy</a>
+          <a class="nav-link" routerLink='iv_therapy' routerLinkActive="active" (click)="isActive = true">I./V. Therapy</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" routerLink='articles' routerLinkActive="active">Health Aticles</a>
+          <a class="nav-link" routerLink='articles' routerLinkActive="active" (click)="isActive = true">Health Aticles</a>
         </li>
         <li ngbDropdown class="nav-item dropdown">
           <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdownAbout" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About Us</a>
           <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownAbout">
-            <a class="dropdown-item" routerLink='practice' routerLinkActive="active">Our Practice</a>
-            <a class="dropdown-item" routerLink='team' routerLinkActive="active">Meet our Team</a>
-            <a class="dropdown-item" routerLink='doctors' routerLinkActive="active">Our Doctors</a>
-            <a class="dropdown-item" routerLink='staff' routerLinkActive="active">Our Staff</a>
-            <a class="dropdown-item" routerLink='contact' routerLinkActive="active">Contact Us</a>
+            <a class="dropdown-item" routerLink='practice' routerLinkActive="active" (click)="isActive = true">Our Practice</a>
+            <a class="dropdown-item" routerLink='team' routerLinkActive="active" (click)="isActive = true">Meet our Team</a>
+            <a class="dropdown-item" routerLink='doctors' routerLinkActive="active" (click)="isActive = true">Our Doctors</a>
+            <a class="dropdown-item" routerLink='staff' routerLinkActive="active" (click)="isActive = true">Our Staff</a>
+            <a class="dropdown-item" routerLink='contact' routerLinkActive="active" (click)="isActive = true">Contact Us</a>
           </div>
         </li>
       </ul>
