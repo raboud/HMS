@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -19,6 +18,9 @@ import { DoctorsComponent } from './main/team/doctors/doctors.component';
 import { StaffComponent } from './main/team/staff/staff.component';
 import { StaffElementComponent } from './main/team/staff-element/staff-element.component';
 import { ExpectComponent } from './main/expect/expect.component';
+import { StoreModule } from './store/store.module';
+import { IdentityModule } from './identity/identity.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -40,8 +42,10 @@ import { ExpectComponent } from './main/expect/expect.component';
     ExpectComponent
   ],
   imports: [
-    NgbModule.forRoot(),
     BrowserModule,
+    StoreModule,
+    IdentityModule,
+    NgbModule.forRoot(),
     AppRoutingModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

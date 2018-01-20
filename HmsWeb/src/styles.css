@@ -30,22 +30,3 @@ li {
   color: white;
   font-size: 15px;
 }
-
-.content {
-  padding: 20px;
-  overflow: hidden;
-}
-
-.content h3 {
-  text-align: left;
-}
-
-.content img {
-  margin-right: 15px;
-  float: left;
-}
-
-.content:nth-child(odd) img {
-  margin-right: 15px;
-  float: right;
-}

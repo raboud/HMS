@@ -1,0 +1,159 @@
+<div class="container col-sm-8 offest-sm-2">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">{{pageTitle}}</h2>
+
+      <div>
+        <form novalidate (ngSubmit)="onRegister()" [formGroup]="form">
+          <div class="form-row">
+            <div class="form-group col-md-6" [ngClass]="{'invalid': displayMessage.firstName }">
+              <label for="firstNameId">FIRST NAME</label>
+              <input class="form-control" id="firstNameId" type="text" placeholder="First Name (required)" formControlName="firstName"
+              />
+              <span class="help-block" *ngIf="displayMessage.firstName">
+                {{displayMessage.firstName}}
+              </span>
+            </div>
+            <div class="form-group col-md-6" [ngClass]="{'has-error': displayMessage.lastName }">
+              <label class=" control-label" for="lastNameId">LAST NAME</label>
+              <input class="form-control" id="lastNameId" type="text" placeholder="Last Name" formControlName="lastName" />
+              <span class="help-block" *ngIf="displayMessage.lastName">
+                {{displayMessage.lastName}}
+              </span>
+            </div>
+          </div>
+          <div class="form-group" [ngClass]="{'has-error': displayMessage.street }">
+            <label class="control-label" for="streetId">STREET</label>
+            <input class="form-control" id="streetId" type="text" placeholder="Street Address" formControlName="street" />
+            <span class="help-block" *ngIf="displayMessage.street">
+              {{displayMessage.street}}
+            </span>
+          </div>
+          <div class="form-group" [ngClass]="{'has-error': displayMessage.street2 }">
+            <label class="control-label" for="streetId2">STREET</label>
+            <input class="form-control" id="streetId2" type="text" placeholder="Street Address" formControlName="street2" />
+            <span class="help-block" *ngIf="displayMessage.street2">
+              {{displayMessage.street2}}
+            </span>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-5" [ngClass]="{'has-error': displayMessage.city }">
+              <label class="control-label" for="cityId">CITY</label>
+              <input class="form-control" id="cityId" type="text" placeholder="City" formControlName="city" />
+              <span class="help-block" *ngIf="displayMessage.city">
+                {{displayMessage.city}}
+              </span>
+            </div>
+
+            <div class="form-group col-md-3" [ngClass]="{'has-error': displayMessage.state }">
+              <label class="control-label" for="stateId">STATE</label>
+              <input class="form-control" id="stateId" type="text" placeholder="State" formControlName="state" />
+              <span class="help-block" *ngIf="displayMessage.state">
+                {{displayMessage.state}}
+              </span>
+            </div>
+
+            <div class="form-group col-md-4" [ngClass]="{'has-error': displayMessage.postalCode }">
+              <label class="control-label" for="postalCodeId">ZIP CODE</label>
+              <input class="form-control" id="postalCodeId" type="text" placeholder="12345-6789" formControlName="postalCode" />
+              <span class="help-block" *ngIf="displayMessage.postalCode">
+                {{displayMessage.postalCode}}
+              </span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6" [ngClass]="{'has-error': displayMessage.phoneNumber }">
+              <label class="control-label" for="phoneNumberId">PHONE NUMBER</label>
+              <input class="form-control" id="phoneNumberId" type="tel" placeholder="404.555.1234" formControlName="phoneNumber" />
+              <span class="help-block" *ngIf="displayMessage.phoneNumber">
+                {{displayMessage.phoneNumber}}
+              </span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-3" [ngClass]="{'has-error': displayMessage.cardNumber }">
+              <label class="control-label" for="cardNumberId">CARD NUMBER</label>
+              <input class="form-control" id="cardNumberId" type="text" placeholder="1234-5678-9012-3456" formControlName="cardNumber"
+              />
+              <span class="help-block" *ngIf="displayMessage.cardNumber">
+                {{displayMessage.cardNumber}}
+              </span>
+            </div>
+
+            <div class="form-group col-md-3" [ngClass]="{'has-error': displayMessage.cardHolderName }">
+              <label class="control-label" for="cardHolderNameId">CARDHOLDER NAME</label>
+              <input class="form-control" id="cardHolderNameId" type="text" placeholder="Cardholder Name" formControlName="cardHolderName"
+              />
+              <span class="help-block" *ngIf="displayMessage.cardHolderName">
+                {{displayMessage.cardHolderName}}
+              </span>
+            </div>
+
+            <div class="form-group col-md-3" [ngClass]="{'has-error': displayMessage.expirationDate }">
+              <label class="control-label" for="expirationDateId">EXPIRATION DATE</label>
+              <input class="form-control" id="expirationDateId" type="text" placeholder="mm/yy" formControlName="expirationDate" />
+              <span class="help-block" *ngIf="displayMessage.expirationDate">
+                {{displayMessage.expirationDate}}
+              </span>
+            </div>
+
+            <div class="form-group col-md-3" [ngClass]="{'has-error': displayMessage.secuirtyCode }">
+              <label class="control-label" for="secuirtyCodeId">SECURITY CODE</label>
+              <input class="form-control" id="secuirtyCodeId" type="text" placeholder="Security Code" formControlName="secuirtyCode" />
+              <span class="help-block" *ngIf="displayMessage.secuirtyCode">
+                {{displayMessage.secuirtyCode}}
+              </span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6 offset-md-3" [ngClass]="{'has-error': displayMessage.userEemail }">
+              <label class="control-label" for="emailId">EMAIL</label>
+              <input class="form-control" id="emailId" type="email" placeholder="someone@test.this" formControlName="email" />
+              <span class="help-block" *ngIf="displayMessage.email">
+                {{displayMessage.email}}
+              </span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6 offset-md-3" [ngClass]="{'has-error': displayMessage.password }">
+              <label class="control-label" for="passwordId">PASSWORD</label>
+              <input class="form-control" id="passwordId" type="password" placeholder="Password (required)" formControlName="password"
+              />
+              <span class="help-block" *ngIf="displayMessage.password">
+                {{displayMessage.password}}
+              </span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6 offset-md-3" [ngClass]="{'has-error': displayMessage.confirmPassword }">
+              <label class="control-label" for="confirmPasswordId">PASSWORD CONFIRM</label>
+              <input class="form-control" id="confirmPasswordId" type="password" placeholder="Confirm Password" formControlName="confirmPassword"
+              />
+              <span class="help-block" *ngIf="displayMessage.confirmPassword">
+                {{displayMessage.confirmPassword}}
+              </span>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Sign in</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+
+
+
+            </div>
+
+            <br />
+            <br />
+
+
+          </div>
+          <button class="btn btn-primary" type="submit" [disabled]='!form.valid'>
+            Login
+          </button>
+        </form>
+        <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>
+      -->

@@ -1,6 +1,5 @@
 <div class='row'>
-  <div style="color:white; text-align:center" class="col-md-6">
-    <h1>HOLISTIC MEDICAL SERVICES</h1>
+  <div style="color:white; text-align:left" class="col-md-6">
     <img class='logo' src='../../../assets/logo.png'>
   </div>
   <div style="text-align: right;" class="col-md-6">
@@ -12,77 +11,81 @@
     </a>
   </div>
 </div>
+
 <header>
-  <div class='row'>
-    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" (click)="menu()">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
+  <nav class="navbar navbar-expand-xl navbar-inverse bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample06" aria-controls="navbarsExample06"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" [ngbCollapse]="isActive">
-          <ul class="nav navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" routerLink='home' routerLinkActive="active">Home</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" routerLink='expertise' routerLinkActive="active">Areas of Expertise</a>
-            </li>
-            <li ngbDropdown class='nav-item active dropdown'>
-              <a ngbDropdownToggle class='dropdown-toggle' data-toggle='dropdown'>About Us
-                <span class='caret'></span>
-              </a>
+    <div class="collapse navbar-collapse" id="navbarsExample06">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink='home' routerLinkActive="active">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink='expertise' routerLinkActive="active">Areas of Expertise</a>
+        </li>
+        <li ngbDropdown class="nav-item dropdown active">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle active" id="dropdownPatient" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">Our Patients</a>
+          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownPatient">
+            <a class="dropdown-item" routerLink='expect' routerLinkActive="active">What to Expect</a>
+            <a class="dropdown-item" href='../../../assets/newpatient.pdf' target="_blank">New Patient form</a>
+            <a class="dropdown-item" href='../../../assets/recordrelease.pdf' target="_blank">Patient Record Release Form</a>
+          </div>
+        </li>
 
-              <ul ngbDropdownMenu class='dropdown-menu' role='menu'>
-                <li class="nav-item active">
-                  <a class="nav-link" routerLink='practice' routerLinkActive="active">Our Practice</a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" routerLink='team' routerLinkActive="active">Meet our Team</a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" routerLink='doctors' routerLinkActive="active">Our Doctors</a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" routerLink='staff' routerLinkActive="active">Our Staff</a>
-                </li>
-              </ul>
-            </li>
-            <li ngbDropdown class='nav-item active dropdown'>
-              <a ngbDropdownToggle class='dropdown-toggle' data-toggle='dropdown'>Our Patients
-                <span class='caret'></span>
-              </a>
-              <ul ngbDropdownMenu class='dropdown-menu' role='menu'>
-                <li class="nav-item active">
-                  <a class="nav-link" routerLink='expect' routerLinkActive="active">What to Expect</a>
-                </li>
-                <li class="nav-item active">
-                  <a href='../../../assets/newpatient.pdf' target="_blank">New Patient form</a>
-                </li>
-                <li class="nav-item active">
-                  <a href='../../../assets/recordrelease.pdf' target="_blank">Patient Record Release Form</a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="nav-item active">
-              <a class="nav-link" routerLink='iv_therapy' routerLinkActive="active">I./V. Therapy</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" routerLink='articles' routerLinkActive="active">Health Aticles</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" routerLink='contact' routerLinkActive="active">Contact Us</a>
-            </li>
-          </ul>
-        </div>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink='iv_therapy' routerLinkActive="active">I./V. Therapy</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink='articles' routerLinkActive="active">Health Aticles</a>
+        </li>
+        <li ngbDropdown class="nav-item dropdown">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdownAbout" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About Us</a>
+          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownAbout">
+            <a class="dropdown-item" routerLink='practice' routerLinkActive="active">Our Practice</a>
+            <a class="dropdown-item" routerLink='team' routerLinkActive="active">Meet our Team</a>
+            <a class="dropdown-item" routerLink='doctors' routerLinkActive="active">Our Doctors</a>
+            <a class="dropdown-item" routerLink='staff' routerLinkActive="active">Our Staff</a>
+            <a class="dropdown-item" routerLink='contact' routerLinkActive="active">Contact Us</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!--  <div class='row'>
+  <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" (click)="menu()">
+           <span class="navbar-toggler-icon"></span>
+        </button>
       </div>
-    </nav>
-  </div>
+
+      <div class="collapse navbar-collapse" [ngbCollapse]="isActive">
+        <ul class="nav navbar-nav">
+          <li ngbDropdown class='nav-item active dropdown'>
+            <a ngbDropdownToggle class='dropdown-toggle' data-toggle='dropdown'>
+              <span class='caret'></span>
+            </a>
+
+            <ul ngbDropdownMenu class='dropdown-menu' role='menu'>
+            </ul>
+          </li>
+          <li ngbDropdown class='nav-item active dropdown'>
+            <a ngbDropdownToggle class='dropdown-toggle' data-toggle='dropdown'>Our Patients
+              <span class='caret'></span>
+            </a>
+            <ul ngbDropdownMenu class='dropdown-menu' role='menu'>
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+-->
 </header>

@@ -23,8 +23,9 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'doctors', component: DoctorsComponent},
   { path: 'staff', component: StaffComponent},
-  { path: 'expect', component: ExpectComponent}
-];
+  { path: 'expect', component: ExpectComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
