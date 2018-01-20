@@ -21,6 +21,7 @@ import { ExpectComponent } from './main/expect/expect.component';
 import { StoreModule } from './store/store.module';
 import { IdentityModule } from './identity/identity.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Expertise2Component } from './main/expertise2/expertise2.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DoctorsComponent,
     StaffComponent,
     StaffElementComponent,
-    ExpectComponent
+    ExpectComponent,
+    Expertise2Component
   ],
   imports: [
     BrowserModule,

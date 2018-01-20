@@ -11,10 +11,12 @@ import { ContactComponent } from './main/contact/contact.component';
 import { DoctorsComponent } from './main/team/doctors/doctors.component';
 import { StaffComponent } from './main/team/staff/staff.component';
 import { ExpectComponent } from './main/expect/expect.component';
+import { Expertise2Component } from './main/expertise2/expertise2.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'expertise', component: ExpertiseComponent },
+  { path: 'expertise2', component: Expertise2Component },
   { path: 'team', component: TeamComponent },
   { path: 'practice', component: PracticeComponent },
   { path: 'patients', component: PatientsComponent },
