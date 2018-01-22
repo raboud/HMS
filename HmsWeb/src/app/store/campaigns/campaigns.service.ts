@@ -18,17 +18,24 @@ import 'rxjs/add/operator/map';
 export class CampaignsService {
     private marketingUrl: string = '';
     private buyerId: string = '';
-    constructor(private service: DataService, private identityService: SecurityService, private configurationService: ConfigurationService) {
+    constructor(
+      private service: DataService,
+      private identityService: SecurityService,
+      private configurationService: ConfigurationService
+    ) {
         if (this.identityService.IsAuthorized) {
             if (this.identityService.UserData) {
                 this.buyerId = this.identityService.UserData.sub;
             }
         }
 
-        if (this.configurationService.isReady)
+        if (this.configurationService.isReady) {
             this.marketingUrl = this.configurationService.serverSettings.marketingUrl;
-        else
-            this.configurationService.settingsLoaded$.subscribe(x => this.marketingUrl = this.configurationService.serverSettings.marketingUrl);
+        } else {
+            this.configurationService.settingsLoaded$.subscribe(
+              x => this.marketingUrl = this.configurationService.serverSettings.marketingUrl
+            );
+        }
 
     }
 
@@ -42,11 +49,11 @@ export class CampaignsService {
     }
 
     getCampaign(id: number): Observable<ICampaignItem> {
-        let url = this.marketingUrl + '/api/v1/campaigns/' + id;
+        const url = this.marketingUrl + '/api/v1/campaigns/' + id;
 
         return this.service.get(url).map((response: Response) => {
             return response.json();
         });
-    }    
+    }
 }
 

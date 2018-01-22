@@ -13,9 +13,27 @@ import { OrdersModule } from './orders/orders.module';
 import { BasketModule } from './basket/basket.module';
 import { CampaignsModule } from './campaigns/campaigns.module';
 import { ConfigurationService } from './shared/services/configuration.service';
+import { VendorListComponent } from './vendor/vendor-list/vendor-list.component';
+import { VendorEditComponent } from './vendor/vendor-edit/vendor-edit.component';
+import { TypeEditComponent } from './type/type-edit/type-edit.component';
+import { TypeListComponent } from './type/type-list/type-list.component';
+import { BrandListComponent } from './brand/brand-list/brand-list.component';
+import { BrandEditComponent } from './brand/brand-edit/brand-edit.component';
+import { ProductEditComponent } from './product/product-edit/product-edit.component';
+import { ProductListComponent } from './product/product-list/product-list.component';
 
 @NgModule({
-    declarations: [StoreComponent],
+    declarations: [
+      StoreComponent,
+      VendorListComponent,
+      VendorEditComponent,
+      TypeEditComponent,
+      TypeListComponent,
+      BrandListComponent,
+      BrandEditComponent,
+      ProductEditComponent,
+      ProductListComponent
+    ],
     imports: [
         BrowserModule,
         routing,
