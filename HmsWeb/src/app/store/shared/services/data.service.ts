@@ -85,7 +85,7 @@ export class DataService {
             }).catch(this.handleError);
     }
 
-    delete(url: string, params?: any) {
+    delete(url: string, params?: any): Observable<boolean> {
       /*
         let options: RequestOptionsArgs = {};
 
@@ -99,9 +99,10 @@ export class DataService {
         //        return res;
         //    );
 */
-        this.http.delete(url).subscribe((res) => {
-            console.log('deleted');
-        });
+        return this.http.delete(url).map((res) => {
+            return true;
+        })
+        .catch(this.handleError);
     }
 
     private handleError(error: HttpErrorResponse) {

@@ -6,7 +6,7 @@ import { ConfigurationService } from '../shared/services/configuration.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-    selector: 'esh-campaigns',
+    selector: 'app-campaigns',
     styleUrls: ['./campaigns.component.scss'],
     templateUrl: './campaigns.component.html'
 })

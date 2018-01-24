@@ -1,8 +1,8 @@
-<div class="esh-pager">
+<div class="pager">
     <div class="container">
-        <article class="esh-pager-wrapper row">
+        <article class="pager-wrapper row">
             <nav>
-                <span class="esh-pager-item esh-pager-item--navigable"
+                <span class="pager-item pager-item--navigable"
                       id="Previous"
                       [ngClass]="{'is-disabled': buttonStates?.previousDisabled}"
                       (click)="onPreviousCliked($event)"
@@ -10,11 +10,11 @@
                     Previous
                 </span>
 
-                <span class="esh-pager-item">
+                <span class="pager-item">
                     Showing {{model?.items}} of {{model?.totalItems}} products - Page {{model?.actualPage + 1}} - {{model?.totalPages}}
                 </span>
 
-                <span class="esh-pager-item esh-pager-item--navigable"
+                <span class="pager-item pager-item--navigable"
                       id="Next"
                       [ngClass]="{'is-disabled': buttonStates?.nextDisabled}"
                       (click)="onNextClicked($event)"

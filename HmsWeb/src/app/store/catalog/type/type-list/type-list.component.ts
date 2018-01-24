@@ -15,10 +15,10 @@ import { Router } from '@angular/router';
 export class TypeListComponent implements OnInit {
   page: number = 0;
   items: ICategoryPage = {
-    count: 0,
-    pageIndex: 0,
-    pageSize: 10,
-    data: [],
+    Count: 0,
+    PageIndex: 0,
+    PageSize: 10,
+    Data: [],
   }
   authenticated: boolean = false;
   authSubscription: Subscription;
@@ -60,7 +60,7 @@ export class TypeListComponent implements OnInit {
     this.service.getCategoyPage(pageIndex, pageSize, true).subscribe(items => {
       console.log(items);
       this.items = items;
-      this.page = items.pageIndex + 1;
+      this.page = items.PageIndex + 1;
     });
   }
 
@@ -70,12 +70,23 @@ export class TypeListComponent implements OnInit {
   }
 
   detail(item: ICategory) {
-    console.log(item.name);
+    console.log(item.Name);
+  }
+
+  delete(item: ICategory) {
+    this.service.deleteCategory(item).subscribe(() => {;
+      this.getItems(this.items.PageSize, this.page - 1);
+    });
+  }
+
+  toggle(item: ICategory) {
+    item.InActive = !item.InActive;
+    this.service.updateCategory(item).subscribe();
   }
 
   pageChange() {
     console.log('pageChange');
-    this.getItems(this.items.pageSize, this.page - 1);
+    this.getItems(this.items.PageSize, this.page - 1);
   }
 
 }

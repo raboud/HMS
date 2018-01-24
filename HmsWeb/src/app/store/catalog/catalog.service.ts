@@ -93,7 +93,15 @@ export class CatalogService {
       }
 
       updateCategory(item: ICategory) {
-        return this.service.put(this.typesUrl + '/' + item.id, item);
+        return this.service.put(this.typesUrl + '/' + item.Id, item);
+      }
+
+      createCategory(item: ICategory) {
+        return this.service.post(this.typesUrl, item);
+      }
+
+      deleteCategory(item: ICategory): Observable<boolean> {
+        return this.service.delete(this.typesUrl + '/' + item.Id);
       }
 
     getVendors(all?: boolean): Observable<IVendor[]> {

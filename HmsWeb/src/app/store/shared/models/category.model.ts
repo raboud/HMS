@@ -4,11 +4,11 @@ export interface ICategoryPage extends IPagination, ICategories {
 }
 
 export interface ICategories {
-  data: ICategory[];
+  Data: ICategory[];
 }
 
 export interface ICategory {
-    id: number;
-    name: string;
-    inActive: boolean;
+    Id: number;
+    Name: string;
+    InActive: boolean;
   }

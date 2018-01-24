@@ -9,8 +9,8 @@ export interface IUnits {
 }
 
 export interface IUnit {
-  id: number;
-  name: string;
-  inActive: boolean;
+  Id: number;
+  Name: string;
+  InActive: boolean;
 }
 

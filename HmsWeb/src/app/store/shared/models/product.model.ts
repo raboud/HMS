@@ -4,19 +4,19 @@ export interface IProductPage extends IPagination, IProducts {
 }
 
 export interface IProducts {
-  data: IProduct[];
+  Data: IProduct[];
 }
 
 export interface IProduct {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  pictureUri: string;
+  Id: string;
+  Name: string;
+  Description: string;
+  Price: number;
+  PictureUri: string;
   catalogBrandId: number;
   catalogBrand: string;
   catalogTypeId: number;
   catalogType: string;
-  units: number;
-  inActive: boolean;
+  Units: number;
+  InActive: boolean;
 }

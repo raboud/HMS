@@ -4,7 +4,7 @@ import { Response } from '@angular/http';
 import { DataService } from '../shared/services/data.service';
 import { IOrder } from '../shared/models/order.model';
 import { IOrderItem } from '../shared/models/orderItem.model';
-import { IOrderDetail } from "../shared/models/order-detail.model";
+import { IOrderDetail } from '../shared/models/order-detail.model';
 import { SecurityService } from '../shared/services/security.service';
 import { ConfigurationService } from '../shared/services/configuration.service';
 import { BasketWrapperService } from '../shared/services/basket.wrapper.service';
@@ -20,11 +20,17 @@ import 'rxjs/add/operator/map';
 export class OrdersService {
     private ordersUrl: string = '';
 
-    constructor(private service: DataService, private basketService: BasketWrapperService, private identityService: SecurityService, private configurationService: ConfigurationService) {
-        if (this.configurationService.isReady)
+    constructor(
+      private service: DataService,
+      private basketService: BasketWrapperService,
+      private identityService: SecurityService,
+      private configurationService: ConfigurationService
+    ) {
+        if (this.configurationService.isReady) {
             this.ordersUrl = this.configurationService.serverSettings.orderingUrl;
-        else
+          } else {
             this.configurationService.settingsLoaded$.subscribe(x => this.ordersUrl = this.configurationService.serverSettings.orderingUrl);
+          }
 
     }
 

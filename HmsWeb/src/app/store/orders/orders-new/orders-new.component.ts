@@ -9,7 +9,7 @@ import { FormGroup, FormBuilder, Validators  }      from '@angular/forms';
 import { Router }                                   from '@angular/router';
 
 @Component({
-    selector: 'esh-orders_new',
+    selector: 'app-orders_new',
     styleUrls: ['./orders-new.component.scss'],
     templateUrl: './orders-new.component.html'
 })
@@ -37,7 +37,7 @@ export class OrdersNewComponent implements OnInit {
     ngOnInit() {
     }
 
-    submitForm(value: any) {        
+    submitForm(value: any) {
         this.order.street = this.newOrderForm.controls['street'].value;
         this.order.city = this.newOrderForm.controls['city'].value;
         this.order.state = this.newOrderForm.controls['state'].value;
@@ -52,7 +52,7 @@ export class OrdersNewComponent implements OnInit {
             .catch((errMessage) => {
                 this.errorReceived = true;
                 this.isOrderProcessing = false;
-                return Observable.throw(errMessage); 
+                return Observable.throw(errMessage);
             })
             .subscribe(res => {
                 this.router.navigate(['orders']);

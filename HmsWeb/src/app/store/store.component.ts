@@ -13,7 +13,7 @@ import { ConfigurationService } from './shared/services/configuration.service';
  */
 
 @Component({
-    selector: 'esh-app',
+    selector: 'app-2',
     styleUrls: ['./store.component.scss'],
     templateUrl: './store.component.html'
 })

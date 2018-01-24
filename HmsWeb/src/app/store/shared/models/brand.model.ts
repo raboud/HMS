@@ -4,11 +4,11 @@ export interface IBrandPage extends IPagination, IBrands {
 }
 
 export interface IBrands {
-  data: IBrand[];
+  Data: IBrand[];
 }
 
 export interface IBrand {
-    id: number;
-    name: string;
-    inActive: boolean;
+    Id: number;
+    Name: string;
+    InActive: boolean;
   }

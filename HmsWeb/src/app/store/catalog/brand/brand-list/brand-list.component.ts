@@ -15,10 +15,10 @@ import { IPager } from '../../../shared/models/pager.model';
 export class BrandListComponent implements OnInit {
   page: number;
   brands: IBrandPage = {
-    count: 0,
-    pageIndex: 0,
-    pageSize: 10,
-    data: [],
+    Count: 0,
+    PageIndex: 0,
+    PageSize: 10,
+    Data: [],
   }
   authenticated: boolean = false;
   authSubscription: Subscription;
@@ -31,9 +31,9 @@ export class BrandListComponent implements OnInit {
   ) {
     this.authenticated = securityService.IsAuthorized;
 
-    this.brands.count = 0;
-    this.brands.pageIndex = 0;
-    this.brands.pageSize = 10;
+    this.brands.Count = 0;
+    this.brands.PageIndex = 0;
+    this.brands.PageSize = 10;
   }
 
   ngOnInit() {
@@ -61,7 +61,7 @@ export class BrandListComponent implements OnInit {
   getBrands(pageSize: number, pageIndex: number) {
     this.service.getBrandsPage(pageSize, pageIndex, true).subscribe(brands => {
       this.brands = brands;
-      this.page = brands.pageIndex + 1;
+      this.page = brands.PageIndex + 1;
     });
   }
 
@@ -71,7 +71,7 @@ export class BrandListComponent implements OnInit {
   }
 
   detail(item: IBrand) {
-    console.log(item.name);
+    console.log(item.Name);
   }
 
 }

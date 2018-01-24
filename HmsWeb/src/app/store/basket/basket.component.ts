@@ -11,7 +11,7 @@ import { IBasketItem } from '../shared/models/basketItem.model';
 import { BasketWrapperService } from '../shared/services/basket.wrapper.service';
 
 @Component({
-    selector: 'esh-basket',
+    selector: 'app-basket',
     styleUrls: ['./basket.component.scss'],
     templateUrl: './basket.component.html'
 })

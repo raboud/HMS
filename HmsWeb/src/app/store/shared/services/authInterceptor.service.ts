@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -11,12 +11,12 @@ import { SecurityService } from './security.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private auth: SecurityService) {}
+  private auth: SecurityService;
 
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  constructor(private injector: Injector) {}
+
+  intercept( req: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
+    this.auth = this.injector.get(SecurityService); // get it here within intercept
     if (this.auth.IsAuthorized) {
       // Get the auth header from the service.
       const authHeader = this.auth.getAuthorizationHeader();

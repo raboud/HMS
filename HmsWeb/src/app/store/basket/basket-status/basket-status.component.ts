@@ -7,7 +7,7 @@ import { SecurityService }      from '../../shared/services/security.service';
 import { ConfigurationService }      from '../../shared/services/configuration.service';
 
 @Component({
-    selector: 'esh-basket-status',
+    selector: 'app-basket-status',
     styleUrls: ['./basket-status.component.scss'],
     templateUrl: './basket-status.component.html'
 })
@@ -32,7 +32,7 @@ export class BasketStatusComponent implements OnInit {
                 });
             });
 
-        // Subscribe to Drop Basket Observable: 
+        // Subscribe to Drop Basket Observable:
         this.basketDroppedSubscription = this.service.basketDroped$.subscribe(res => {
             this.badge = 0;
         });

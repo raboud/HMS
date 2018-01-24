@@ -5,7 +5,7 @@ import { ConfigurationService } from '../shared/services/configuration.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-    selector: 'esh-orders',
+    selector: 'app-orders',
     styleUrls: ['./orders.component.scss'],
     templateUrl: './orders.component.html'
 })
@@ -52,6 +52,6 @@ export class OrdersComponent implements OnInit {
     private handleError(error: any) {
         this.errorReceived = true;
         return Observable.throw(error);
-    }  
+    }
 }
 

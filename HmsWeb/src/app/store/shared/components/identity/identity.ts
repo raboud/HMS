@@ -5,7 +5,7 @@ import { IIdentity } from '../../models/identity.model';
 import { SecurityService } from  '../../services/security.service';
 
 @Component({
-    selector: 'esh-identity',
+    selector: 'app-identity',
     templateUrl: './identity.html',
     styleUrls: ['./identity.scss']
 })

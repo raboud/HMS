@@ -4,7 +4,7 @@ import { ICampaignItem } from '../../shared/models/campaignItem.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'esh-campaigns_detail',
+    selector: 'app-campaigns_detail',
     styleUrls: ['./campaigns-detail.component.scss'],
     templateUrl: './campaigns-detail.component.html'
 })

@@ -1,46 +1,43 @@
-<section class="esh-catalog-filters">
+<section class="catalog-filters">
   <div class="container">
-    <div class="alert alert-warning esh-catalog-alert" role="alert" [hidden]="!errorReceived">
+    <div class="alert alert-warning catalog-alert" role="alert" [hidden]="!errorReceived">
       Error requesting catalog products, please try later on
     </div>
-    <label class="esh-catalog-label" data-title="brand">
-      <select class="esh-catalog-filter" (change)="onBrandFilterChanged($event, $event.target.value)">
-        <option *ngFor="let brand of brands" [value]="brand.id">{{brand.name}}</option>
+    <label class="catalog-label" data-title="brand">
+      <select class="catalog-filter" (change)="onBrandFilterChanged($event, $event.target.value)">
+        <option *ngFor="let brand of brands" [value]="brand.Id">{{brand.Name}}</option>
       </select>
     </label>
-    <label class="esh-catalog-label" data-title="type">
-      <select class="esh-catalog-filter" (change)="onTypeFilterChanged($event, $event.target.value)">
-        <option *ngFor="let type of types" [value]="type.id">{{type.name}}</option>
+    <label class="catalog-label" data-title="type">
+      <select class="catalog-filter" (change)="onTypeFilterChanged($event, $event.target.value)">
+        <option *ngFor="let type of types" [value]="type.Id">{{type.Name}}</option>
       </select>
     </label>
-    <img class="esh-catalog-send" (click)="onFilterApplied($event)" src="/assets/images/arrow-right.svg" />
+    <img class="catalog-send" (click)="onFilterApplied($event)" src="/assets/images/arrow-right.svg" />
   </div>
 </section>
 
-  <div *ngIf="catalog?.data.length > 0">
-    <esh-pager [model]="paginationInfo" (changed)="onPageChanged($event)"></esh-pager>
-
+  <div *ngIf="items?.Data.length > 0">
     <div class="card-group row">
-      <div class="col-md-4" *ngFor="let item of catalog?.data">
+      <div class="col-md-4" *ngFor="let item of items?.Data">
         <div class="card" (click)=detail(item)>
 
-          <img class="card-img-top" src="{{item.pictureUri}}" />
+          <img class="card-img-top" src="{{item.PictureUri}}" />
           <div class="card-body">
-            <h5 class="card-title">{{item.name}}</h5>
-            <button [ngClass]="{'esh-catalog-button': true, 'is-disabled': !authenticated}" (click)="addToCart(item)">
+            <h5 class="card-title">{{item.Name}}</h5>
+            <button [ngClass]="{'catalog-button': true, 'is-disabled': !authenticated}" (click)="addToCart(item)">
               [ ADD TO CART ]
             </button>
 
           </div>
-          <div class="card-text">{{item.price | number:'.2-2'}}</div>
+          <div class="card-text">{{item.Price | number:'.2-2'}}</div>
         </div>
       </div>
     </div>
+    <ngb-pagination [collectionSize]="items.Count" [pageSize]='items.PageSize' [(page)]="page" [maxSize]="5" [rotate]="true"
+    [ellipses]="false" (pageChange)='onPageChange()' [boundaryLinks]="true"></ngb-pagination>
 
-    <ngb-pagination [pageSize]='paginationInfo.itemsPage' [collectionSize]="paginationInfo.totalItems" [(page)]="paginationInfo.actualPage" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
-
-  <esh-pager [model]="paginationInfo" (changed)="onPageChanged($event)"></esh-pager>
-<div *ngIf="catalog?.data.length == 0">
+<div *ngIf="items?.Data.length == 0">
   <span>THERE ARE NO RESULTS THAT MATCH YOUR SEARCH</span>
 </div>
 

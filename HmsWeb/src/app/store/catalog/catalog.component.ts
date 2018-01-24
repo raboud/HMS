@@ -12,14 +12,15 @@ import { SecurityService } from '../shared/services/security.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-    selector: 'esh-catalog .esh-catalog',
+    selector: 'app-catalog .catalog',
     styleUrls: ['./catalog.component.scss'],
     templateUrl: './catalog.component.html'
 })
 export class CatalogComponent implements OnInit {
     brands: IBrand[] = [];
     types: ICategory[] = [];
-    catalog: IProductPage;
+    page: number;
+    items: IProductPage;
     brandSelected: number;
     typeSelected: number;
     paginationInfo: IPager;
@@ -37,6 +38,7 @@ export class CatalogComponent implements OnInit {
     }
 
     ngOnInit() {
+      this.page = 1;
 
         // Configuration Settings:
         if (this.configurationService.isReady) {
@@ -74,11 +76,9 @@ export class CatalogComponent implements OnInit {
         this.typeSelected = value;
     }
 
-    onPageChanged(value: any) {
-        console.log('catalog pager event fired' + value);
-        event.preventDefault();
-        this.paginationInfo.actualPage = value;
-        this.getCatalog(this.paginationInfo.itemsPage, value);
+    onPageChange() {
+      console.log('pageChange');
+      this.getCatalog(this.items.PageSize, this.page - 1);
     }
 
     addToCart(item: IProduct) {
@@ -90,7 +90,7 @@ export class CatalogComponent implements OnInit {
         this.service.getCatalog(pageIndex, pageSize, brand, type)
             .catch((err) => this.handleError(err))
             .subscribe(catalog => {
-                this.catalog = catalog;
+                this.items = catalog;
                 this.paginationInfo = {
                     actualPage : catalog.pageIndex,
                     itemsPage : catalog.pageSize,
@@ -104,7 +104,7 @@ export class CatalogComponent implements OnInit {
     getTypes() {
         this.service.getTypes().subscribe(types => {
             this.types = types;
-            const alltypes: ICategory = { id: null, name: 'All', inActive: false };
+            const alltypes: ICategory = { Id: null, Name: 'All', InActive: false };
             this.types.unshift(alltypes);
             console.log('types ' + this.types.length);
         });
@@ -114,7 +114,7 @@ export class CatalogComponent implements OnInit {
         this.service.getBrands().subscribe(brands => {
             this.brands = brands;
             console.log('brands ' + this.brands.length);
-            const allBrands: IBrand = { id: null, name: 'All', inActive: false };
+            const allBrands: IBrand = { Id: null, Name: 'All', InActive: false };
             this.brands.unshift(allBrands);
         });
     }
@@ -125,7 +125,7 @@ export class CatalogComponent implements OnInit {
     }
 
     detail(item: IProduct) {
-      console.log(item.name);
+      console.log(item.Name);
     }
 
 }

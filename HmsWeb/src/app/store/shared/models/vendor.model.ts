@@ -4,11 +4,11 @@ export interface IVendorPage extends IPagination, IVendor {
 }
 
 export interface IVendors {
-  data: IVendor[];
+  Data: IVendor[];
 }
 
 export interface IVendor {
-  id: number;
-  name: string;
-  inActive: boolean;
+  Id: number;
+  Name: string;
+  InActive: boolean;
 }

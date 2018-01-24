@@ -1,6 +1,14 @@
-<ngb-pagination [collectionSize]="items.count" [pageSize]='items.pageSize' [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false" (pageChange)='pageChange()' [boundaryLinks]="true"></ngb-pagination>
-<div *ngFor='let item of items.data' class='row'>
-  <div class='col-4'>{{item.name}}</div>
-  <div class='col-2'> <a routerLink='/category/{{item.id}}'>edit</a></div>
+<div style="min-height: 60vh">
+  <div *ngFor='let item of items.Data' class='row'>
+    <div class='col-4'>{{item.Name}}</div>
+    <div class='col-3 text-primary'>
+      <a routerLink='/category/{{item.Id}}'>edit</a> |
+        <a (click)='delete(item)'>delete</a> |
+        <a *ngIf='item.InActive' (click)='toggle(item)'>activate</a>
+        <a *ngIf='!item.InActive' (click)='toggle(item)'>in activate</a>
+      </div>
+    </div>
 </div>
-
+<ngb-pagination [collectionSize]="items.Count" [pageSize]='items.PageSize' [(page)]="page" [maxSize]="5" [rotate]="true"
+  [ellipses]="false" (pageChange)='pageChange()' [boundaryLinks]="true"></ngb-pagination>
+  <button class="btn btn-primary" routerLink='/category/-1'>Add</button>

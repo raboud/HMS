@@ -1,42 +1,42 @@
-<div class="esh-identity">
-    <section class="esh-identity-section"
+<div class="identity">
+    <section class="identity-section"
              *ngIf="!authenticated">
-        <div class="esh-identity-item"
+        <div class="identity-item"
              (click)="login()">
 
-            <div class="esh-identity-name esh-identity-name--upper">Login</div>
+            <div class="identity-name identity-name--upper">Login</div>
         </div>
     </section>
 
-    <section class="esh-identity-section"
+    <section class="identity-section"
          *ngIf="authenticated">
 
-        <div class="esh-identity-name">{{userName}}</div>
-        <img class="esh-identity-image" src="assets/images/arrow-down.png">
+        <div class="identity-name">{{userName}}</div>
+        <img class="identity-image" src="assets/images/arrow-down.png">
     </section>
 
-    <section class="esh-identity-drop"
+    <section class="identity-drop"
              *ngIf="authenticated">
 
-        <div class="esh-identity-item"
+        <div class="identity-item"
              [routerLink]="['orders']">
 
-            <div class="esh-identity-name esh-identity-name--upper">My orders</div>
-            <img class="esh-identity-image" src="assets/images/my_orders.png">
+            <div class="identity-name identity-name--upper">My orders</div>
+            <img class="identity-image" src="assets/images/my_orders.png">
         </div>
 
-        <div class="esh-identity-item"
+        <div class="identity-item"
              [routerLink]="['campaigns']">
 
-            <div class="esh-identity-name esh-identity-name--upper">My campaigns</div>
-            <img class="esh-identity-image" src="assets/images/my_orders.png">
+            <div class="identity-name identity-name--upper">My campaigns</div>
+            <img class="identity-image" src="assets/images/my_orders.png">
         </div>
 
-        <div class="esh-identity-item"
+        <div class="identity-item"
              (click)="logoutClicked($event)">
 
-            <div class="esh-identity-name esh-identity-name--upper">Log Out</div>
-            <img class="esh-identity-image" src="assets/images/logout.png">
+            <div class="identity-name identity-name--upper">Log Out</div>
+            <img class="identity-image" src="assets/images/logout.png">
         </div>
     </section>
 </div>

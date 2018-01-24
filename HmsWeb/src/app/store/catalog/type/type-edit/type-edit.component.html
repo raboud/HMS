@@ -4,7 +4,7 @@
       <h2 class="card-title">{{pageTitle}}</h2>
 
       <div class='card-text'>
-        <form novalidate (ngSubmit)="onRegister()" [formGroup]="form">
+        <form novalidate (ngSubmit)="onSave()" [formGroup]="form">
             <div class="form-group" [ngClass]="{'invalid': displayMessage.name }">
               <label for="nameId">NAME</label>
               <input class="form-control" id="nameId" type="text" placeholder="Name (required)" formControlName="name"
@@ -19,6 +19,7 @@
           </div>
           <br/>
           <button type="submit" class="btn btn-primary">Submit</button>
+          <button class="btn btn-secondary" routerLink='/category'>Cancel</button>
         </form>
       </div>
     </div>
