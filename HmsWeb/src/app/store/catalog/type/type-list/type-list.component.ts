@@ -5,6 +5,7 @@ import { CatalogService } from '../../catalog.service';
 import { ConfigurationService } from '../../../shared/services/configuration.service';
 import { SecurityService } from '../../../shared/services/security.service';
 import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-type-list',
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./type-list.component.css']
 })
 export class TypeListComponent implements OnInit {
-  page: number;
+  page: number = 0;
   items: ICategoryPage = {
     count: 0,
     pageIndex: 0,
@@ -26,14 +27,11 @@ export class TypeListComponent implements OnInit {
   constructor(
     private service: CatalogService,
     private configurationService: ConfigurationService,
-    private securityService: SecurityService
+    private securityService: SecurityService,
+    private router: Router
   ) {
     this.authenticated = securityService.IsAuthorized;
 
-    this.items.count = 0;
-    this.items.pageIndex = 0;
-    this.items.pageSize = 10;
-    this.items.data = [];
   }
 
   ngOnInit() {
@@ -55,11 +53,12 @@ export class TypeListComponent implements OnInit {
   }
 
   loadData() {
-    this.getItems(0, 10);
+//    this.getItems(0, 10);
   }
 
   getItems(pageSize: number, pageIndex: number) {
     this.service.getCategoyPage(pageIndex, pageSize, true).subscribe(items => {
+      console.log(items);
       this.items = items;
       this.page = items.pageIndex + 1;
     });
@@ -75,6 +74,7 @@ export class TypeListComponent implements OnInit {
   }
 
   pageChange() {
+    console.log('pageChange');
     this.getItems(this.items.pageSize, this.page - 1);
   }
 

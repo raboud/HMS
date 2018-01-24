@@ -85,6 +85,17 @@ export class CatalogService {
         return this.service.get<ICategoryPage>(url);
       }
 
+      getCategory(id: number): Observable<ICategory> {
+        let url = this.typesUrl ;
+        url = url + '/' + id;
+        console.log(url);
+        return this.service.get<ICategory>(url);
+      }
+
+      updateCategory(item: ICategory) {
+        return this.service.put(this.typesUrl + '/' + item.id, item);
+      }
+
     getVendors(all?: boolean): Observable<IVendor[]> {
       if (all) {
         return this.service.get<IVendor[]>(this.vendorUrl + '/?all=' + all);

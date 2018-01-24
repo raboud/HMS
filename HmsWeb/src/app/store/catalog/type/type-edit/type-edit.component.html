@@ -1,3 +1,26 @@
-<p>
-  type-edit works!
-</p>
+<div class="container col-sm-6 offest-sm-3">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">{{pageTitle}}</h2>
+
+      <div class='card-text'>
+        <form novalidate (ngSubmit)="onRegister()" [formGroup]="form">
+            <div class="form-group" [ngClass]="{'invalid': displayMessage.name }">
+              <label for="nameId">NAME</label>
+              <input class="form-control" id="nameId" type="text" placeholder="Name (required)" formControlName="name"
+              />
+              <span class="help-block" *ngIf="displayMessage.name">
+                {{displayMessage.name}}
+              </span>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" id="inActiveId" type="checkbox" placeholder="In Active" formControlName="inActive" />
+              <label class=" form-check-label" for="inActiveId">INACTIVE</label>
+          </div>
+          <br/>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
