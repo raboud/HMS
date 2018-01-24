@@ -37,6 +37,8 @@
       </div>
     </div>
 
+    <ngb-pagination [pageSize]='paginationInfo.itemsPage' [collectionSize]="paginationInfo.totalItems" [(page)]="paginationInfo.actualPage" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+
   <esh-pager [model]="paginationInfo" (changed)="onPageChanged($event)"></esh-pager>
 <div *ngIf="catalog?.data.length == 0">
   <span>THERE ARE NO RESULTS THAT MATCH YOUR SEARCH</span>

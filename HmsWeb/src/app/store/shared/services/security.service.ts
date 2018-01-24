@@ -1,15 +1,16 @@
-﻿import { Injectable }                   from '@angular/core';
-import { Http, Response, Headers }      from '@angular/http';
+﻿import { Injectable } from '@angular/core';
+import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { Observable }                   from 'rxjs/Observable';
-import { Subject }                      from 'rxjs/Subject';
-import { Router }                       from '@angular/router';
-import { ActivatedRoute }               from '@angular/router';
-import { ConfigurationService }         from './configuration.service';
-import { StorageService }               from './storage.service';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { ConfigurationService } from './configuration.service';
+import { StorageService } from './storage.service';
 
 @Injectable()
 export class SecurityService {
+  public UserData: any;
 
     private actionUrl: string;
     private headers: Headers;
@@ -18,14 +19,20 @@ export class SecurityService {
     authenticationChallenge$ = this.authenticationSource.asObservable();
     private authorityUrl = '';
 
-    constructor(private _http: Http, private _router: Router, private route: ActivatedRoute, private _configurationService: ConfigurationService, private _storageService: StorageService) {
+    constructor(
+      private _http: Http,
+      private _router: Router,
+      private route: ActivatedRoute,
+      private _configurationService: ConfigurationService,
+      private _storageService: StorageService
+    ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');
         this.headers.append('Accept', 'application/json');
         this.storage = _storageService;
 
         this._configurationService.settingsLoaded$.subscribe(x => {
-            this.authorityUrl = this._configurationService.serverSettings.identityUrl
+            this.authorityUrl = this._configurationService.serverSettings.identityUrl;
             this.storage.store('IdentityUrl', this.authorityUrl);
         });
 
@@ -37,6 +44,10 @@ export class SecurityService {
     }
 
     public IsAuthorized: boolean;
+
+    public getAuthorizationHeader(): string {
+      return 'Bearer ' + this.GetToken()
+    }
 
     public GetToken(): any {
         return this.storage.retrieve('authorizationData');
@@ -50,7 +61,6 @@ export class SecurityService {
         this.storage.store('IsAuthorized', false);
     }
 
-    public UserData: any;
     public SetAuthorizationData(token: any, id_token: any) {
         if (this.storage.retrieve('authorizationData') !== '') {
             this.storage.store('authorizationData', '');
@@ -78,18 +88,18 @@ export class SecurityService {
     public Authorize() {
         this.ResetAuthorizationData();
 
-        let authorizationUrl = this.authorityUrl + '/connect/authorize';
-        let client_id = 'js';
-        let redirect_uri = location.origin + '/';
-        let response_type = 'id_token token';
-        let scope = 'openid profile orders basket marketing locations';
-        let nonce = 'N' + Math.random() + '' + Date.now();
-        let state = Date.now() + '' + Math.random();
+        const authorizationUrl = this.authorityUrl + '/connect/authorize';
+        const client_id = 'js';
+        const redirect_uri = location.origin + '/';
+        const response_type = 'id_token token';
+        const scope = 'openid profile orders basket marketing locations';
+        const nonce = 'N' + Math.random() + '' + Date.now();
+        const state = Date.now() + '' + Math.random();
 
         this.storage.store('authStateControl', state);
         this.storage.store('authNonce', nonce);
 
-        let url =
+        const url =
             authorizationUrl + '?' +
             'response_type=' + encodeURI(response_type) + '&' +
             'client_id=' + encodeURI(client_id) + '&' +
@@ -104,10 +114,10 @@ export class SecurityService {
     public AuthorizedCallback() {
         this.ResetAuthorizationData();
 
-        let hash = window.location.hash.substr(1);
+        const hash = window.location.hash.substr(1);
 
-        let result: any = hash.split('&').reduce(function (result: any, item: string) {
-            let parts = item.split('=');
+        const result: any = hash.split('&').reduce(function (result: any, item: string) {
+            const parts = item.split('=');
             result[parts[0]] = parts[1];
             return result;
         }, {});
@@ -127,7 +137,7 @@ export class SecurityService {
                 token = result.access_token;
                 id_token = result.id_token;
 
-                let dataIdToken: any = this.getDataFromToken(id_token);
+                const dataIdToken: any = this.getDataFromToken(id_token);
                 console.log(dataIdToken);
 
                 // validate nonce
@@ -150,11 +160,11 @@ export class SecurityService {
     }
 
     public Logoff() {
-        let authorizationUrl = this.authorityUrl + '/connect/endsession';
-        let id_token_hint = this.storage.retrieve('authorizationDataIdToken');
-        let post_logout_redirect_uri = location.origin + '/';
+        const authorizationUrl = this.authorityUrl + '/connect/endsession';
+        const id_token_hint = this.storage.retrieve('authorizationDataIdToken');
+        const post_logout_redirect_uri = location.origin + '/';
 
-        let url =
+        const url =
             authorizationUrl + '?' +
             'id_token_hint=' + encodeURI(id_token_hint) + '&' +
             'post_logout_redirect_uri=' + encodeURI(post_logout_redirect_uri);
@@ -168,10 +178,9 @@ export class SecurityService {
 
     public HandleError(error: any) {
         console.log(error);
-        if (error.status == 403) {
+        if (error.status === 403) {
             this._router.navigate(['/Forbidden']);
-        }
-        else if (error.status == 401) {
+        } else if (error.status === 401) {
             // this.ResetAuthorizationData();
             this._router.navigate(['/Unauthorized']);
         }
@@ -198,14 +207,14 @@ export class SecurityService {
     private getDataFromToken(token: any) {
         let data = {};
         if (typeof token !== 'undefined') {
-            let encoded = token.split('.')[1];
+            const encoded = token.split('.')[1];
             data = JSON.parse(this.urlBase64Decode(encoded));
         }
 
         return data;
     }
 
-    //private retrieve(key: string): any {
+    // private retrieve(key: string): any {
     //    let item = this.storage.getItem(key);
 
     //    if (item && item !== 'undefined') {
@@ -213,16 +222,17 @@ export class SecurityService {
     //    }
 
     //    return;
-    //}
+    // }
 
-    //private store(key: string, value: any) {
+    // private store(key: string, value: any) {
     //    this.storage.setItem(key, JSON.stringify(value));
-    //}
+    // }
 
     private getUserData = (): Observable<string[]> => {
         this.setHeaders();
-        if (this.authorityUrl === '')
+        if (this.authorityUrl === '') {
             this.authorityUrl = this.storage.retrieve('IdentityUrl');
+        }
 
         return this._http.get(this.authorityUrl + '/connect/userinfo', {
             headers: this.headers,
@@ -235,7 +245,7 @@ export class SecurityService {
         this.headers.append('Content-Type', 'application/json');
         this.headers.append('Accept', 'application/json');
 
-        let token = this.GetToken();
+        const token = this.GetToken();
 
         if (token !== '') {
             this.headers.append('Authorization', 'Bearer ' + token);

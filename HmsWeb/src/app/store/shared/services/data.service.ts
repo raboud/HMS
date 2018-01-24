@@ -1,5 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptionsArgs, RequestMethod, Headers } from '@angular/http';
+import { HttpClient, HttpResponse, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+
+import 'rxjs/add/operator/retry';
 
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
@@ -15,20 +17,20 @@ import { Guid } from '../../guid';
 // is pending to do for the SPA app
 @Injectable()
 export class DataService {
-    constructor(private http: Http, private securityService: SecurityService) { }
+    constructor(private http: HttpClient, private securityService: SecurityService) { }
 
-    get(url: string, params?: any): Observable<Response> {
-        let options: RequestOptionsArgs = {};
-
+    get<type>(url: string, params?: any): Observable<type> {
         if (this.securityService) {
-            options.headers = new Headers();
-            options.headers.append('Authorization', 'Bearer ' + this.securityService.GetToken());
-        }
-
-        return this.http.get(url, options).map(
-            (res: Response) => {
-            return res;
+          return this.http.get<type>(url)
+          .map(
+            (d) => {
+              return d;
         }).catch(this.handleError);
+        } else {
+        return this.http.get<type>(url).map(
+            () => {
+        }).catch(this.handleError);
+      }
     }
 
     postWithId(url: string, data: any, params?: any): Observable<Response> {
@@ -44,42 +46,43 @@ export class DataService {
     }
 
     private doPost(url: string, data: any, needId: boolean, params?: any): Observable<Response> {
-        let options: RequestOptionsArgs = {};
+      const options: HttpHeaders = new HttpHeaders();
 
-        options.headers = new Headers();
+
         if (this.securityService) {
-            options.headers.append('Authorization', 'Bearer ' + this.securityService.GetToken());
+            options.set('Authorization', this.securityService.getAuthorizationHeader());
         }
         if (needId) {
-            let guid = Guid.newGuid();
-            options.headers.append('x-requestid', guid);
+            const guid = Guid.newGuid();
+            options.append('x-requestid', guid);
         }
 
-        return this.http.post(url, data, options).map(
-            (res: Response) => {
+        return this.http.post(url, data, {headers: options}).map(
+            (res: HttpResponse<any>) => {
                 return res;
             }).catch(this.handleError);
     }
 
     private doPut(url: string, data: any, needId: boolean, params?: any): Observable<Response> {
-        let options: RequestOptionsArgs = {};
+      const options: HttpHeaders = new HttpHeaders();
 
-        options.headers = new Headers();
+
         if (this.securityService) {
-            options.headers.append('Authorization', 'Bearer ' + this.securityService.GetToken());
+            options.set('Authorization', this.securityService.getAuthorizationHeader());
         }
         if (needId) {
-            let guid = Guid.newGuid();
-            options.headers.append('x-requestid', guid);
+            const guid = Guid.newGuid();
+            options.append('x-requestid', guid);
         }
 
-        return this.http.put(url, data, options).map(
+        return this.http.put(url, data, {headers: options}).map(
             (res: Response) => {
                 return res;
             }).catch(this.handleError);
     }
 
     delete(url: string, params?: any) {
+      /*
         let options: RequestOptionsArgs = {};
 
         if (this.securityService) {
@@ -91,18 +94,18 @@ export class DataService {
         // return this.http.delete(url, options).subscribe(
         //        return res;
         //    );
-
-        this.http.delete(url, options).subscribe((res) => {
+*/
+        this.http.delete(url).subscribe((res) => {
             console.log('deleted');
         });
     }
 
-    private handleError(error: any) {
+    private handleError(error: HttpErrorResponse) {
         console.error('server error:', error);
-        if (error instanceof Response) {
+        if (error instanceof HttpErrorResponse) {
             let errMessage = '';
             try {
-                errMessage = error.json();
+                errMessage = error.message;
             } catch (err) {
                 errMessage = error.statusText;
             }

@@ -1,9 +1,9 @@
-﻿import { Injectable }       from '@angular/core';
-import { Subject }          from 'rxjs/Subject';
+﻿import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 
-import { ICatalogItem }     from '../models/catalogItem.model';
-import { IBasketItem }      from '../models/basketItem.model';
-import { IBasket }          from '../models/basket.model';
+import { IProduct } from '../models/product.model';
+import { IBasketItem } from '../models/basketItem.model';
+import { IBasket } from '../models/basket.model';
 import { SecurityService } from '../services/security.service';
 import { Guid } from '../../guid';
 
@@ -20,7 +20,7 @@ export class BasketWrapperService {
     private orderCreatedSource = new Subject();
     orderCreated$ = this.orderCreatedSource.asObservable();
 
-    addItemToBasket(item: ICatalogItem) {
+    addItemToBasket(item: IProduct) {
         if (this.identityService.IsAuthorized) {
             let basket: IBasketItem = {
                 pictureUrl: item.pictureUri,

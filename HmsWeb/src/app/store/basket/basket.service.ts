@@ -28,13 +28,20 @@ export class BasketService {
         items: []
     };
 
-    //observable that is fired when the basket is dropped
+    // observable that is fired when the basket is dropped
     private basketDropedSource = new Subject();
     basketDroped$ = this.basketDropedSource.asObservable();
-    
-    constructor(private service: DataService, private authService: SecurityService, private basketEvents: BasketWrapperService, private router: Router, private configurationService: ConfigurationService, private storageService: StorageService) {
+
+    constructor(
+      private service: DataService,
+      private authService: SecurityService,
+      private basketEvents: BasketWrapperService,
+      private router: Router,
+      private configurationService: ConfigurationService,
+      private storageService: StorageService
+    ) {
         this.basket.items = [];
-        
+
         // Init:
         if (this.authService.IsAuthorized) {
             if (this.authService.UserData) {
@@ -42,8 +49,7 @@ export class BasketService {
                 if (this.configurationService.isReady) {
                     this.basketUrl = this.configurationService.serverSettings.basketUrl;
                     this.loadData();
-                }
-                else {
+                } else {
                     this.configurationService.settingsLoaded$.subscribe(x => {
                         this.basketUrl = this.configurationService.serverSettings.basketUrl;
                         this.loadData();
@@ -56,30 +62,30 @@ export class BasketService {
             this.dropBasket();
         });
     }
-    
+
     addItemToBasket(item): Observable<boolean> {
         this.basket.items.push(item);
         return this.setBasket(this.basket);
     }
 
     setBasket(basket): Observable<boolean> {
-        let url = this.basketUrl + '/api/v1/basket/';
+        const url = this.basketUrl + '/api/v1/basket/';
         this.basket = basket;
-        return this.service.post(url, basket).map((response: Response) => {
+        return this.service.post(url, basket).map(() => {
             return true;
         });
     }
 
     setBasketCheckout(basketCheckout): Observable<boolean> {
-        let url = this.basketUrl + '/api/v1/basket/checkout';
-        return this.service.postWithId(url, basketCheckout).map((response: Response) => {
+        const url = this.basketUrl + '/api/v1/basket/checkout';
+        return this.service.postWithId(url, basketCheckout).map(() => {
             this.basketEvents.orderCreated();
             return true;
         });
     }
 
     getBasket(): Observable<IBasket> {
-        let url = this.basketUrl + '/api/v1/basket/' + this.basket.buyerId;
+        const url = this.basketUrl + '/api/v1/basket/' + this.basket.buyerId;
         return this.service.get(url).map((response: Response) => {
             if (response.status === 204) {
                 return null;
@@ -87,12 +93,12 @@ export class BasketService {
 
             return response.json();
         });
-    }    
+    }
 
     mapBasketInfoCheckout(order: IOrder): IBasketCheckout {
-        let basketCheckout = <IBasketCheckout>{};
+        const basketCheckout = <IBasketCheckout>{};
 
-        basketCheckout.street = order.street
+        basketCheckout.street = order.street;
         basketCheckout.city = order.city;
         basketCheckout.country = order.country;
         basketCheckout.state = order.state;
@@ -106,17 +112,18 @@ export class BasketService {
         basketCheckout.expiration = order.expiration;
 
         return basketCheckout;
-    }    
+    }
 
     dropBasket() {
-        this.basket.items = [];        
+        this.basket.items = [];
         this.basketDropedSource.next();
     }
 
     private loadData() {
         this.getBasket().subscribe(basket => {
-            if (basket != null)
+            if (basket != null) {
                 this.basket.items = basket.items;
+            }
         });
     }
 }

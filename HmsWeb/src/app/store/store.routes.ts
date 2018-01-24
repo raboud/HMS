@@ -7,14 +7,14 @@ import { OrdersDetailComponent } from './orders/orders-detail/orders-detail.comp
 import { OrdersNewComponent } from './orders/orders-new/orders-new.component';
 import { CampaignsComponent } from './campaigns/campaigns.component';
 import { CampaignsDetailComponent } from './campaigns/campaigns-detail/campaigns-detail.component';
-import { VendorListComponent } from './vendor/vendor-list/vendor-list.component';
-import { VendorEditComponent } from './vendor/vendor-edit/vendor-edit.component';
-import { TypeListComponent } from './type/type-list/type-list.component';
-import { TypeEditComponent } from './type/type-edit/type-edit.component';
-import { BrandListComponent } from './brand/brand-list/brand-list.component';
-import { BrandEditComponent } from './brand/brand-edit/brand-edit.component';
-import { ProductListComponent } from './product/product-list/product-list.component';
-import { ProductEditComponent } from './product/product-edit/product-edit.component';
+import { VendorListComponent } from './catalog/vendor/vendor-list/vendor-list.component';
+import { VendorEditComponent } from './catalog/vendor/vendor-edit/vendor-edit.component';
+import { TypeListComponent } from './catalog/type/type-list/type-list.component';
+import { TypeEditComponent } from './catalog/type/type-edit/type-edit.component';
+import { BrandListComponent } from './catalog/brand/brand-list/brand-list.component';
+import { BrandEditComponent } from './catalog/brand/brand-edit/brand-edit.component';
+import { ProductListComponent } from './catalog/product/product-list/product-list.component';
+import { ProductEditComponent } from './catalog/product/product-edit/product-edit.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'catalog', pathMatch: 'full' },
@@ -27,8 +27,8 @@ export const routes: Routes = [
     { path: 'campaigns/:id', component: CampaignsDetailComponent },
     { path: 'vendor', component: VendorListComponent},
     { path: 'vendor/:id',  component: VendorEditComponent},
-    { path: 'type', component: TypeListComponent},
-    { path: 'type/:id', component: TypeEditComponent},
+    { path: 'category', component: TypeListComponent},
+    { path: 'category/:id', component: TypeEditComponent},
     { path: 'brand', component: BrandListComponent},
     { path: 'brand/:id', component: BrandEditComponent},
     { path: 'product', component: ProductListComponent},

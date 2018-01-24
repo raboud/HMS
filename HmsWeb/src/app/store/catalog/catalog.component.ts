@@ -3,10 +3,9 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { CatalogService } from './catalog.service';
 import { ConfigurationService } from '../shared/services/configuration.service';
-import { ICatalog } from '../shared/models/catalog.model';
-import { ICatalogItem } from '../shared/models/catalogItem.model';
-import { ICatalogType } from '../shared/models/catalogType.model';
-import { ICatalogBrand } from '../shared/models/catalogBrand.model';
+import { IProducts, IProduct, IProductPage } from '../shared/models/product.model';
+import { ICategory } from '../shared/models/category.model';
+import { IBrand } from '../shared/models/brand.model';
 import { IPager } from '../shared/models/pager.model';
 import { BasketWrapperService} from '../shared/services/basket.wrapper.service';
 import { SecurityService } from '../shared/services/security.service';
@@ -18,9 +17,9 @@ import { Observable } from 'rxjs/Observable';
     templateUrl: './catalog.component.html'
 })
 export class CatalogComponent implements OnInit {
-    brands: ICatalogBrand[];
-    types: ICatalogType[];
-    catalog: ICatalog;
+    brands: IBrand[] = [];
+    types: ICategory[] = [];
+    catalog: IProductPage;
     brandSelected: number;
     typeSelected: number;
     paginationInfo: IPager;
@@ -82,7 +81,7 @@ export class CatalogComponent implements OnInit {
         this.getCatalog(this.paginationInfo.itemsPage, value);
     }
 
-    addToCart(item: ICatalogItem) {
+    addToCart(item: IProduct) {
         this.basketService.addItemToBasket(item);
     }
 
@@ -105,9 +104,9 @@ export class CatalogComponent implements OnInit {
     getTypes() {
         this.service.getTypes().subscribe(types => {
             this.types = types;
-            console.log('types ' + this.types.length);
-            const alltypes: ICatalogType = { id: null, name: 'All' };
+            const alltypes: ICategory = { id: null, name: 'All', inActive: false };
             this.types.unshift(alltypes);
+            console.log('types ' + this.types.length);
         });
     }
 
@@ -115,7 +114,7 @@ export class CatalogComponent implements OnInit {
         this.service.getBrands().subscribe(brands => {
             this.brands = brands;
             console.log('brands ' + this.brands.length);
-            const allBrands: ICatalogBrand = { id: null, name: 'All' };
+            const allBrands: IBrand = { id: null, name: 'All', inActive: false };
             this.brands.unshift(allBrands);
         });
     }
@@ -125,7 +124,7 @@ export class CatalogComponent implements OnInit {
         return Observable.throw(error);
     }
 
-    detail(item: ICatalogItem) {
+    detail(item: IProduct) {
       console.log(item.name);
     }
 

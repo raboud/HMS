@@ -8,9 +8,14 @@ import { OrdersNewComponent }      from './orders-new/orders-new.component';
 import { OrdersService } from './orders.service';
 import { BasketService } from '../basket/basket.service';
 import { Header }                from '../shared/components/header/header';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-    imports: [BrowserModule, SharedModule],
+    imports: [
+      BrowserModule,
+      SharedModule,
+      NgbModule,
+    ],
     declarations: [OrdersComponent, OrdersDetailComponent, OrdersNewComponent],
     providers: [OrdersService, BasketService]
 })

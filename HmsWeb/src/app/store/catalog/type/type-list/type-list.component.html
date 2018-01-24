@@ -1,0 +1,5 @@
+<ngb-pagination [collectionSize]="items.count" [pageSize]='items.pageSize' [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false" (pageChange)='pageChange()' [boundaryLinks]="true"></ngb-pagination>
+<div *ngFor='let item of items.data'>
+  <div>{{item.name}}</div>
+</div>
+
