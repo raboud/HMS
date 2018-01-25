@@ -13,11 +13,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./type-list.component.css']
 })
 export class TypeListComponent implements OnInit {
+  pageTitle: string = 'Category List';
   page: number = 0;
   items: ICategoryPage = {
     Count: 0,
     PageIndex: 0,
-    PageSize: 10,
+    PageSize: 20,
     Data: [],
   }
   authenticated: boolean = false;

@@ -5,21 +5,22 @@
 
       <div class='card-text'>
         <form novalidate (ngSubmit)="onSave()" [formGroup]="form">
-            <div class="form-group" [ngClass]="{'invalid': displayMessage.name }">
-              <label for="nameId">NAME</label>
-              <input class="form-control" id="nameId" type="text" placeholder="Name (required)" formControlName="name"
-              />
-              <span class="help-block" *ngIf="displayMessage.name">
-                {{displayMessage.name}}
-              </span>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" id="inActiveId" type="checkbox" placeholder="In Active" formControlName="inActive" />
-              <label class=" form-check-label" for="inActiveId">INACTIVE</label>
+          <div class="form-group" [ngClass]="{'invalid': displayMessage.name }">
+            <label for="nameId">NAME</label>
+            <input class="form-control" id="nameId" type="text" placeholder="Name (required)" formControlName="name" />
+            <span class="help-block" *ngIf="displayMessage.name">
+              {{displayMessage.name}}
+            </span>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" id="inActiveId" type="checkbox" placeholder="In Active" formControlName="inActive" />
+            <label class=" form-check-label" for="inActiveId">INACTIVE</label>
           </div>
           <br/>
-          <button type="submit" class="btn btn-primary">Submit</button>
-          <button class="btn btn-secondary" routerLink='/category'>Cancel</button>
+          <span>
+            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-default" routerLink='/category'>Cancel</button>
+          </span>
         </form>
       </div>
     </div>

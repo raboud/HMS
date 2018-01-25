@@ -22,6 +22,7 @@ import { StoreModule } from './store/store.module';
 import { IdentityModule } from './identity/identity.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Expertise2Component } from './main/expertise2/expertise2.component';
+import { StoreComponent } from './store/store.component';
 
 
 @NgModule({

@@ -6,10 +6,10 @@ import { SecurityService } from  '../../services/security.service';
 
 @Component({
     selector: 'app-identity',
-    templateUrl: './identity.html',
-    styleUrls: ['./identity.scss']
+    templateUrl: './identity.component.html',
+    styleUrls: ['./identity.component.scss']
 })
-export class Identity implements OnInit  {
+export class IdentityComponent implements OnInit  {
     authenticated: boolean = false;
     private subscription: Subscription;
     private userName: string = '';
@@ -32,8 +32,9 @@ export class Identity implements OnInit  {
         this.authenticated = this.service.IsAuthorized;
 
         if (this.authenticated) {
-            if (this.service.UserData)
-                this.userName = this.service.UserData.email;
+            if (this.service.UserData) {
+              this.userName = this.service.UserData.email;
+            }
         }
     }
 

@@ -1,45 +1,38 @@
-  <div class="container col-sm-6 offest-sm-3">
+<div class="container col-sm-4 offest-sm-4">
 
-    <div class="card">
-      <div class="card-body">
-        <h2 class="card-title">{{pageTitle}}</h2>
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">{{pageTitle}}</h2>
 
-        <div>
-          <form novalidate (ngSubmit)="onLogin()" [formGroup]="form">
-            <fieldset class="form-group">
-              <div class="form-group row" [ngClass]="{'invalid': displayMessage.userName }">
-                <label class="col-4 col-form-label" for="userNameId">Username</label>
-
-                <div class="col-8">
-                  <input class="form-control" id="usernameId" type="email" placeholder="User Name (required)" formControlName="userName" />
-                  <span class="help-block" *ngIf="displayMessage.userName">
-                    {{displayMessage.userName}}
-                  </span>
-                </div>
-              </div>
-              <div class="form-group row" [ngClass]="{'invalid': displayMessage.password }">
-                <label class="col-md-4 control-label" for="passwordId">Password</label>
-
-                <div class="col-md-8">
-                  <input class="form-control" id="passwordId" type="password" placeholder="Password (required)" formControlName="password"
-                  />
-                  <span class="help-block" *ngIf="displayMessage.password">
-                    {{displayMessage.password}}
-                  </span>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="row justify-content-center">
-                  <span>
-                    <button class="btn btn-primary" type="submit" [disabled]='!form.valid'>
-                      Login
-                    </button>
-                  </span>
-                </div>
-              </div>
-            </fieldset>
-          </form>
-          <div class='invalid' *ngIf='errorMessage'>{{errorMessage}}</div>
-        </div>
+      <div class="card-text">
+        <form novalidate (ngSubmit)="onLogin()" [formGroup]="form">
+          <div class="form-group" [ngClass]="{'invalid': displayMessage.userName }">
+            <label for="userNameId">Username</label>
+            <input class="form-control" id="usernameId" type="email" placeholder="User Name (required)" formControlName="userName" />
+            <span class="help-block" *ngIf="displayMessage.userName">
+              {{displayMessage.userName}}
+            </span>
+          </div>
+          <div class="form-group" [ngClass]="{'invalid': displayMessage.password }">
+            <label for="passwordId">Password</label>
+            <input class="form-control" id="passwordId" type="password" placeholder="Password (required)" formControlName="password"
+            />
+            <span class="help-block" *ngIf="displayMessage.password">
+              {{displayMessage.password}}
+            </span>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" id="inActiveId" type="checkbox" placeholder="In Active" formControlName="rememberMe" />
+            <label class=" form-check-label" for="rememberMe">Remember Me</label>
+          </div>
+          <br />
+          <div class="form-group row justify-content-center">
+            <button class="btn btn-primary" type="submit" [disabled]='!form.valid'>
+              Login
+            </button>
+          </div>
+        </form>
+        <div class='invalid' *ngIf='errorMessage'>{{errorMessage}}</div>
       </div>
     </div>
+  </div>

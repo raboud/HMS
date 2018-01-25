@@ -14,7 +14,7 @@ import { StorageService } from './services/storage.service';
 // Components:
 import { Pager } from './components/pager/pager';
 import { Header } from './components/header/header';
-import { Identity } from './components/identity/identity';
+import { IdentityComponent } from './components/identity/identity.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 // Pipes:
@@ -36,7 +36,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     declarations: [
         Pager,
         Header,
-        Identity,
+        IdentityComponent,
         PageNotFoundComponent,
         UppercasePipe
     ],
@@ -49,7 +49,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         // Providers, Components, directive, pipes
         Pager,
         Header,
-        Identity,
+        IdentityComponent,
         PageNotFoundComponent,
         UppercasePipe
     ]

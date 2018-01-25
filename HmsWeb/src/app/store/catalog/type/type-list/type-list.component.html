@@ -1,14 +1,20 @@
-<div style="min-height: 60vh">
-  <div *ngFor='let item of items.Data' class='row'>
-    <div class='col-4'>{{item.Name}}</div>
-    <div class='col-3 text-primary'>
-      <a routerLink='/category/{{item.Id}}'>edit</a> |
-        <a (click)='delete(item)'>delete</a> |
-        <a *ngIf='item.InActive' (click)='toggle(item)'>activate</a>
-        <a *ngIf='!item.InActive' (click)='toggle(item)'>in activate</a>
+<div style="min-height: 65vh" class="card container col-6 offset-3">
+  <div class="card-body">
+    <h2 class="card-title">{{pageTitle}}</h2>
+    <div *ngFor='let item of items.Data' class='row' style='text-align:left;'>
+      <div class='col-6'>{{item.Name}}</div>
+      <div class='col-6'>
+        <a routerLink='/category/{{item.Id}}' tabindex="1">edit</a> |
+        <a (click)='delete(item)' tabindex="2">delete</a> |
+        <a *ngIf='item.InActive' (click)='toggle(item)' tabindex="3">activate</a>
+        <a *ngIf='!item.InActive' (click)='toggle(item)' tabindex="3">in activate</a>
       </div>
     </div>
+  </div>
+  <div class='row'>
+    <ngb-pagination class='col-9' [collectionSize]="items.Count" [pageSize]='items.PageSize' [(page)]="page" [maxSize]="5" [rotate]="true"
+      [ellipses]="false" (pageChange)='pageChange()' [boundaryLinks]="true"></ngb-pagination>
+    <button class="col-2 btn btn-primary" routerLink='/category/-1'>Add</button>
+  </div>
+  <br />
 </div>
-<ngb-pagination [collectionSize]="items.Count" [pageSize]='items.PageSize' [(page)]="page" [maxSize]="5" [rotate]="true"
-  [ellipses]="false" (pageChange)='pageChange()' [boundaryLinks]="true"></ngb-pagination>
-  <button class="btn btn-primary" routerLink='/category/-1'>Add</button>
