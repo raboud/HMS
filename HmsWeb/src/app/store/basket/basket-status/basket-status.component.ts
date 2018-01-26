@@ -1,10 +1,10 @@
-import { Component, OnInit }    from '@angular/core';
-import { Subscription }         from 'rxjs/Subscription';
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
-import { BasketService }        from '../basket.service';
+import { BasketService } from '../basket.service';
 import { BasketWrapperService } from '../../shared/services/basket.wrapper.service';
-import { SecurityService }      from '../../shared/services/security.service';
-import { ConfigurationService }      from '../../shared/services/configuration.service';
+import { SecurityService } from '../../shared/services/security.service';
+import { ConfigurationService } from '../../shared/services/configuration.service';
 
 @Component({
     selector: 'app-basket-status',

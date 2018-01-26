@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from '../../../shared/models/product.model';
 import { ProductService } from '../../product.service';
-import { ConfigurationService } from '../../../shared/services/configuration.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({

@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { CatalogService } from './catalog.service';
-import { ConfigurationService } from '../shared/services/configuration.service';
 import { IProduct } from '../shared/models/product.model';
 import { ICategory } from '../shared/models/category.model';
 import { IBrand } from '../shared/models/brand.model';

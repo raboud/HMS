@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfigurationService } from '../../../shared/services/configuration.service';
 import { SecurityService } from '../../../shared/services/security.service';
 import { IBrand } from '../../../shared/models/brand.model';
 import { Subscription } from 'rxjs/Subscription';
@@ -16,12 +15,11 @@ import { BaseListComponent } from '../../base-List.component';
 export class BrandListComponent  extends BaseListComponent<IBrand> {
   constructor (
     service: BrandService,
-    configurationService: ConfigurationService,
     securityService: SecurityService,
     router: Router,
     route: ActivatedRoute
   ) {
-    super(service, configurationService, securityService, router, route);
+    super(service, securityService, router, route);
     this.pageTitle = 'Brand List';
   }
 }

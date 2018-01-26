@@ -7,7 +7,6 @@ import { ICampaignItem } from '../shared/models/campaignItem.model';
 import { SecurityService } from '../shared/services/security.service';
 import { ConfigurationService } from '../shared/services/configuration.service';
 
-import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import { Observer } from 'rxjs/Observer';
@@ -18,6 +17,7 @@ import 'rxjs/add/operator/map';
 export class CampaignsService {
     private marketingUrl: string = '';
     private buyerId: string = '';
+
     constructor(
       private service: DataService,
       private identityService: SecurityService,

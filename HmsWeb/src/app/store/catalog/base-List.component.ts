@@ -1,7 +1,6 @@
 import { ICrud, IPage } from '../shared/models/pagination.model';
 import { OnInit, Injectable } from '@angular/core';
 import { BaseService } from './base.service';
-import { ConfigurationService } from '../shared/services/configuration.service';
 import { SecurityService } from '../shared/services/security.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -27,7 +26,6 @@ export class BaseListComponent<T extends ICrud> implements OnInit {
 
   constructor(
     protected service: BaseService<T>,
-    private configurationService: ConfigurationService,
     private securityService: SecurityService,
     private router: Router,
     private route: ActivatedRoute

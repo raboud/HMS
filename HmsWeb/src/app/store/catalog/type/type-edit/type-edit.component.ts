@@ -36,22 +36,24 @@ export class TypeEditComponent implements OnInit {
       ],
       inActive: [false]
     });
-    this.route.params.subscribe(params => {
-      const id = +params['id']; // (+) converts string 'id' to a number
-      if (id === -1) {
-        this.pageTitle = 'Add Category';
-        this.editing = false;
-        this.item = {
-          Id: 0,
-          Name: '',
-          InActive: false,
-        };
-        this.updateForm();
-      } else {
-        this.pageTitle = 'Edit Category';
-        this.editing = true;
-        this.getItem(id);
-      }
+    this.service.load().subscribe(() => {
+      this.route.params.subscribe(params => {
+        const id = +params['id']; // (+) converts string 'id' to a number
+        if (id === -1) {
+          this.pageTitle = 'Add Category';
+          this.editing = false;
+          this.item = {
+            Id: 0,
+            Name: '',
+            InActive: false,
+          };
+          this.updateForm();
+        } else {
+          this.pageTitle = 'Edit Category';
+          this.editing = true;
+          this.getItem(id);
+        }
+      });
     });
   }
 
