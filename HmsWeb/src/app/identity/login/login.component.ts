@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.form = this.fb.group({
       userName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       password: ['', Validators.required],
-      rememberMe: [false];
+      rememberMe: [false]
     });
   }
 

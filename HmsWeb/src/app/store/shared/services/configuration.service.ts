@@ -37,8 +37,8 @@ export class ConfigurationService {
             this.storageService.store('orderingUrl', this.serverSettings.orderingUrl);
             this.storageService.store('marketingUrl', this.serverSettings.marketingUrl);
             this.storageService.store('activateCampaignDetailFunction', this.serverSettings.activateCampaignDetailFunction);
-            this.isReady = true;
             this.settingsLoadedSource.next();
+            this.isReady = true;
         });
     }
 }

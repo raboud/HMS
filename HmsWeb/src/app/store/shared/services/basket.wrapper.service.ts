@@ -24,7 +24,7 @@ export class BasketWrapperService {
         if (this.identityService.IsAuthorized) {
             let basket: IBasketItem = {
                 pictureUrl: item.PictureUri,
-                productId: item.Id,
+                productId: item.Id.toString(),
                 productName: item.Name,
                 quantity: 1,
                 unitPrice: item.Price,

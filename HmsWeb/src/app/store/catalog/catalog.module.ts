@@ -6,6 +6,10 @@ import { CatalogComponent } from './catalog.component';
 import { CatalogService } from './catalog.service';
 import { Pager } from '../shared/components/pager/pager';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrandService } from './brand.service';
+import { CategoryService } from './category.service';
+import { VendorService } from './vendor.service';
+import { ProductService } from './product.service';
 
 @NgModule({
     imports: [
@@ -16,6 +20,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     declarations: [
       CatalogComponent
     ],
-    providers: [CatalogService]
+    providers: [
+      CatalogService,
+      BrandService,
+      CategoryService,
+      VendorService,
+      ProductService
+    ]
 })
 export class CatalogModule { }

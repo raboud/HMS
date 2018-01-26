@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+import { Router } from '@angular/router';
+
+import { Observable } from 'rxjs/Observable';
 
 import { CatalogService } from './catalog.service';
 import { ConfigurationService } from '../shared/services/configuration.service';
-import { IProducts, IProduct, IProductPage } from '../shared/models/product.model';
+import { IProduct } from '../shared/models/product.model';
 import { ICategory } from '../shared/models/category.model';
 import { IBrand } from '../shared/models/brand.model';
 import { IPager } from '../shared/models/pager.model';
 import { BasketWrapperService} from '../shared/services/basket.wrapper.service';
 import { SecurityService } from '../shared/services/security.service';
-import { Observable } from 'rxjs/Observable';
+import { IPage } from '../shared/models/pagination.model';
 
 @Component({
     selector: 'app-catalog .catalog',
@@ -20,10 +23,9 @@ export class CatalogComponent implements OnInit {
     brands: IBrand[] = [];
     types: ICategory[] = [];
     page: number;
-    items: IProductPage;
+    items: IPage<IProduct>;
     brandSelected: number;
     typeSelected: number;
-    paginationInfo: IPager;
     authenticated: boolean = false;
     authSubscription: Subscription;
     errorReceived: boolean;
@@ -32,7 +34,8 @@ export class CatalogComponent implements OnInit {
       private service: CatalogService,
       private basketService: BasketWrapperService,
       private configurationService: ConfigurationService,
-      private securityService: SecurityService
+      private securityService: SecurityService,
+      private router: Router
     ) {
         this.authenticated = securityService.IsAuthorized;
     }
@@ -57,13 +60,13 @@ export class CatalogComponent implements OnInit {
 
     loadData() {
         this.getBrands();
-        this.getCatalog(10, 0);
+        this.getCatalog(6, 0);
         this.getTypes();
     }
 
     onFilterApplied(event: any) {
         event.preventDefault();
-        this.getCatalog(this.paginationInfo.itemsPage, this.paginationInfo.actualPage, this.brandSelected, this.typeSelected);
+        this.getCatalog(this.items.PageSize, 0, this.brandSelected, this.typeSelected);
     }
 
     onBrandFilterChanged(event: any, value: number) {
@@ -91,13 +94,6 @@ export class CatalogComponent implements OnInit {
             .catch((err) => this.handleError(err))
             .subscribe(catalog => {
                 this.items = catalog;
-                this.paginationInfo = {
-                    actualPage : catalog.pageIndex,
-                    itemsPage : catalog.pageSize,
-                    totalItems : catalog.count,
-                    totalPages: Math.ceil(catalog.count / catalog.pageSize),
-                    items: catalog.pageSize
-                };
         });
     }
 
@@ -125,7 +121,7 @@ export class CatalogComponent implements OnInit {
     }
 
     detail(item: IProduct) {
-      console.log(item.Name);
+      this.router.navigate(['productdetail/' + item.Id]);
     }
 
 }

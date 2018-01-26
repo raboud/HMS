@@ -1,0 +1,17 @@
+<div *ngIf="item" class="container col-sm-6 offest-sm-3">
+<div class="card">
+    <div class="card-body">
+      <h1 class="card-title">{{item.Brand.Name}}</h1>
+      <h2 class="card-title">{{item.Name}}</h2>
+      <h3>{{item.Count}} {{item.Unit.Name}}</h3>
+      <img class="card-img-top" src="{{item.PictureUri}}">
+
+      <div class='card-text'>
+        <p>
+        {{item.Description}}
+      </p>
+      <h5>{{item.Types.join(' - ')}}</h5>
+       </div>
+    </div>
+  </div>
+</div>

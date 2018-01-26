@@ -1,22 +1,21 @@
-import { IPagination } from './pagination.model';
+import { ICrud } from './pagination.model';
 
-export interface IProductPage extends IPagination, IProducts {
-}
-
-export interface IProducts {
-  Data: IProduct[];
-}
-
-export interface IProduct {
-  Id: string;
+export interface IProduct extends ICrud {
   Name: string;
   Description: string;
   Price: number;
   PictureUri: string;
   catalogBrandId: number;
-  catalogBrand: string;
+  Brand: {
+    Name: string;
+  }
+  Types: string[];
   catalogTypeId: number;
   catalogType: string;
-  Units: number;
+  Unit:
+  {
+    Name: string;
+  };
+  Count: number;
   InActive: boolean;
 }

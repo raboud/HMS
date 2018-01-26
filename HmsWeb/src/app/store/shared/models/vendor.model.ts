@@ -1,14 +1,6 @@
-import { IPagination } from './pagination.model';
+import { ICrud } from './pagination.model';
 
-export interface IVendorPage extends IPagination, IVendor {
-}
-
-export interface IVendors {
-  Data: IVendor[];
-}
-
-export interface IVendor {
-  Id: number;
+export interface IVendor extends ICrud {
   Name: string;
   InActive: boolean;
 }

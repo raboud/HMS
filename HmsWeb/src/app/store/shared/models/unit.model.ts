@@ -1,15 +1,6 @@
-import { IPagination } from './pagination.model';
+import { ICrud } from './pagination.model';
 
-
-export interface IUnitPage extends IPagination, IUnit {
-}
-
-export interface IUnits {
-  data: IUnit[];
-}
-
-export interface IUnit {
-  Id: number;
+export interface IUnit extends ICrud {
   Name: string;
   InActive: boolean;
 }

@@ -22,6 +22,7 @@ import { BrandListComponent } from './catalog/brand/brand-list/brand-list.compon
 import { BrandEditComponent } from './catalog/brand/brand-edit/brand-edit.component';
 import { ProductEditComponent } from './catalog/product/product-edit/product-edit.component';
 import { ProductListComponent } from './catalog/product/product-list/product-list.component';
+import { ProductDetailComponent } from './catalog/product/product-detail/product-detail.component';
 
 @NgModule({
     declarations: [
@@ -33,7 +34,8 @@ import { ProductListComponent } from './catalog/product/product-list/product-lis
       BrandListComponent,
       BrandEditComponent,
       ProductEditComponent,
-      ProductListComponent
+      ProductListComponent,
+      ProductDetailComponent
     ],
     imports: [
         BrowserModule,

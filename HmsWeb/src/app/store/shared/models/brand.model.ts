@@ -1,14 +1,6 @@
-import { IPagination } from './pagination.model';
+import { ICrud } from './pagination.model';
 
-export interface IBrandPage extends IPagination, IBrands {
-}
-
-export interface IBrands {
-  Data: IBrand[];
-}
-
-export interface IBrand {
-    Id: number;
+export interface IBrand extends ICrud {
     Name: string;
     InActive: boolean;
   }
