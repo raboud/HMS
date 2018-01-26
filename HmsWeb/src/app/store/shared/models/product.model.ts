@@ -5,17 +5,21 @@ export interface IProduct extends ICrud {
   Description: string;
   Price: number;
   PictureUri: string;
-  catalogBrandId: number;
   Brand: {
     Name: string;
   }
+  BrandId: number;
   Types: string[];
-  catalogTypeId: number;
-  catalogType: string;
+  Types2: string[];
   Unit:
   {
     Name: string;
   };
+  UnitId: number;
+  Vendor: {
+    Name: string;
+  }
+  VendorId: number;
   Count: number;
   InActive: boolean;
 }

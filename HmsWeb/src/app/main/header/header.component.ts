@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   public isActive = true;
 
+  public isAuthenticated: boolean = false;
+  public isAdmin: boolean = true;
+
   constructor() { }
 
   ngOnInit() {
@@ -15,6 +18,9 @@ export class HeaderComponent implements OnInit {
 
   menu() {
     this.isActive = !this.isActive;
+  }
+
+  logout() {
   }
 
 }

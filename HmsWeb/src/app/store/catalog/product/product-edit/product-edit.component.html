@@ -1,3 +1,85 @@
-<p>
-  product-edit works!
-</p>
+<div class="container col-sm-6 offest-sm-3">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">{{pageTitle}}</h2>
+
+      <div class='card-text'>
+        <form novalidate (ngSubmit)="onSave()" [formGroup]="form">
+          <div class="form-group" [ngClass]="{'invalid': displayMessage.name }">
+            <label for="nameId">NAME</label>
+            <input class="form-control" id="nameId" type="text" placeholder="Name (required)" formControlName="name" />
+            <span class="help-block" *ngIf="displayMessage.name">
+              {{displayMessage.name}}
+            </span>
+          </div>
+
+          <div class="form-group" [ngClass]="{'invalid': displayMessage.price }">
+            <label for="priceId">Price</label>
+            <input class="form-control" id="priceId" type="number" placeholder="Price (required)" formControlName="price" />
+            <span class="help-block" *ngIf="displayMessage.price">
+              {{displayMessage.price}}
+            </span>
+          </div>
+
+          <div class="form-group" [ngClass]="{'invalid': displayMessage.vendor }">
+            <label for="vendorId">VENDOR</label>
+            <select class="form-seclect" id="vendorId" type="number" placeholder="Vendor (required)" formControlName="vendor">
+              <option *ngFor='let vendor of vendors' [ngValue]='vendor.Id'>
+                {{vendor.Name}}
+              </option>
+            </select>
+            <span class="help-block" *ngIf="displayMessage.price">
+              {{displayMessage.price}}
+            </span>
+          </div>
+
+          <div class="form-group" [ngClass]="{'invalid': displayMessage.brand }">
+            <label for="brandId">BRAND</label>
+            <select class="form-seclect" id="brandId" type="number" placeholder="Brand (required)" formControlName="brand">
+              <option *ngFor='let brand of brands' [ngValue]='brand.Id'>
+                {{brand.Name}}
+              </option>
+            </select>
+            <span class="help-block" *ngIf="displayMessage.brand">
+              {{displayMessage.brand}}
+            </span>
+          </div>
+
+          <div class="form-group" [ngClass]="{'invalid': displayMessage.unit }">
+            <label for="unitId">UNITS</label>
+            <select class="form-seclect" id="unitId" type="number" placeholder="Brand (required)" formControlName="unit">
+              <option *ngFor='let unit of units' [ngValue]='unit.Id'>
+                {{unit.Name}}
+              </option>
+            </select>
+            <span class="help-block" *ngIf="displayMessage.unit">
+              {{displayMessage.unit}}
+            </span>
+          </div>
+
+          <div class="form-group" [ngClass]="{'invalid': displayMessage.type }">
+              <label for="typeId">TYPES</label>
+              <select multiple='true' class="form-seclect" id="typeId" type="number" placeholder="Brand (required)" formControlName="type">
+                <option *ngFor='let type of types' [ngValue]='type.Name'>
+                  {{type.Name}}
+                </option>
+              </select>
+              <span class="help-block" *ngIf="displayMessage.type">
+                {{displayMessage.type}}
+              </span>
+            </div>
+
+          <div class="form-check">
+            <input class="form-check-input" id="inActiveId" type="checkbox" placeholder="In Active" formControlName="inActive" />
+            <label class=" form-check-label" for="inActiveId">INACTIVE</label>
+          </div>
+          <br/>
+          <span>
+            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-default" (click)='onCancel()'>Cancel</button>
+          </span>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

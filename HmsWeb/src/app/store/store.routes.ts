@@ -16,6 +16,8 @@ import { BrandEditComponent } from './catalog/brand/brand-edit/brand-edit.compon
 import { ProductListComponent } from './catalog/product/product-list/product-list.component';
 import { ProductEditComponent } from './catalog/product/product-edit/product-edit.component';
 import { ProductDetailComponent } from './catalog/product/product-detail/product-detail.component';
+import { UnitListComponent } from './catalog/unit/unit-list/unit-list.component';
+import { UnitEditComponent } from './catalog/unit/unit-edit/unit-edit.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'catalog', pathMatch: 'full' },
@@ -34,7 +36,9 @@ export const routes: Routes = [
     { path: 'brand/:id', component: BrandEditComponent},
     { path: 'product', component: ProductListComponent},
     { path: 'product/:id', component: ProductEditComponent},
-    { path: 'productdetail/:id', component: ProductDetailComponent}
+    { path: 'productdetail/:id', component: ProductDetailComponent},
+    { path: 'unit', component: UnitListComponent},
+    { path: 'unit/:id', component: UnitEditComponent},
 ];
 
 export const routing = RouterModule.forChild(routes);

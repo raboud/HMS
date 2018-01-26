@@ -1,25 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ICategory } from '../../../shared/models/category.model';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 import { GenericValidator } from '../../../../identity/generic-validator';
+import { IUnit } from '../../../shared/models/unit.model';
+import { UnitService } from '../../unit.service';
 import { BaseEditComponent } from '../../base-edit.component';
-import { CategoryService } from '../../category.service';
 
 @Component({
-  selector: 'app-type-edit',
-  templateUrl: './type-edit.component.html',
-  styleUrls: ['./type-edit.component.css']
+  selector: 'app-brand-edit',
+  templateUrl: '../../type/type-edit/type-edit.component.html',
+  styleUrls: ['../../type/type-edit/type-edit.component.css']
 })
-export class TypeEditComponent extends BaseEditComponent<ICategory> {
+export class UnitEditComponent extends BaseEditComponent<IUnit> {
   constructor (
-    service: CategoryService,
+    service: UnitService,
     route: ActivatedRoute,
     fb: FormBuilder,
     router: Router,
   ) {
     super(service, route, fb, router);
-    this.pageTitle = 'Category';
+    this.pageTitle = 'Vendor';
   }
 
   initItem() {

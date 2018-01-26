@@ -38,9 +38,11 @@ export class BaseService<T extends ICrud> {
 
   getItems(all?: boolean): Observable<T[]> {
     let url = this.baseUrl;
+    console.log(url);
     if (all) {
       url += '?all=' + all;
     }
+
     return this.service.get<T[]>(url);
   }
 

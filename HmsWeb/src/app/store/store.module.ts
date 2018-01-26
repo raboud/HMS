@@ -23,19 +23,23 @@ import { BrandEditComponent } from './catalog/brand/brand-edit/brand-edit.compon
 import { ProductEditComponent } from './catalog/product/product-edit/product-edit.component';
 import { ProductListComponent } from './catalog/product/product-list/product-list.component';
 import { ProductDetailComponent } from './catalog/product/product-detail/product-detail.component';
+import { UnitListComponent } from './catalog/unit/unit-list/unit-list.component';
+import { UnitEditComponent } from './catalog/unit/unit-edit/unit-edit.component';
 
 @NgModule({
     declarations: [
-      StoreComponent,
-      VendorListComponent,
-      VendorEditComponent,
-      TypeEditComponent,
-      TypeListComponent,
       BrandListComponent,
       BrandEditComponent,
       ProductEditComponent,
       ProductListComponent,
-      ProductDetailComponent
+      ProductDetailComponent,
+      StoreComponent,
+      TypeEditComponent,
+      TypeListComponent,
+      UnitListComponent,
+      UnitEditComponent,
+      VendorListComponent,
+      VendorEditComponent,
     ],
     imports: [
         BrowserModule,

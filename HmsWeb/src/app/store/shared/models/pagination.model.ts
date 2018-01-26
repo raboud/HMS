@@ -10,4 +10,5 @@ export interface IPage<t> {
 export interface ICrud {
   Id: number;
   InActive: boolean;
+  Name: string;
 }

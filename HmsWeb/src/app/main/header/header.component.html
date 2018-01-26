@@ -42,6 +42,11 @@
         <li class="nav-item active">
           <a class="nav-link" routerLink='articles' routerLinkActive="active" (click)="isActive = true">Health Aticles</a>
         </li>
+
+        <li class="nav-item active">
+          <a class="nav-link text-primary" routerLink='catalog' routerLinkActive="active" (click)="logout();isActive = true">Store</a>
+        </li>
+
         <li ngbDropdown class="nav-item dropdown text-primary">
           <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdownAbout" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About Us</a>
           <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownAbout">
@@ -51,6 +56,29 @@
             <a class="dropdown-item text-primary" routerLink='staff' routerLinkActive="active" (click)="isActive = true">Our Staff</a>
             <a class="dropdown-item text-primary" routerLink='contact' routerLinkActive="active" (click)="isActive = true">Contact Us</a>
           </div>
+        </li>
+
+        <li *ngIf='isAdmin' ngbDropdown class="nav-item dropdown text-primary">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdownAdmin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownAdmin">
+            <a class="dropdown-item text-primary" routerLink='product' routerLinkActive="active" (click)="isActive = true">Products</a>
+            <a class="dropdown-item text-primary" routerLink='vendor' routerLinkActive="active" (click)="isActive = true">Vendors</a>
+            <a class="dropdown-item text-primary" routerLink='brand' routerLinkActive="active" (click)="isActive = true">Brands</a>
+            <a class="dropdown-item text-primary" routerLink='unit' routerLinkActive="active" (click)="isActive = true">Units</a>
+            <a class="dropdown-item text-primary" routerLink='category' routerLinkActive="active" (click)="isActive = true">Categories</a>
+          </div>
+        </li>
+
+
+        <li *ngIf='!isAuthenticated' ngbDropdown class="nav-item dropdown text-primary">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdownLogin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
+          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownLogin">
+            <a class="dropdown-item text-primary" routerLink='login' routerLinkActive="active" (click)="isActive = true">Login</a>
+            <a class="dropdown-item text-primary" routerLink='register' routerLinkActive="active" (click)="isActive = true">Register</a>
+          </div>
+        </li>
+        <li *ngIf='isAuthenticated' class="nav-item active">
+          <a class="nav-link text-primary" routerLinkActive="active" (click)="logout();isActive = true">Logout</a>
         </li>
 
       </ul>
