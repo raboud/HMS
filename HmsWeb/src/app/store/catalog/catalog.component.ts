@@ -33,7 +33,6 @@ export class CatalogComponent implements OnInit {
     constructor(
       private service: CatalogService,
       private basketService: BasketWrapperService,
-      private configurationService: ConfigurationService,
       private securityService: SecurityService,
       private router: Router
     ) {
@@ -42,20 +41,13 @@ export class CatalogComponent implements OnInit {
 
     ngOnInit() {
       this.page = 1;
-
-        // Configuration Settings:
-        if (this.configurationService.isReady) {
-            this.loadData();
-        } else {
-            this.configurationService.settingsLoaded$.subscribe(x => {
-                this.loadData();
-            });
-          }
-
-        // Subscribe to login and logout observable
+      this.service.load().subscribe(() => {
+      // Subscribe to login and logout observable
         this.authSubscription = this.securityService.authenticationChallenge$.subscribe(res => {
-            this.authenticated = res;
+          this.authenticated = res;
         });
+        this.loadData();
+      });
     }
 
     loadData() {

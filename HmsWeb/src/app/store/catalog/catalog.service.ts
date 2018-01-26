@@ -25,19 +25,19 @@ export class CatalogService {
     private service: DataService,
     private configurationService: ConfigurationService
   ) {
-    console.log('CatalogService');
-    this.configurationService.settingsLoaded$.subscribe(
-      x => {
-        console.log('config loaded');
-        this.catalogUrl = this.configurationService.serverSettings.catalogUrl + '/api/v1/products/page';
-        this.brandUrl = this.configurationService.serverSettings.catalogUrl + '/api/v1/brands';
-        this.typesUrl = this.configurationService.serverSettings.catalogUrl + '/api/v1/categories';
-          this.vendorUrl = this.configurationService.serverSettings.catalogUrl + '/api/v1/vendors';
-          this.unitUrl = this.configurationService.serverSettings.catalogUrl + '/api/v1/units';
-      },
-      error => console.log(error)
-    );
   }
+
+  load(): Observable<boolean> {
+    return  this.configurationService.load().map(() => {
+      this.catalogUrl = this.configurationService.serverSettings.catalogUrl + '/api/v1/products/page';
+      this.brandUrl = this.configurationService.serverSettings.catalogUrl + '/api/v1/brands';
+      this.typesUrl = this.configurationService.serverSettings.catalogUrl + '/api/v1/categories';
+      this.vendorUrl = this.configurationService.serverSettings.catalogUrl + '/api/v1/vendors';
+      this.unitUrl = this.configurationService.serverSettings.catalogUrl + '/api/v1/units';
+      return true;
+  });
+  }
+
 
   getCatalog(
     pageIndex: number,

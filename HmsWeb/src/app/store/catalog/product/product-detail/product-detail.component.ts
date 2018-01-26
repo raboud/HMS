@@ -19,25 +19,18 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private service: ProductService,
-    private configurationService: ConfigurationService,
     private route: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      const id = +params['id']; // (+) converts string 'id' to a number
-      if (this.configurationService.isReady) {
-        console.log('ready');
+    this.service.load().subscribe( x => {
+      this.route.params.subscribe(params => {
+        const id = +params['id']; // (+) converts string 'id' to a number
         this.getItem(id);
-      } else {
-        this.configurationService.settingsLoaded$.subscribe(x => {
-          console.log('settingsloaded');
-          this.getItem(id);
-        });
-
-    }});
+      });
+    });
   }
 
   getItem(id: number) {

@@ -29,16 +29,10 @@ export class SecurityService {
         this.headers.append('Content-Type', 'application/json');
         this.headers.append('Accept', 'application/json');
 
-        this._configurationService.settingsLoaded$.subscribe(x => {
+        this._configurationService.load().subscribe(x => {
             this.authorityUrl = this._configurationService.serverSettings.identityUrl;
             this._storage.store('IdentityUrl', this.authorityUrl);
         });
-
-        if (this._storage.retrieve('IsAuthorized') !== '') {
-            this.IsAuthorized = this._storage.retrieve('IsAuthorized');
-            this.authenticationSource.next(true);
-            this.UserData = this._storage.retrieve('userData');
-        }
     }
 
     public IsAuthorized: boolean;

@@ -37,13 +37,9 @@ export class BaseListComponent<T extends ICrud> implements OnInit {
 
   ngOnInit() {
     // Configuration Settings:
-    if (this.configurationService.isReady) {
+    this.service.load().subscribe(() => {
       this.loadData();
-    } else {
-      this.configurationService.settingsLoaded$.subscribe(x => {
-        this.loadData();
-      });
-    }
+    });
 
     // Subscribe to login and logout observable
     this.authSubscription = this.securityService.authenticationChallenge$.subscribe(

@@ -12,7 +12,6 @@ import { BasketWrapperService } from '../shared/services/basket.wrapper.service'
 import { ConfigurationService } from '../shared/services/configuration.service';
 import { StorageService } from '../shared/services/storage.service';
 
-import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import { Observer } from 'rxjs/Observer';
@@ -45,16 +44,11 @@ export class BasketService {
         // Init:
         if (this.authService.IsAuthorized) {
             if (this.authService.UserData) {
-                this.basket.buyerId = this.authService.UserData.sub;
-                if (this.configurationService.isReady) {
-                    this.basketUrl = this.configurationService.serverSettings.basketUrl;
-                    this.loadData();
-                } else {
-                    this.configurationService.settingsLoaded$.subscribe(x => {
-                        this.basketUrl = this.configurationService.serverSettings.basketUrl;
-                        this.loadData();
-                    });
-                }
+              this.basket.buyerId = this.authService.UserData.sub;
+              this.configurationService.load().subscribe(() => {
+                this.basketUrl = this.configurationService.serverSettings.basketUrl;
+                this.loadData();
+              });
             }
         }
 

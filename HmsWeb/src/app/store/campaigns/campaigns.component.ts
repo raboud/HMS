@@ -20,14 +20,9 @@ export class CampaignsComponent implements OnInit {
     constructor(private service: CampaignsService, private configurationService: ConfigurationService) { }
 
     ngOnInit() {
-        if (this.configurationService.isReady) {
-            this.getCampaigns(9, 0)
-        } else {
-            this.configurationService.settingsLoaded$.subscribe(x => {
-                this.getCampaigns(9, 0);
-            });
-        }
-
+        this.configurationService.load().subscribe(() => {
+          this.getCampaigns(9, 0);
+        });
         this.isCampaignDetailFunctionEnabled = this.configurationService.serverSettings.activateCampaignDetailFunction;
     }
 

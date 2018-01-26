@@ -18,7 +18,12 @@ export class BasketStatusComponent implements OnInit {
 
     badge: number = 0;
 
-    constructor(private service: BasketService, private basketEvents: BasketWrapperService, private authService: SecurityService, private configurationService: ConfigurationService) { }
+    constructor(
+      private service: BasketService,
+      private basketEvents: BasketWrapperService,
+      private authService: SecurityService,
+      private configurationService: ConfigurationService
+    ) { }
 
     ngOnInit() {
         // Subscribe to Add Basket Observable:
@@ -26,8 +31,9 @@ export class BasketStatusComponent implements OnInit {
             item => {
                 this.service.addItemToBasket(item).subscribe(res => {
                     this.service.getBasket().subscribe(basket => {
-                        if (basket)
+                        if (basket) {
                             this.badge = basket.items.length;
+                        }
                     });
                 });
             });
@@ -40,25 +46,20 @@ export class BasketStatusComponent implements OnInit {
         // Subscribe to login and logout observable
         this.authSubscription = this.authService.authenticationChallenge$.subscribe(res => {
             this.service.getBasket().subscribe(basket => {
-                if (basket != null)
+                if (basket != null) {
                     this.badge = basket.items.length;
+                }
             });
         });
 
         // Init:
-        if (this.configurationService.isReady) {
-            this.service.getBasket().subscribe(basket => {
-                if (basket != null)
-                    this.badge = basket.items.length;
-            });
-        } else {
-            this.configurationService.settingsLoaded$.subscribe(x => {
-                this.service.getBasket().subscribe(basket => {
-                    if (basket != null)
-                        this.badge = basket.items.length;
-                });
-            });
-        }
+        this.configurationService.load().subscribe(x => {
+          this.service.getBasket().subscribe(basket => {
+            if (basket != null) {
+              this.badge = basket.items.length;
+            }
+          });
+        });
     }
 }
 

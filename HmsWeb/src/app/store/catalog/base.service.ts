@@ -16,19 +16,16 @@ export class BaseService<T extends ICrud> {
   constructor(
     protected service: DataService,
     protected configurationService: ConfigurationService
-  ) {
-    if (this.configurationService.isReady) {
-      console.log('ready2');
+  ) { }
+
+  load(): Observable<boolean> {
+    console.log('baseService:load');
+    return this.configurationService.load().map( (x) => {
+      console.log('baseService:load load2 complete');
       this.init();
-    } else {
-      this.configurationService.settingsLoaded$.subscribe(x => {
-        console.log('settingsloaded2');
-        this.init();
-      },
-      error => console.log(error)
-    );
+      return x;
+    });
   }
-}
 
   init() {}
 

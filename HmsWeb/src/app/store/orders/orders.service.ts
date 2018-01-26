@@ -26,11 +26,9 @@ export class OrdersService {
       private identityService: SecurityService,
       private configurationService: ConfigurationService
     ) {
-        if (this.configurationService.isReady) {
-            this.ordersUrl = this.configurationService.serverSettings.orderingUrl;
-          } else {
-            this.configurationService.settingsLoaded$.subscribe(x => this.ordersUrl = this.configurationService.serverSettings.orderingUrl);
-          }
+        this.configurationService.load().subscribe(() => {
+          this.ordersUrl = this.configurationService.serverSettings.orderingUrl;
+        });
 
     }
 

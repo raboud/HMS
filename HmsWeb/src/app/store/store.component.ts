@@ -27,11 +27,11 @@ export class StoreComponent implements OnInit {
 
     ngOnInit() {
         console.log('app on init');
-        this.subscription = this.securityService.authenticationChallenge$.subscribe(res => this.Authenticated = res);
 
         // Get configuration from server environment variables:
-        console.log('configuration');
-        this.configurationService.load();
+        this.configurationService.load().subscribe(() => {
+          this.subscription = this.securityService.authenticationChallenge$.subscribe(res => this.Authenticated = res);
+        });
     }
 
     public setTitle(newTitle: string) {

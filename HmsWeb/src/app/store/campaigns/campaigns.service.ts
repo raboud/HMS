@@ -29,14 +29,9 @@ export class CampaignsService {
             }
         }
 
-        if (this.configurationService.isReady) {
+        this.configurationService.load().subscribe(() => {
             this.marketingUrl = this.configurationService.serverSettings.marketingUrl;
-        } else {
-            this.configurationService.settingsLoaded$.subscribe(
-              x => this.marketingUrl = this.configurationService.serverSettings.marketingUrl
-            );
-        }
-
+        });
     }
 
     getCampaigns(pageIndex: number, pageSize: number): Observable<ICampaign> {

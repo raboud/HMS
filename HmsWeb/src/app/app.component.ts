@@ -13,6 +13,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.config.load();
+    this.config.load().subscribe();
   }
 }

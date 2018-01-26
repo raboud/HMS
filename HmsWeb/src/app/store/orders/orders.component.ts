@@ -19,13 +19,9 @@ export class OrdersComponent implements OnInit {
     constructor(private service: OrdersService, private configurationService: ConfigurationService) { }
 
     ngOnInit() {
-        if (this.configurationService.isReady) {
+        this.configurationService.load().subscribe(() => {
             this.getOrders();
-        } else {
-            this.configurationService.settingsLoaded$.subscribe(x => {
-                this.getOrders();
-            });
-        }
+        });
 
         // call orders until new order is retrieved
         this.interval = setTimeout(() => {
