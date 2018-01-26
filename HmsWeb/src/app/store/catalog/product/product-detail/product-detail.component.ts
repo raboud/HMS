@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from '../../../shared/models/product.model';
 import { ProductService } from '../../product.service';
 import { ConfigurationService } from '../../../shared/services/configuration.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-detail',
@@ -14,12 +15,14 @@ export class ProductDetailComponent implements OnInit {
   item: IProduct;
   pageTitle = '';
   errorMessage: string;
+  htmlContent: SafeHtml;
 
   constructor(
     private service: ProductService,
     private configurationService: ConfigurationService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -41,6 +44,7 @@ export class ProductDetailComponent implements OnInit {
     this.service.getItem(id).subscribe(item => {
       this.item = item;
       this.pageTitle = item.Name;
+      this.htmlContent = this.sanitizer.bypassSecurityTrustHtml(this.item.Description);
     });
   }
 
