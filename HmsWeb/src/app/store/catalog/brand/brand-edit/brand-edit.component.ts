@@ -60,7 +60,6 @@ export class BrandEditComponent implements OnInit {
     this.service.getItem(id).subscribe(item => {
       this.item = item;
       this.updateForm();
-      console.log(this.item);
     });
   }
 

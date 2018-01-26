@@ -27,7 +27,6 @@ export class CampaignsComponent implements OnInit {
     }
 
     onPageChanged(value: any) {
-        console.log('campaigns pager event fired' + value);
         // event.preventDefault();
         this.paginationInfo.actualPage = value;
         this.getCampaigns(this.paginationInfo.itemsPage, value);

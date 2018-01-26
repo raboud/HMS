@@ -41,7 +41,6 @@ export class OrdersComponent implements OnInit {
             .subscribe(orders => {
                 this.orders = orders;
                 this.oldOrders = this.orders;
-                console.log('orders items retrieved: ' + orders.length);
         });
     }
 

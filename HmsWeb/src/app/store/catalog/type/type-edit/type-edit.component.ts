@@ -59,7 +59,6 @@ export class TypeEditComponent implements OnInit {
     this.service.getCategory(id).subscribe(item => {
       this.item = item;
       this.updateForm();
-      console.log(this.item);
     });
   }
 
@@ -81,5 +80,5 @@ export class TypeEditComponent implements OnInit {
     }
   }
 
-  
+
 }

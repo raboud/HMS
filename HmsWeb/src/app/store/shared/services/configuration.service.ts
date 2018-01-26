@@ -35,7 +35,6 @@ export class ConfigurationService {
           return this.http.get<IConfiguration>(url).map((response: IConfiguration) => {
               console.log('server settings loaded');
               this.serverSettings = response;
-              console.log(this.serverSettings);
               this.storageService.store('basketUrl', this.serverSettings.basketUrl);
               this.storageService.store('catalogUrl', this.serverSettings.catalogUrl);
               this.storageService.store('identityUrl', this.serverSettings.identityUrl);

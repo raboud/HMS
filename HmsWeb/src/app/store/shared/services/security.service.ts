@@ -72,9 +72,7 @@ export class SecurityService {
                 window.location.href = location.origin;
             },
             error => this.HandleError(error),
-            () => {
-                console.log(this.UserData);
-            });
+            () => {});
     }
 
     public Authorize() {
@@ -114,8 +112,6 @@ export class SecurityService {
             return result;
         }, {});
 
-        console.log(result);
-
         let token = '';
         let id_token = '';
         let authResponseIsValid = false;
@@ -130,7 +126,6 @@ export class SecurityService {
                 id_token = result.id_token;
 
                 const dataIdToken: any = this.getDataFromToken(id_token);
-                console.log(dataIdToken);
 
                 // validate nonce
                 if (dataIdToken.nonce !== this._storage.retrieve('authNonce')) {
@@ -140,7 +135,6 @@ export class SecurityService {
                     this._storage.store('authStateControl', '');
 
                     authResponseIsValid = true;
-                    console.log('AuthorizedCallback state and nonce validated, returning access token');
                 }
             }
         }

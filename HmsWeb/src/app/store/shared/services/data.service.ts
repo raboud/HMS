@@ -86,19 +86,6 @@ export class DataService {
     }
 
     delete(url: string, params?: any): Observable<boolean> {
-      /*
-        let options: RequestOptionsArgs = {};
-
-        if (this.securityService) {
-            options.headers = new Headers();
-            options.headers.append('Authorization', 'Bearer ' + this.securityService.GetToken());
-        }
-
-        console.log('data.service deleting');
-        // return this.http.delete(url, options).subscribe(
-        //        return res;
-        //    );
-*/
         return this.http.delete(url).map((res) => {
             return true;
         })

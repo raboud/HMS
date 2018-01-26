@@ -70,7 +70,6 @@ export class CatalogService {
     if (all) {
       url = url + '&all=' + all;
     }
-    console.log(url);
     return this.service.get<IPage<IBrand>>(url);
   }
 
@@ -85,7 +84,6 @@ export class CatalogService {
   getBrand(id: number): Observable<IBrand> {
     let url = this.brandUrl;
     url = url + '/' + id;
-    console.log(url);
     return this.service.get<ICategory>(url);
   }
 
@@ -120,14 +118,12 @@ export class CatalogService {
     if (all) {
       url = url + '&all=' + all;
     }
-    console.log(url);
     return this.service.get<IPage<ICategory>>(url);
   }
 
   getCategory(id: number): Observable<ICategory> {
     let url = this.typesUrl;
     url = url + '/' + id;
-    console.log(url);
     return this.service.get<ICategory>(url);
   }
 
@@ -163,14 +159,12 @@ export class CatalogService {
     if (all) {
       url = url + '&all=' + all;
     }
-    console.log(url);
     return this.service.get<IPage<IVendor>>(url);
   }
 
   getVendor(id: number): Observable<IVendor> {
     let url = this.vendorUrl;
     url = url + '/' + id;
-    console.log(url);
     return this.service.get<IVendor>(url);
   }
 

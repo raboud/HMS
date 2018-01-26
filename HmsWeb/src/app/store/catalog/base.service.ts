@@ -19,9 +19,7 @@ export class BaseService<T extends ICrud> {
   ) { }
 
   load(): Observable<boolean> {
-    console.log('baseService:load');
     return this.configurationService.load().map( (x) => {
-      console.log('baseService:load load2 complete');
       this.init();
       return x;
     });
@@ -35,7 +33,6 @@ export class BaseService<T extends ICrud> {
     if (all) {
       url = url + '&all=' + all;
     }
-    console.log(url);
     return this.service.get<IPage<T>>(url);
   }
 
@@ -50,7 +47,6 @@ export class BaseService<T extends ICrud> {
   getItem(id: number): Observable<T> {
     let url = this.baseUrl;
     url = url + '/' + id;
-    console.log(url);
     return this.service.get<T>(url);
   }
 

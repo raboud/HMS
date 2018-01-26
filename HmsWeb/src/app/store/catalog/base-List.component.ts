@@ -55,7 +55,6 @@ export class BaseListComponent<T extends ICrud> implements OnInit {
 
   getItems(pageSize: number, pageIndex: number) {
     this.service.getPage(pageIndex, pageSize, true).subscribe(items => {
-      console.log(items);
       this.items = items;
       this.page = items.PageIndex + 1;
     });

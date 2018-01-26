@@ -15,9 +15,6 @@ export class StaffElementComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.index);
-    console.log(this.odd);
-    console.log(this.even);
   }
 
   get FullName(): string {

@@ -75,7 +75,6 @@ export class VendorListComponent implements OnInit {
   getItems(pageSize: number, pageIndex: number) {
     if (this.ready) {
       this.service.getVendorPage(pageIndex, pageSize, true).subscribe(items => {
-        console.log(items);
         this.items = items;
         this.page = items.PageIndex + 1;
       });
@@ -89,7 +88,6 @@ export class VendorListComponent implements OnInit {
 
   onDetail(item: IVendor) {
     this.router.navigate(["./" + item.Id], { relativeTo: this.route });
-    console.log(item.Name);
   }
 
   onNew() {
@@ -103,7 +101,6 @@ export class VendorListComponent implements OnInit {
   }
 
   onPageChange() {
-    console.log("pageChange");
     this.getItems(this.items.PageSize, this.page - 1);
   }
 

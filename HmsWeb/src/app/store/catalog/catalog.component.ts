@@ -72,7 +72,6 @@ export class CatalogComponent implements OnInit {
     }
 
     onPageChange() {
-      console.log('pageChange');
       this.getCatalog(this.items.PageSize, this.page - 1);
     }
 
@@ -94,14 +93,12 @@ export class CatalogComponent implements OnInit {
             this.types = types;
             const alltypes: ICategory = { Id: null, Name: 'All', InActive: false };
             this.types.unshift(alltypes);
-            console.log('types ' + this.types.length);
         });
     }
 
     getBrands() {
         this.service.getBrands().subscribe(brands => {
             this.brands = brands;
-            console.log('brands ' + this.brands.length);
             const allBrands: IBrand = { Id: null, Name: 'All', InActive: false };
             this.brands.unshift(allBrands);
         });
