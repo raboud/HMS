@@ -31,7 +31,7 @@ export class BasketComponent implements OnInit {
 
     itemQuantityChanged(item: IBasketItem) {
         this.calculateTotalPrice();
-        this.service.setBasket(this.basket).subscribe(x => );
+        this.service.setBasket(this.basket).subscribe(x => {});
     }
 
     update(event: any): Observable<boolean> {
