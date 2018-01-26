@@ -34,7 +34,7 @@ export class ProductDetailComponent implements OnInit {
           this.getItem(id);
         });
 
-    });
+    }});
   }
 
   getItem(id: number) {
