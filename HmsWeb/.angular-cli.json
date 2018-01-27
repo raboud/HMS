@@ -29,11 +29,10 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "../node_modules/bootswatch/dist/superhero/bootstrap.min.css",
-        "styles.css"
+        "styles.scss"
       ],
       "scripts": [
-        "../node_modules/bootswatch/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+        "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

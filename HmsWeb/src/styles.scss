@@ -1,26 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootswatch/dist/superhero/variables";
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/bootswatch/dist/superhero/bootswatch";
+
 h1 {
-  color: orange;
+  color: $primary;
 }
 
 h2 {
-  color: orange;
+  color: $primary;
 }
 
 h3 {
-  color: orange;
+  color: $primary;
 }
 
 h4 {
-  color: orange;
+  color: $primary;
 }
 
 h5 {
-  color: orange;
+  color: $primary;
 }
 
 ul {
-  color: orange;
+  color: $primary;
   font-size: 30px;
   list-style-position: inside;
   text-align: center;
