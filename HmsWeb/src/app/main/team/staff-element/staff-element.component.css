@@ -1,11 +1,13 @@
 .even img {
   margin-right: 15px;
   float: left;
+  max-width: 50%;
 }
 
 .odd img {
   margin-left: 15px;
   float: right;
+  max-width: 50%;
 }
 
 .odd {
