@@ -35,22 +35,29 @@ li {
   font-size: 15px;
 }
 
-.logo {
-  text-align:left;
-  color:white;
-}
-
-.phone {
-  text-align: right;
-}
-@media (mmax-width: 768px) {
-  logo {
+@media (max-width: 768px) {
+  .logo {
     text-align:center;
   }
 
-  phone {
+  .phone {
     text-align: center;
   }
+}
+
+@media (min-width: 768px) {
+  .logo {
+    text-align:left;
+    color:white;
+  }
+
+  .phone {
+    text-align: right;
+  }
+}
+
+
+@media (mmax-width: 768px) {
 
  }
 
