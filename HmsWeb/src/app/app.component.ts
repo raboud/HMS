@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { Subscription } from 'rxjs/Subscription';
+
 import { ConfigurationService } from './store/shared/services/configuration.service';
+import { SecurityService } from './store/shared/services/security.service';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +12,17 @@ import { ConfigurationService } from './store/shared/services/configuration.serv
 })
 export class AppComponent implements OnInit {
   title = 'app';
+  Authenticated: boolean = false;
+  subscription: Subscription;
 
-  constructor(private config: ConfigurationService) {
+
+  constructor(private titleService: Title, private securityService: SecurityService, private config: ConfigurationService) {
+    this.Authenticated = this.securityService.IsAuthorized;
   }
 
   ngOnInit() {
+    console.log('app on init');
+    this.subscription = this.securityService.authenticationChallenge$.subscribe(res => this.Authenticated = res);
     this.config.load().subscribe();
   }
 }

@@ -4,6 +4,8 @@ import { ICampaign } from '../shared/models/campaign.model';
 import { IPager } from '../shared/models/pager.model';
 import { ConfigurationService } from '../shared/services/configuration.service';
 import { Observable } from 'rxjs/Observable';
+import { IPage } from '../shared/models/pagination.model';
+import { ICampaignItem } from '../shared/models/campaignItem.model';
 
 @Component({
     selector: 'app-campaigns',
@@ -13,13 +15,18 @@ import { Observable } from 'rxjs/Observable';
 export class CampaignsComponent implements OnInit {
     private interval = null;
     paginationInfo: IPager;
+    items: IPage<ICampaignItem>;
     campaigns: ICampaign;
     isCampaignDetailFunctionEnabled: boolean = false;
     errorReceived: boolean;
 
-    constructor(private service: CampaignsService, private configurationService: ConfigurationService) { }
+    constructor(private service: CampaignsService, private configurationService: ConfigurationService) {
+      console.log('CampaignsComponent');
+    }
 
     ngOnInit() {
+      console.log('CampaignsComponent2');
+
         this.configurationService.load().subscribe(() => {
           this.getCampaigns(9, 0);
         });
@@ -37,6 +44,7 @@ export class CampaignsComponent implements OnInit {
         this.service.getCampaigns(pageIndex, pageSize)
             .catch((err) => this.handleError(err))
             .subscribe(campaigns => {
+              this.items = campaigns;
                 this.campaigns = campaigns;
                 this.paginationInfo = {
                     actualPage : campaigns.pageIndex,

@@ -17,27 +17,24 @@
   </div>
 </section>
 
-  <div *ngIf="items?.Data.length > 0">
-    <div class="card-group row">
-      <div class="col-md-4" *ngFor="let item of items?.Data">
-        <div class="card" (click)=detail(item)>
-
-          <img class="card-img-top" src="{{item.PictureUri}}" />
-          <div class="card-body">
-            <h5 class="card-title">{{item.Name}}</h5>
-            <button [ngClass]="{'catalog-button': true, 'is-disabled': !authenticated}" (click)="addToCart(item)">
-              [ ADD TO CART ]
-            </button>
-
-          </div>
+<div *ngIf="items?.Data.length > 0">
+  <div class='row'>
+    <div class="col-md-4" *ngFor="let item of items?.Data">
+      <div class="card" (click)=detail(item)>
+        <img class="foo-img" src="{{item.PictureUri}}" />
+        <div class="card-body">
+          <h5 class="card-title">{{item.Name}}</h5>
           <div class="card-text">{{item.Price | number:'.2-2'}}</div>
+          <button [ngClass]="{'catalog-button': true, 'is-disabled': !authenticated}" (click)="addToCart(item)">
+            [ ADD TO CART ]
+          </button>
         </div>
       </div>
     </div>
-    <ngb-pagination [collectionSize]="items.Count" [pageSize]='items.PageSize' [(page)]="page" [maxSize]="5" [rotate]="true"
+  </div>
+  <ngb-pagination [collectionSize]="items.Count" [pageSize]='items.PageSize' [(page)]="page" [maxSize]="5" [rotate]="true"
     [ellipses]="false" (pageChange)='onPageChange()' [boundaryLinks]="true"></ngb-pagination>
 
-<div *ngIf="items?.Data.length == 0">
-  <span>THERE ARE NO RESULTS THAT MATCH YOUR SEARCH</span>
-</div>
-
+  <div *ngIf="items?.Data.length == 0">
+    <span>THERE ARE NO RESULTS THAT MATCH YOUR SEARCH</span>
+  </div>

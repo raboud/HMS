@@ -18,9 +18,9 @@ import { ProductEditComponent } from './catalog/product/product-edit/product-edi
 import { ProductDetailComponent } from './catalog/product/product-detail/product-detail.component';
 import { UnitListComponent } from './catalog/unit/unit-list/unit-list.component';
 import { UnitEditComponent } from './catalog/unit/unit-edit/unit-edit.component';
+import { NgModule } from '@angular/core';
 
-export const routes: Routes = [
-    { path: '', redirectTo: 'catalog', pathMatch: 'full' },
+const routes: Routes = [
     { path: 'basket', component: BasketComponent },
     { path: 'catalog', component: CatalogComponent },
     { path: 'orders', component: OrdersComponent },
@@ -41,4 +41,8 @@ export const routes: Routes = [
     { path: 'unit/:id', component: UnitEditComponent},
 ];
 
-export const routing = RouterModule.forChild(routes);
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class StoreRoutingModule {}

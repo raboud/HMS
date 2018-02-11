@@ -23,6 +23,7 @@ import { IdentityModule } from './identity/identity.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Expertise2Component } from './main/expertise2/expertise2.component';
 import { StoreComponent } from './store/store.component';
+import { SharedModule } from './store/shared/shared.module';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { StoreComponent } from './store/store.component';
     StoreModule,
     IdentityModule,
     NgbModule.forRoot(),
+    SharedModule.forRoot(),
     AppRoutingModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

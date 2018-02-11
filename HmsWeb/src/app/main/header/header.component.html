@@ -11,7 +11,7 @@
     </a>
   </div>
 </div>
-<app-identity></app-identity>
+
 <header>
   <nav class="navbar navbar-expand-xl navbar-inverse bg-dark">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" (click)="menu()">
@@ -66,18 +66,19 @@
             <a class="dropdown-item text-primary" routerLink='brand' routerLinkActive="active" (click)="isActive = true">Brands</a>
             <a class="dropdown-item text-primary" routerLink='unit' routerLinkActive="active" (click)="isActive = true">Units</a>
             <a class="dropdown-item text-primary" routerLink='category' routerLinkActive="active" (click)="isActive = true">Categories</a>
+            <a class="dropdown-item text-primary" routerLink='campaign' routerLinkActive="active" (click)="isActive = true">Campaign</a>
           </div>
         </li>
 
 
-        <li *ngIf='!isAuthenticated' ngbDropdown class="nav-item dropdown text-primary">
+        <li *ngIf='!authenticated' ngbDropdown class="nav-item dropdown text-primary">
           <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdownLogin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
           <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownLogin">
             <a class="dropdown-item text-primary" routerLink='login' routerLinkActive="active" (click)="isActive = true">Login</a>
             <a class="dropdown-item text-primary" routerLink='register' routerLinkActive="active" (click)="isActive = true">Register</a>
           </div>
         </li>
-        <li *ngIf='isAuthenticated' class="nav-item active">
+        <li *ngIf='authenticated' class="nav-item active">
           <a class="nav-link text-primary" routerLinkActive="active" (click)="logout();isActive = true">Logout</a>
         </li>
 

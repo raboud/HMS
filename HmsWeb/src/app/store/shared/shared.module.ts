@@ -35,8 +35,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ],
     declarations: [
         Pager,
-        Header,
-        IdentityComponent,
         PageNotFoundComponent,
         UppercasePipe
     ],
@@ -48,8 +46,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         RouterModule,
         // Providers, Components, directive, pipes
         Pager,
-        Header,
-        IdentityComponent,
         PageNotFoundComponent,
         UppercasePipe
     ]

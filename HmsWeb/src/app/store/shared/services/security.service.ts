@@ -8,9 +8,17 @@ import { ConfigurationService } from './configuration.service';
 import { StorageService } from './storage.service';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
 
+interface TOKEN {
+  access_token: string;
+  refresh_token?: string;
+  token_type: string;
+  expires_in: number;
+}
+
 @Injectable()
 export class SecurityService {
   public UserData: any;
+  private urlHeaders = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
 
     private actionUrl: string;
     private headers: HttpHeaders;
@@ -33,12 +41,25 @@ export class SecurityService {
             this.authorityUrl = this._configurationService.serverSettings.identityUrl;
             this._storage.store('IdentityUrl', this.authorityUrl);
         });
-    }
 
-    public IsAuthorized: boolean;
+        if (this._storage.retrieve('IsAuthorized') !== '') {
+          this.IsAuthorized = this._storage.retrieve('IsAuthorized');
+          this.authenticationSource.next(true);
+          this.UserData = this._storage.retrieve('userData');
+          if (this.UserData) {
+            if (this.UserData.role === 'admin') {
+              this.IsAdmin = true;
+            }
+          }
+        }
+
+      }
+
+    public IsAuthorized: boolean = false;
+    public IsAdmin: boolean = false;
 
     public getAuthorizationHeader(): string {
-      return 'Bearer ' + this.GetToken()
+      return 'Bearer ' + this.GetToken();
     }
 
     public GetToken(): any {
@@ -50,6 +71,7 @@ export class SecurityService {
         this._storage.store('authorizationDataIdToken', '');
 
         this.IsAuthorized = false;
+        this.IsAdmin = false;
         this._storage.store('IsAuthorized', false);
     }
 
@@ -66,23 +88,44 @@ export class SecurityService {
         this.getUserData()
             .subscribe(data => {
                 this.UserData = data;
+                if (this.UserData.role === 'admin') {
+                  this.IsAdmin = true;
+                }
                 this._storage.store('userData', data);
                 // emit observable
                 this.authenticationSource.next(true);
-                window.location.href = location.origin;
             },
             error => this.HandleError(error),
             () => {});
+    }
+
+    public Signin(userName: string, password: string) {
+      const authorizationUrl = this.authorityUrl + '/connect/token';
+      const clientId = 'HMSjs';
+      const grantType = 'password';
+      const scope = 'openid profile catalog orders basket marketing locations';
+
+      const data: string = 'grant_type=' + grantType + '&' +
+                         'username=' + userName + '&' +
+                         'password=' + password + '&' +
+                         'client_id=' + 'ro.client' + '&' +
+                         'client_secret=' + 'secret' ;
+
+      this.ResetAuthorizationData();
+      this._http.post<TOKEN>(authorizationUrl, data, { headers: this.urlHeaders })
+        .subscribe(resp => {
+          this.SetAuthorizationData(resp.access_token, null);
+        });
     }
 
     public Authorize() {
         this.ResetAuthorizationData();
 
         const authorizationUrl = this.authorityUrl + '/connect/authorize';
-        const client_id = 'js';
-        const redirect_uri = location.origin + '/';
+        const client_id = 'HMSjs';
+        const redirect_uri = location.origin + '/home';
         const response_type = 'id_token token';
-        const scope = 'openid profile orders basket marketing locations';
+        const scope = 'openid profile catalog orders basket marketing locations';
         const nonce = 'N' + Math.random() + '' + Date.now();
         const state = Date.now() + '' + Math.random();
 
@@ -105,7 +148,6 @@ export class SecurityService {
         this.ResetAuthorizationData();
 
         const hash = window.location.hash.substr(1);
-
         const result: any = hash.split('&').reduce(function (result: any, item: string) {
             const parts = item.split('=');
             result[parts[0]] = parts[1];
@@ -119,9 +161,7 @@ export class SecurityService {
         if (!result.error) {
 
             if (result.state !== this._storage.retrieve('authStateControl')) {
-                console.log('AuthorizedCallback incorrect state');
             } else {
-
                 token = result.access_token;
                 id_token = result.id_token;
 
@@ -143,6 +183,18 @@ export class SecurityService {
         if (authResponseIsValid) {
             this.SetAuthorizationData(token, id_token);
         }
+    }
+
+    public Signoff() {
+      const authorizationUrl = this.authorityUrl + '/Account/Signout';
+
+      this._http.get(authorizationUrl)
+        .subscribe(resp => {
+          this.ResetAuthorizationData();
+
+          // emit observable
+          this.authenticationSource.next(false);
+        })
     }
 
     public Logoff() {
@@ -194,9 +246,9 @@ export class SecurityService {
         let data = {};
         if (typeof token !== 'undefined') {
             const encoded = token.split('.')[1];
-            data = JSON.parse(this.urlBase64Decode(encoded));
+            const t: string = this.urlBase64Decode(encoded);
+            data = JSON.parse(t);
         }
-
         return data;
     }
 
@@ -206,9 +258,9 @@ export class SecurityService {
             this.authorityUrl = this._storage.retrieve('IdentityUrl');
         }
 
-        return this._http.get(this.authorityUrl + '/connect/userinfo', {
+        return this._http.get<string[]>(this.authorityUrl + '/connect/userinfo', {
             headers: this.headers,
-        }).map((res: HttpResponse<any>) => res.body());
+        });
     }
 
     private setHeaders() {
@@ -218,8 +270,8 @@ export class SecurityService {
 
         const token = this.GetToken();
 
-        if (token !== '') {
-            this.headers.append('Authorization', 'Bearer ' + token);
-        }
+        // if (token !== '') {
+        //     this.headers.append('Authorization', 'Bearer ' + token);
+        // }
     }
 }

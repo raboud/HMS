@@ -6,6 +6,8 @@ import 'rxjs/add/observable/merge';
 import { Observable } from 'rxjs/Observable';
 
 import { GenericValidator } from '../generic-validator';
+import { SecurityService } from '../../store/shared/services/security.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,14 +20,15 @@ export class LoginComponent implements OnInit, AfterViewInit {
   pageTitle: string = 'Login';
   errorMessage: string;
   form: FormGroup;
-  form2: FormGroup;
 
   displayMessage: { [key: string]: string } = {};
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private auth: SecurityService,
+    private router: Router
   ) {
            // Defines all of the validation messages for the form.
         // These could instead be retrieved from a file or database.
@@ -47,6 +50,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.auth.authenticationChallenge$.subscribe(ret =>{
+    if (ret === true) {
+      this.router.navigate(['home']);
+    }});
+
     this.form = this.fb.group({
       userName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       password: ['', Validators.required],
@@ -67,6 +75,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
 }
 
   onLogin() {
+    const userName = this.form.controls['userName'].value;
+    const password = this.form.controls['password'].value;
+
+    this.auth.Signin(userName, password);
   }
 
 }

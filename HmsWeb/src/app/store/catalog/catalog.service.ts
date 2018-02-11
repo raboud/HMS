@@ -49,11 +49,11 @@ export class CatalogService {
     url = url + '?pageIndex=' + pageIndex + '&pageSize=' + pageSize;
 
     if (type) {
-      url = url + '&catalogTypeId=' + (type ? type.toString() : 'null');
+      url = url + '&typeId=' + (type ? type.toString() : 'null');
     }
 
     if (brand) {
-      url = url + '&catalogBrandId=' + (brand ? brand.toString() : 'null');
+      url = url + '&brandId=' + (brand ? brand.toString() : 'null');
     }
 
     return this.service.get<IPage<IProduct>>(url);

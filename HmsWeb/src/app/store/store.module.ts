@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { routing } from './store.routes';
+import { StoreRoutingModule } from './store.routes';
 import { StoreService } from './store.service';
 import { StoreComponent } from './store.component';
 import { SharedModule } from './shared/shared.module';
@@ -43,15 +43,15 @@ import { UnitEditComponent } from './catalog/unit/unit-edit/unit-edit.component'
     ],
     imports: [
         BrowserModule,
-        routing,
         HttpModule,
         NgbModule,
         // Only module that app module loads
-        SharedModule.forRoot(),
+        SharedModule,
         CatalogModule,
         OrdersModule,
         BasketModule,
-        CampaignsModule
+        CampaignsModule,
+        StoreRoutingModule
     ],
     providers: [
       ConfigurationService,

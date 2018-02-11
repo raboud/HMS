@@ -6,9 +6,10 @@ import { CampaignsComponent } from './campaigns.component';
 import { CampaignsDetailComponent } from './campaigns-detail/campaigns-detail.component';
 import { CampaignsService } from './campaigns.service';
 import { Header } from '../shared/components/header/header';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-    imports: [BrowserModule, SharedModule],
+    imports: [BrowserModule, SharedModule, NgbModule],
     declarations: [CampaignsComponent, CampaignsDetailComponent],
     providers: [CampaignsService]
 })
