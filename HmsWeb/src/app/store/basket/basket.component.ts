@@ -30,12 +30,18 @@ export class BasketComponent implements OnInit {
     }
 
     itemQuantityChanged(item: IBasketItem) {
+      if (item.quantity === 0) {
+        const index = this.basket.items.indexOf(item, 0);
+        if (index > -1) {
+           this.basket.items.splice(index, 1);
+        }
+      }
         this.calculateTotalPrice();
         this.service.setBasket(this.basket).subscribe(x => {});
     }
 
     update(event: any): Observable<boolean> {
-        let setBasketObservable = this.service.setBasket(this.basket);
+        const setBasketObservable = this.service.setBasket(this.basket);
         setBasketObservable
             .subscribe(
             x => {

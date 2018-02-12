@@ -38,17 +38,13 @@ export class CampaignsService {
         let url = this.marketingUrl + '/api/v1/campaigns/user';
         url = url + '?pageIndex=' + pageIndex + '&pageSize=' + pageSize;
 
-        return this.service.get(url).map((response: Response) => {
-            return response.json();
-        });
+        return this.service.get<ICampaign>(url);
     }
 
     getCampaign(id: number): Observable<ICampaignItem> {
         const url = this.marketingUrl + '/api/v1/campaigns/' + id;
 
-        return this.service.get(url).map((response: Response) => {
-            return response.json();
-        });
+        return this.service.get<ICampaignItem>(url);
     }
 }
 

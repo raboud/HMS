@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { ConfigurationService } from './store/shared/services/configuration.service';
 import { SecurityService } from './store/shared/services/security.service';
+import { BasketStatusComponent} from './store/basket/basket-status/basket-status.component';
 
 @Component({
   selector: 'app-root',

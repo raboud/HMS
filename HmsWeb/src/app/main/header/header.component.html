@@ -44,7 +44,7 @@
         </li>
 
         <li class="nav-item active">
-          <a class="nav-link text-primary" routerLink='catalog' routerLinkActive="active" (click)="logout();isActive = true">Store</a>
+          <a class="nav-link text-primary" routerLink='catalog' routerLinkActive="active" (click)="isActive = true">Store</a>
         </li>
 
         <li ngbDropdown class="nav-item dropdown text-primary">
@@ -78,11 +78,17 @@
             <a class="dropdown-item text-primary" routerLink='register' routerLinkActive="active" (click)="isActive = true">Register</a>
           </div>
         </li>
-        <li *ngIf='authenticated' class="nav-item active">
-          <a class="nav-link text-primary" routerLinkActive="active" (click)="logout();isActive = true">Logout</a>
-        </li>
 
+        <li *ngIf='authenticated' ngbDropdown class="nav-item dropdown text-primary">
+            <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdownLogin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{userName}}</a>
+            <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownLogin">
+              <a class="dropdown-item text-primary" routerLink='orders' routerLinkActive="active" (click)="isActive = true">My order</a>
+              <a class="dropdown-item text-primary" routerLink='campaigns' routerLinkActive="active" (click)="isActive = true">My campaigns</a>
+              <a class="dropdown-item text-primary" routerLinkActive="active" (click)="logout();isActive = true">Logout</a>
+            </div>
+          </li>
       </ul>
     </div>
+    <app-basket-status *ngIf='authenticated'></app-basket-status>
   </nav>
 </header>

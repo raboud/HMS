@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   public authenticated: boolean = false;
   private subscription: Subscription;
   private userName: string = '';
+  badge: number = 0;
 
   constructor(private service: SecurityService) { }
 

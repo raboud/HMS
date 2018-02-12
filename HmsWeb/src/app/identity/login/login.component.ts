@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.auth.authenticationChallenge$.subscribe(ret =>{
+    this.auth.authenticationChallenge$.subscribe(ret => {
     if (ret === true) {
       this.router.navigate(['home']);
     }});

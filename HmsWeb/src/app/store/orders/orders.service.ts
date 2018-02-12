@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
+import { HttpResponse } from '@angular/common/http';
 
 import { DataService } from '../shared/services/data.service';
 import { IOrder } from '../shared/models/order.model';
@@ -9,7 +9,6 @@ import { SecurityService } from '../shared/services/security.service';
 import { ConfigurationService } from '../shared/services/configuration.service';
 import { BasketWrapperService } from '../shared/services/basket.wrapper.service';
 
-import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import { Observer } from 'rxjs/Observer';
@@ -33,25 +32,21 @@ export class OrdersService {
     }
 
     getOrders(): Observable<IOrder[]> {
-        let url = this.ordersUrl + '/api/v1/orders';
+        const url = this.ordersUrl + '/api/v1/orders';
 
-        return this.service.get(url).map((response: Response) => {
-            return response.json();
-        });
+        return this.service.get<IOrder[]>(url);
     }
 
     getOrder(id: number): Observable<IOrderDetail> {
-        let url = this.ordersUrl + '/api/v1/orders/' + id;
+        const url = this.ordersUrl + '/api/v1/orders/' + id;
 
-        return this.service.get(url).map((response: Response) => {
-            return response.json();
-        });
+        return this.service.get<IOrderDetail>(url);
     }
 
     mapOrderAndIdentityInfoNewOrder(): IOrder {
-        let order = <IOrder>{};
-        let basket = this.basketService.basket;
-        let identityInfo = this.identityService.UserData;
+        const order = <IOrder>{};
+        const basket = this.basketService.basket;
+        const identityInfo = this.identityService.UserData;
 
         // Identity data mapping:
         order.street = identityInfo.address_street;
@@ -70,7 +65,7 @@ export class OrdersService {
         // basket data mapping:
         order.orderItems = new Array<IOrderItem>();
         basket.items.forEach(x => {
-            let item: IOrderItem = <IOrderItem>{};
+            const item: IOrderItem = <IOrderItem>{};
             item.pictureurl = x.pictureUrl;
             item.productId =  +x.productId;
             item.productname = x.productName;

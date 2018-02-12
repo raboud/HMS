@@ -1,5 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 
 import { IProduct } from '../models/product.model';
 import { IBasketItem } from '../models/basketItem.model';
@@ -15,14 +16,14 @@ export class BasketWrapperService {
 
     // observable that is fired when a product is added to the cart
     private addItemToBasketSource = new Subject<IBasketItem>();
-    addItemToBasket$ = this.addItemToBasketSource.asObservable();
+    public addItemToBasket$: Observable<IBasketItem> = this.addItemToBasketSource.asObservable();
 
     private orderCreatedSource = new Subject();
     orderCreated$ = this.orderCreatedSource.asObservable();
 
     addItemToBasket(item: IProduct) {
         if (this.identityService.IsAuthorized) {
-            let basket: IBasketItem = {
+          let basket: IBasketItem = {
                 pictureUrl: item.PictureUri,
                 productId: item.Id.toString(),
                 productName: item.Name,
@@ -33,12 +34,15 @@ export class BasketWrapperService {
             };
 
             this.addItemToBasketSource.next(basket);
+
         } else {
             this.identityService.Authorize();
         }
     }
 
     orderCreated() {
+      console.log('orderCreated');
+
         this.orderCreatedSource.next();
     }
 }

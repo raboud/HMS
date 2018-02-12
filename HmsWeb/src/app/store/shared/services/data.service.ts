@@ -3,7 +3,6 @@ import { HttpClient, HttpResponse, HttpHeaders, HttpErrorResponse } from '@angul
 
 import 'rxjs/add/operator/retry';
 
-import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import { Observer } from 'rxjs/Observer';
@@ -19,18 +18,15 @@ import { Guid } from '../../guid';
 export class DataService {
     constructor(private http: HttpClient, private securityService: SecurityService) { }
 
+    getFullResp<type>(url: string): Observable<HttpResponse<type>> {
+      return this.http.get<type>(
+        url, { observe: 'response' });
+    }
+
     get<type>(url: string, params?: any): Observable<type> {
-        if (this.securityService) {
-          return this.http.get<type>(url)
-          .map(
-            (d) => {
-              return d;
-        }).catch(this.handleError);
-        } else {
-        return this.http.get<type>(url).map(
-            () => {
-        }).catch(this.handleError);
-      }
+       return this.http.get<type>(url)
+          .map((d) => d )
+          .catch(this.handleError);
     }
 
     postWithId(url: string, data: any, params?: any): Observable<Response> {

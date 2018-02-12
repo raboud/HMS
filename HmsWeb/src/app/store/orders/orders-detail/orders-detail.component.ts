@@ -15,7 +15,7 @@ export class OrdersDetailComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            let id = +params['id']; // (+) converts string 'id' to a number
+            const id = +params['id']; // (+) converts string 'id' to a number
             this.getOrder(id);
         });
     }

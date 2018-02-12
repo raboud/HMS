@@ -24,7 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Expertise2Component } from './main/expertise2/expertise2.component';
 import { StoreComponent } from './store/store.component';
 import { SharedModule } from './store/shared/shared.module';
-
+import { BasketModule } from './store/basket/basket.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,7 @@ import { SharedModule } from './store/shared/shared.module';
     StaffComponent,
     StaffElementComponent,
     ExpectComponent,
-    Expertise2Component
+    Expertise2Component,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +51,8 @@ import { SharedModule } from './store/shared/shared.module';
     IdentityModule,
     NgbModule.forRoot(),
     SharedModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    BasketModule,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],

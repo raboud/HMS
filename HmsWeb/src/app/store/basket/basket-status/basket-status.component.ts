@@ -5,6 +5,7 @@ import { BasketService } from '../basket.service';
 import { BasketWrapperService } from '../../shared/services/basket.wrapper.service';
 import { SecurityService } from '../../shared/services/security.service';
 import { ConfigurationService } from '../../shared/services/configuration.service';
+import { IBasket } from '../../shared/models/basket.model';
 
 @Component({
     selector: 'app-basket-status',
@@ -29,13 +30,18 @@ export class BasketStatusComponent implements OnInit {
         // Subscribe to Add Basket Observable:
         this.basketItemAddedSubscription = this.basketEvents.addItemToBasket$.subscribe(
             item => {
-                this.service.addItemToBasket(item).subscribe(res => {
-                    this.service.getBasket().subscribe(basket => {
-                        if (basket) {
-                            this.badge = basket.items.length;
-                        }
+              console.log('addItemToBasket - ' + item.id);
+              this.service.addItemToBasket(item).subscribe(res => {
+                this.service.getBasket().subscribe((basket: IBasket) => {
+                  if (basket) {
+                    let sum = 0;
+                    basket.items.forEach(element => {
+                      sum += element.quantity;
                     });
+                    this.badge = sum;
+                  }
                 });
+              });
             });
 
         // Subscribe to Drop Basket Observable:

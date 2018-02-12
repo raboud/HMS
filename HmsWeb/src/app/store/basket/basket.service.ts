@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Response, Headers } from '@angular/http';
+import { HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observer } from 'rxjs/Observer';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 import { DataService } from '../shared/services/data.service';
 import { SecurityService } from '../shared/services/security.service';
@@ -13,11 +18,6 @@ import { ConfigurationService } from '../shared/services/configuration.service';
 import { StorageService } from '../shared/services/storage.service';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import { Observer } from 'rxjs/Observer';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class BasketService {
@@ -57,12 +57,17 @@ export class BasketService {
         });
     }
 
-    addItemToBasket(item): Observable<boolean> {
+    addItemToBasket(item: IBasketItem): Observable<boolean> {
+      const inList: IBasketItem = this.basket.items.find(i => i.productId === item.productId);
+      if (inList) {
+        inList.quantity += item.quantity;
+      } else {
         this.basket.items.push(item);
-        return this.setBasket(this.basket);
+      }
+      return this.setBasket(this.basket);
     }
 
-    setBasket(basket): Observable<boolean> {
+    setBasket(basket: IBasket): Observable<boolean> {
         const url = this.basketUrl + '/api/v1/basket/';
         this.basket = basket;
         return this.service.post(url, basket).map(() => {
@@ -80,12 +85,11 @@ export class BasketService {
 
     getBasket(): Observable<IBasket> {
         const url = this.basketUrl + '/api/v1/basket/' + this.basket.buyerId;
-        return this.service.get(url).map((response: Response) => {
-            if (response.status === 204) {
-                return null;
-            }
-
-            return response.json();
+        return this.service.getFullResp<IBasket>(url).map(resp => {
+          if (resp.status === 204) {
+            return null;
+          }
+            return resp.body;
         });
     }
 
