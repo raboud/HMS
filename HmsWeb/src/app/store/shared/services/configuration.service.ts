@@ -1,13 +1,15 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
-import { IConfiguration } from '../models/configuration.model';
+import { Observable,  } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/of';
+
+import { IConfiguration } from '../models';
 import { StorageService } from './storage.service';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import { Observer } from 'rxjs/Observer';
-import 'rxjs/add/operator/map';
-import { Subject } from 'rxjs/Subject';
 
 
 @Injectable()

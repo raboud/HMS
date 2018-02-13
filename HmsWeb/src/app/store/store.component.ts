@@ -28,7 +28,7 @@ export class StoreComponent implements OnInit {
     ngOnInit() {
         // Get configuration from server environment variables:
         this.configurationService.load().subscribe(() => {
-          this.subscription = this.securityService.authenticationChallenge$.subscribe(res => this.Authenticated = res);
+          this.subscription = this.securityService.authentication$.subscribe(res => this.Authenticated = res);
         });
     }
 

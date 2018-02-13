@@ -13,13 +13,13 @@ export class HeaderComponent implements OnInit {
   public isAdmin: boolean = false;
   public authenticated: boolean = false;
   private subscription: Subscription;
-  private userName: string = '';
+  public userName: string = '';
   badge: number = 0;
 
   constructor(private service: SecurityService) { }
 
   ngOnInit() {
-    this.subscription = this.service.authenticationChallenge$.subscribe(res => {
+    this.subscription = this.service.authentication$.subscribe(res => {
       this.authenticated = res;
       this.isAdmin = this.service.IsAdmin;
       this.userName = this.service.UserData.email;

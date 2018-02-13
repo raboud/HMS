@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 
 import { DataService } from '../shared/services/data.service';
-import { IOrder } from '../shared/models/order.model';
+import { IOrder, IOrderSummary } from '../shared/models';
 import { IOrderItem } from '../shared/models/orderItem.model';
 import { IOrderDetail } from '../shared/models/order-detail.model';
 import { SecurityService } from '../shared/services/security.service';
 import { ConfigurationService } from '../shared/services/configuration.service';
-import { BasketWrapperService } from '../shared/services/basket.wrapper.service';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import { Observer } from 'rxjs/Observer';
 import 'rxjs/add/operator/map';
+import { BasketService } from '../basket/basket.service';
 
 
 @Injectable()
@@ -21,7 +21,7 @@ export class OrdersService {
 
     constructor(
       private service: DataService,
-      private basketService: BasketWrapperService,
+      private basketService: BasketService,
       private identityService: SecurityService,
       private configurationService: ConfigurationService
     ) {
@@ -31,10 +31,10 @@ export class OrdersService {
 
     }
 
-    getOrders(): Observable<IOrder[]> {
+    getOrders(): Observable<IOrderSummary[]> {
         const url = this.ordersUrl + '/api/v1/orders';
 
-        return this.service.get<IOrder[]>(url);
+        return this.service.get<IOrderSummary[]>(url);
     }
 
     getOrder(id: number): Observable<IOrderDetail> {

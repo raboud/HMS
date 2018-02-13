@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     console.log('app on init');
-    this.subscription = this.securityService.authenticationChallenge$.subscribe(res => this.Authenticated = res);
+    this.subscription = this.securityService.authentication$.subscribe(res => this.Authenticated = res);
     this.config.load().subscribe();
   }
 }

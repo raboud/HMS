@@ -9,9 +9,9 @@ import { IProduct } from '../shared/models/product.model';
 import { ICategory } from '../shared/models/category.model';
 import { IBrand } from '../shared/models/brand.model';
 import { IPager } from '../shared/models/pager.model';
-import { BasketWrapperService} from '../shared/services/basket.wrapper.service';
 import { SecurityService } from '../shared/services/security.service';
 import { IPage } from '../shared/models/pagination.model';
+import { BasketService } from '../basket/basket.service';
 
 @Component({
     selector: 'app-catalog .catalog',
@@ -31,7 +31,7 @@ export class CatalogComponent implements OnInit {
 
     constructor(
       private service: CatalogService,
-      private basketService: BasketWrapperService,
+      private basketService: BasketService,
       private securityService: SecurityService,
       private router: Router
     ) {
@@ -42,7 +42,7 @@ export class CatalogComponent implements OnInit {
       this.page = 1;
       this.service.load().subscribe(() => {
       // Subscribe to login and logout observable
-        this.authSubscription = this.securityService.authenticationChallenge$.subscribe(res => {
+        this.authSubscription = this.securityService.authentication$.subscribe(res => {
           this.authenticated = res;
         });
         this.loadData();

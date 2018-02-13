@@ -1,42 +1,39 @@
-<div class="basket">
-    <div class="container">
+<div class="basket card container col-12">
+    <div class="card-body">
         <div *ngFor="let errorMessage of errorMessages">
             <div class="basket-items-margin-left1 row">
                 <div class="alert alert-warning" role="alert">&nbsp;{{errorMessage}}</div>
             </div>
         </div>
-
-        <article class="basket-titles row">
-            <section class="basket-title col-xs-3">Product</section>
-            <section class="basket-title col-xs-3 hidden-lg-down"></section>
-            <section class="basket-title col-xs-2">Price</section>
-            <section class="basket-title col-xs-2">Quantity</section>
-            <section class="basket-title col-xs-2">Cost</section>
-        </article>
-
-        <div *ngFor="let item of basket?.items" class="basket-items--border">
-            <article class="basket-items row">
-
-                <section class="basket-item basket-item--middle col-lg-3 hidden-lg-down">
-                    <img class="basket-image" src="{{item.pictureUrl}}"/>
-                </section>
-                <section class="basket-item basket-item--middle col-xs-3">{{item.productName}}</section>
-                <section class="basket-item basket-item--middle col-xs-2">$ {{item.unitPrice | number:'.2-2'}}</section>
-                <section class="basket-item basket-item--middle col-xs-2">
-                    <input id="quantity"
-                           class="basket-input"
-                           type="number"
-                           min="1"
-                           [(ngModel)]="item.quantity"
-                           (change)="itemQuantityChanged(item)"/>
-                </section>
-                <section class="basket-item basket-item--middle basket-item--mark col-xs-2">$ {{(item.unitPrice * item.quantity) | number:'.2-2'}}</section>
-            </article>
-            <br/>
-            <div class="basket-items-margin-left1 row">
-                <div class="alert alert-warning" role="alert" *ngIf="item.oldUnitPrice > 0">&nbsp;Note that the price of this article changed in our Catalog. The old price when you originally added it to the basket was $ {{item.oldUnitPrice}} </div>
-            </div>
-        </div>
+        <table class="table table-hover table-striped" style='text-align:left;'>
+          <thead>
+              <tr class='row text-primary' stype='font-weight: bold;'>
+                  <th class="basket-title col-3 hidden-md-down"></th>
+                  <th class="basket-title col-3">Product</th>
+                  <th class="basket-title col-2">Price</th>
+                  <th class="basket-title col-2">Quantity</th>
+                  <th class="basket-title col-2">Cost</th>
+                </tr>
+          </thead>
+          <tbody>
+              <tr class='row' *ngFor='let item of basket?.items'>
+                  <td class="basket-item basket-item--middle col-3 hidden-xl-down">
+                      <img class="basket-image" src="{{item.pictureUrl}}"/>
+                  </td>
+                  <td class="basket-item basket-item--middle col-3">{{item.productName}}</td>
+                  <td class="basket-item basket-item--middle col-2">$ {{item.unitPrice | number:'.2-2'}}</td>
+                  <td class="basket-item basket-item--middle col-2">
+                      <input id="quantity"
+                             class="basket-input"
+                             type="number"
+                             min="0"
+                             [(ngModel)]="item.quantity"
+                             (change)="itemQuantityChanged(item)"/>
+                  </td>
+                  <td class="basket-item basket-item--middle basket-item--mark col-2">$ {{(item.unitPrice * item.quantity) | number:'.2-2'}}</td>
+                </tr>
+          </tbody>
+        </table>
     </div>
 
     <div class="container">
@@ -53,10 +50,10 @@
         <article class="basket-items row">
             <section class="basket-item col-xs-7"></section>
             <section class="basket-item col-xs-2">
-                <button class="btn basket-checkout" (click)="update($event)">[ Update ]</button>
+                <button [disabled]='!isDirty()' class="btn basket-checkout" (click)="update($event)">[ Update ]</button>
             </section>
             <section class="basket-item col-xs-3">
-                <div (click)="checkOut($event)" class="btn basket-checkout">[ Checkout ]</div>
+                <button [disabled]='isDirty()' (click)="checkOut($event)" class="btn basket-checkout">[ Checkout ]</button>
             </section>
         </article>
     </div>

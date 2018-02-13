@@ -19,7 +19,7 @@ export class IdentityComponent implements OnInit  {
     }
 
     ngOnInit() {
-        this.subscription = this.service.authenticationChallenge$.subscribe(res => {
+        this.subscription = this.service.authentication$.subscribe(res => {
             this.authenticated = res;
             this.userName = this.service.UserData.email;
         });

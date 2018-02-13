@@ -13,14 +13,4 @@ import { Header } from '../shared/components/header/header';
     providers: [BasketService],
     exports: [BasketStatusComponent]
 })
-export class BasketModule {
-    static forRoot(): ModuleWithProviders {
-        return {
-            ngModule: BasketModule,
-            providers: [
-                // Providers
-                BasketService
-            ]
-        };
-    }
-}
+export class BasketModule {}

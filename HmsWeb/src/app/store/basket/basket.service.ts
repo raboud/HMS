@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/observable/throw';
@@ -9,15 +10,11 @@ import 'rxjs/add/operator/catch';
 
 import { DataService } from '../shared/services/data.service';
 import { SecurityService } from '../shared/services/security.service';
-import { IBasket } from '../shared/models/basket.model';
-import { IOrder } from '../shared/models/order.model';
-import { IBasketCheckout } from '../shared/models/basketCheckout.model';
-import { IBasketItem } from '../shared/models/basketItem.model';
-import { BasketWrapperService } from '../shared/services/basket.wrapper.service';
 import { ConfigurationService } from '../shared/services/configuration.service';
 import { StorageService } from '../shared/services/storage.service';
 
-import { Observable } from 'rxjs/Observable';
+import { IBasket, IBasketItem, IBasketCheckout, IOrder,  IProduct } from '../shared/models';
+import { Guid } from '../guid';
 
 @Injectable()
 export class BasketService {
@@ -27,50 +24,72 @@ export class BasketService {
         items: []
     };
 
-    // observable that is fired when the basket is dropped
-    private basketDropedSource = new Subject();
-    basketDroped$ = this.basketDropedSource.asObservable();
+        // observable that is fired when a product is added to the cart
+        private basketUpdateSource = new Subject<boolean>();
+        public basketUpdated$: Observable<boolean> = this.basketUpdateSource.asObservable();
 
     constructor(
       private service: DataService,
       private authService: SecurityService,
-      private basketEvents: BasketWrapperService,
       private router: Router,
       private configurationService: ConfigurationService,
       private storageService: StorageService
     ) {
         this.basket.items = [];
-
-        // Init:
-        if (this.authService.IsAuthorized) {
-            if (this.authService.UserData) {
+        this.configurationService.load().subscribe(() => {
+          this.basketUrl = this.configurationService.serverSettings.basketUrl;
+          this.authService.authentication$.subscribe((auth) => {
+            if (auth) {
               this.basket.buyerId = this.authService.UserData.sub;
-              this.configurationService.load().subscribe(() => {
-                this.basketUrl = this.configurationService.serverSettings.basketUrl;
-                this.loadData();
-              });
+              this.loadData();
+            } else {
+              this.basket.buyerId = '';
+              this.basket.items = [];
             }
-        }
-
-        this.basketEvents.orderCreated$.subscribe(x => {
-            this.dropBasket();
         });
+      });
     }
 
-    addItemToBasket(item: IBasketItem): Observable<boolean> {
-      const inList: IBasketItem = this.basket.items.find(i => i.productId === item.productId);
-      if (inList) {
-        inList.quantity += item.quantity;
+    getItemCount(): number{
+      let sum = 0;
+      this.basket.items.forEach(element => {
+        sum += element.quantity;
+      });
+      return sum;
+    }
+
+    addItemToBasket(product: IProduct) {
+      if (this.authService.IsAuthorized) {
+        const inList: IBasketItem = this.basket.items.find(i => i.productId === product.Id.toString());
+        if (inList) {
+          inList.quantity += 1;
+        } else {
+          const item: IBasketItem = {
+              pictureUrl: product.PictureUri,
+              productId: product.Id.toString(),
+              productName: product.Name,
+              quantity: 1,
+              unitPrice: product.Price,
+              id: Guid.newGuid(),
+              oldUnitPrice: 0
+          };
+          this.basket.items.push(item);
+        }
+        this.basketUpdateSource.next(true);
+
+        this.setBasket().subscribe();
       } else {
-        this.basket.items.push(item);
+          this.authService.Authorize();
       }
-      return this.setBasket(this.basket);
-    }
+  }
 
-    setBasket(basket: IBasket): Observable<boolean> {
+  public UpdateBasket(basket: IBasket): Observable<boolean> {
+    this.basket = basket;
+    return this.setBasket();
+  }
+    private setBasket(): Observable<boolean> {
         const url = this.basketUrl + '/api/v1/basket/';
-        this.basket = basket;
-        return this.service.post(url, basket).map(() => {
+        return this.service.post(url, this.basket).map(() => {
             return true;
         });
     }
@@ -78,17 +97,19 @@ export class BasketService {
     setBasketCheckout(basketCheckout): Observable<boolean> {
         const url = this.basketUrl + '/api/v1/basket/checkout';
         return this.service.postWithId(url, basketCheckout).map(() => {
-            this.basketEvents.orderCreated();
+            this.basketUpdateSource.next(true);
             return true;
         });
     }
 
-    getBasket(): Observable<IBasket> {
+    private getBasket(): Observable<IBasket> {
         const url = this.basketUrl + '/api/v1/basket/' + this.basket.buyerId;
         return this.service.getFullResp<IBasket>(url).map(resp => {
           if (resp.status === 204) {
             return null;
           }
+            this.basket = resp.body;
+            this.basketUpdateSource.next(true);
             return resp.body;
         });
     }
@@ -114,13 +135,13 @@ export class BasketService {
 
     dropBasket() {
         this.basket.items = [];
-        this.basketDropedSource.next();
+        this.basketUpdateSource.next();
     }
 
     private loadData() {
         this.getBasket().subscribe(basket => {
             if (basket != null) {
-                this.basket.items = basket.items;
+                this.basket = basket;
             }
         });
     }

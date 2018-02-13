@@ -22,7 +22,6 @@ export class BaseListComponent<T extends ICrud> implements OnInit {
   authenticated: boolean = false;
   authSubscription: Subscription;
   errorReceived: boolean;
-  ;
 
   constructor(
     protected service: BaseService<T>,
@@ -40,7 +39,7 @@ export class BaseListComponent<T extends ICrud> implements OnInit {
     });
 
     // Subscribe to login and logout observable
-    this.authSubscription = this.securityService.authenticationChallenge$.subscribe(
+    this.authSubscription = this.securityService.authentication$.subscribe(
       res => {
         this.authenticated = res;
       }

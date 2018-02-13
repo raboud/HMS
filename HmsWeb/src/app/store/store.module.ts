@@ -1,7 +1,5 @@
 import { NgModule, NgModuleFactoryLoader, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule  } from '@angular/platform-browser';
-// import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -43,7 +41,6 @@ import { UnitEditComponent } from './catalog/unit/unit-edit/unit-edit.component'
     ],
     imports: [
         BrowserModule,
-        HttpModule,
         NgbModule,
         // Only module that app module loads
         SharedModule,

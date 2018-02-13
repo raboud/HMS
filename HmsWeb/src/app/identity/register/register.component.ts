@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControl
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/merge';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/debounceTime';
 
 import { GenericValidator } from '../generic-validator';
 

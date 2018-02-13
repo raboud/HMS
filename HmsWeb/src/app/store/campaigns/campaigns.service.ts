@@ -1,5 +1,4 @@
 ﻿import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
 
 import { DataService } from '../shared/services/data.service';
 import { ICampaign } from '../shared/models/campaign.model';

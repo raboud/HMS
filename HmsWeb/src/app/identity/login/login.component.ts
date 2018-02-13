@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControl
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/merge';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/debounceTime';
 
 import { GenericValidator } from '../generic-validator';
 import { SecurityService } from '../../store/shared/services/security.service';
@@ -50,7 +51,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.auth.authenticationChallenge$.subscribe(ret => {
+    this.auth.authentication$.subscribe(ret => {
     if (ret === true) {
       this.router.navigate(['home']);
     }});

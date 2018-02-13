@@ -1,12 +1,11 @@
 ﻿import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ConfigurationService } from './configuration.service';
 import { StorageService } from './storage.service';
-import { HttpErrorResponse } from '@angular/common/http/src/response';
 
 interface TOKEN {
   access_token: string;
@@ -23,8 +22,9 @@ export class SecurityService {
     private actionUrl: string;
     private headers: HttpHeaders;
     private authenticationSource = new Subject<boolean>();
-    authenticationChallenge$ = this.authenticationSource.asObservable();
+    authentication$ = this.authenticationSource.asObservable();
     private authorityUrl = '';
+    private token: string = '';
 
     constructor(
       private _http: HttpClient,
@@ -44,13 +44,14 @@ export class SecurityService {
 
         if (this._storage.retrieve('IsAuthorized') !== '') {
           this.IsAuthorized = this._storage.retrieve('IsAuthorized');
-          this.authenticationSource.next(true);
+          this.token = this._storage.retrieve('authorizationData');
           this.UserData = this._storage.retrieve('userData');
           if (this.UserData) {
             if (this.UserData.role === 'admin') {
               this.IsAdmin = true;
             }
           }
+          this.authenticationSource.next(this.IsAuthorized);
         }
 
       }
@@ -63,28 +64,23 @@ export class SecurityService {
     }
 
     public GetToken(): any {
-        return this._storage.retrieve('authorizationData');
+        return this.token;
     }
 
-    public ResetAuthorizationData() {
+    private ResetAuthorizationData() {
+      this.token = '';
         this._storage.store('authorizationData', '');
         this._storage.store('authorizationDataIdToken', '');
 
         this.IsAuthorized = false;
         this.IsAdmin = false;
         this._storage.store('IsAuthorized', false);
-    }
+        this.authenticationSource.next(false);
+      }
 
-    public SetAuthorizationData(token: any, id_token: any) {
-        if (this._storage.retrieve('authorizationData') !== '') {
-            this._storage.store('authorizationData', '');
-        }
-
-        this._storage.store('authorizationData', token);
-        this._storage.store('authorizationDataIdToken', id_token);
-        this.IsAuthorized = true;
-        this._storage.store('IsAuthorized', true);
-
+    private SetAuthorizationData(token: any, id_token: any) {
+      this.IsAuthorized = true;
+      this.token = token;
         this.getUserData()
             .subscribe(data => {
                 this.UserData = data;
@@ -93,7 +89,11 @@ export class SecurityService {
                 }
                 this._storage.store('userData', data);
                 // emit observable
-                this.authenticationSource.next(true);
+              this._storage.store('authorizationData', token);
+              this._storage.store('authorizationDataIdToken', id_token);
+              this._storage.store('IsAuthorized', true);
+
+                      this.authenticationSource.next(true);
             },
             error => this.HandleError(error),
             () => {});
@@ -191,10 +191,7 @@ export class SecurityService {
       this._http.get(authorizationUrl)
         .subscribe(resp => {
           this.ResetAuthorizationData();
-
-          // emit observable
-          this.authenticationSource.next(false);
-        })
+        });
     }
 
     public Logoff() {
@@ -208,13 +205,10 @@ export class SecurityService {
             'post_logout_redirect_uri=' + encodeURI(post_logout_redirect_uri);
 
         this.ResetAuthorizationData();
-
-        // emit observable
-        this.authenticationSource.next(false);
         window.location.href = url;
     }
 
-    public HandleError(error: HttpErrorResponse) {
+    private HandleError(error: HttpErrorResponse) {
         console.log(error);
         if (error.status === 403) {
             this._router.navigate(['/Forbidden']);

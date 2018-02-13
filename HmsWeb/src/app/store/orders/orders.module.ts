@@ -17,6 +17,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       NgbModule,
     ],
     declarations: [OrdersComponent, OrdersDetailComponent, OrdersNewComponent],
-    providers: [OrdersService, BasketService]
+    providers: [
+      OrdersService,
+//      BasketService
+    ]
 })
 export class OrdersModule { }
