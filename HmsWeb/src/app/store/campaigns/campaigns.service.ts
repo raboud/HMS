@@ -1,16 +1,14 @@
 ﻿import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
+import { Observer } from 'rxjs/Observer';
+import 'rxjs/add/operator/map';
 
 import { DataService } from '../shared/services/data.service';
 import { ICampaign } from '../shared/models/campaign.model';
 import { ICampaignItem } from '../shared/models/campaignItem.model';
 import { SecurityService } from '../shared/services/security.service';
 import { ConfigurationService } from '../shared/services/configuration.service';
-
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import { Observer } from 'rxjs/Observer';
-import 'rxjs/add/operator/map';
-
 
 @Injectable()
 export class CampaignsService {

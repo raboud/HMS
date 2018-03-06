@@ -4,7 +4,7 @@ import { IOrderDetail } from '../../shared/models/order-detail.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'app-orders_detail',
+    selector: 'app-orders-detail',
     styleUrls: ['./orders-detail.component.scss'],
     templateUrl: './orders-detail.component.html'
 })

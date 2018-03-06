@@ -14,11 +14,12 @@ import { ICampaignItem } from '../shared/models/campaignItem.model';
 })
 export class CampaignsComponent implements OnInit {
     private interval = null;
-    paginationInfo: IPager;
+//    paginationInfo: IPager;
     items: IPage<ICampaignItem>;
     campaigns: ICampaign;
     isCampaignDetailFunctionEnabled: boolean = false;
     errorReceived: boolean;
+    page: number = 0;
 
     constructor(private service: CampaignsService, private configurationService: ConfigurationService) {
       console.log('CampaignsComponent');
@@ -33,10 +34,9 @@ export class CampaignsComponent implements OnInit {
         this.isCampaignDetailFunctionEnabled = this.configurationService.serverSettings.activateCampaignDetailFunction;
     }
 
-    onPageChanged(value: any) {
+    onPageChange() {
         // event.preventDefault();
-        this.paginationInfo.actualPage = value;
-        this.getCampaigns(this.paginationInfo.itemsPage, value);
+        this.getCampaigns(this.items.PageSize, this.page - 1);
     }
 
     getCampaigns(pageSize: number, pageIndex: number) {
@@ -46,13 +46,6 @@ export class CampaignsComponent implements OnInit {
             .subscribe(campaigns => {
               this.items = campaigns;
                 this.campaigns = campaigns;
-                this.paginationInfo = {
-                    actualPage : campaigns.pageIndex,
-                    itemsPage : campaigns.pageSize,
-                    totalItems : campaigns.count,
-                    totalPages: Math.ceil(campaigns.count / campaigns.pageSize),
-                    items: campaigns.pageSize
-                };
         });
     }
 

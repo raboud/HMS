@@ -7,7 +7,7 @@
     "start": "ng serve -port 9999",
     "build": "ng build --prod",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "tslint app/*.ts -t verbose",
     "e2e": "ng e2e"
   },
   "private": true,

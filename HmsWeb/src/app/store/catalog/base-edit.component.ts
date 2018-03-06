@@ -92,7 +92,7 @@ import { GenericValidator } from '../../identity/generic-validator';
       }
     }
 
-    onCancel(){
+    onCancel() {
       this.returnToList();
     }
 

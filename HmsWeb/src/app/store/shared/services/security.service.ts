@@ -83,6 +83,7 @@ export class SecurityService {
       this.token = token;
         this.getUserData()
             .subscribe(data => {
+              console.log(data);
                 this.UserData = data;
                 if (this.UserData.role === 'admin') {
                   this.IsAdmin = true;
@@ -148,7 +149,7 @@ export class SecurityService {
         this.ResetAuthorizationData();
 
         const hash = window.location.hash.substr(1);
-        const result: any = hash.split('&').reduce(function (result: any, item: string) {
+        const result: any = hash.split('&').reduce(function (result2: any, item: string) {
             const parts = item.split('=');
             result[parts[0]] = parts[1];
             return result;
@@ -230,7 +231,7 @@ export class SecurityService {
                 output += '=';
                 break;
             default:
-                throw 'Illegal base64url string!';
+                throw new Error('Illegal base64url string!');
         }
 
         return window.atob(output);

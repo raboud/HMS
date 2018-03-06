@@ -1,8 +1,7 @@
 import { Component, OnInit, OnChanges, Output, Input, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { IIdentity } from '../../models/identity.model';
-import { SecurityService } from  '../../services/security.service';
+import { SecurityService } from '../../services/security.service';
 
 @Component({
     selector: 'app-identity',

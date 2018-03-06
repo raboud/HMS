@@ -11,6 +11,7 @@ import 'rxjs/add/operator/catch';
 
 import { SecurityService } from './security.service';
 import { Guid } from '../../guid';
+import { HttpJsonParseError } from '@angular/common/http/src/response';
 
 // Implementing a Retry-Circuit breaker policy
 // is pending to do for the SPA app
@@ -29,12 +30,12 @@ export class DataService {
           .catch(this.handleError);
     }
 
-    postWithId(url: string, data: any, params?: any): Observable<Response> {
-        return this.doPost(url, data, true, params);
+    postWithId<t>(url: string, data: any, params?: any): Observable<HttpResponse<t>> {
+        return this.doPost<t>(url, data, true, params);
     }
 
-    post(url: string, data: any, params?: any): Observable<Response> {
-        return this.doPost(url, data, false, params);
+    post<t>(url: string, data: any, params?: any): Observable<HttpResponse<t>> {
+        return this.doPost<t>(url, data, false, params);
     }
 
     putWithId(url: string, data: any, params?: any): Observable<Response> {
@@ -45,12 +46,12 @@ export class DataService {
       return this.doPut(url, data, false, params);
   }
 
-    private doPost(url: string, data: any, needId: boolean, params?: any): Observable<Response> {
+    private doPost<t>(url: string, data: any, needId: boolean, params?: any): Observable<HttpResponse<t>> {
       const options: HttpHeaders = new HttpHeaders();
 
 
         if (this.securityService) {
-            options.set('Authorization', this.securityService.getAuthorizationHeader());
+//            options.set('Authorization', this.securityService.getAuthorizationHeader());
         }
         if (needId) {
             const guid = Guid.newGuid();
@@ -58,7 +59,7 @@ export class DataService {
         }
 
         return this.http.post(url, data, {headers: options}).map(
-            (res: HttpResponse<any>) => {
+            (res: HttpResponse<t>) => {
                 return res;
             }).catch(this.handleError);
     }
@@ -66,10 +67,6 @@ export class DataService {
     private doPut(url: string, data: any, needId: boolean, params?: any): Observable<Response> {
       const options: HttpHeaders = new HttpHeaders();
 
-
-        if (this.securityService) {
-            options.set('Authorization', this.securityService.getAuthorizationHeader());
-        }
         if (needId) {
             const guid = Guid.newGuid();
             options.append('x-requestid', guid);

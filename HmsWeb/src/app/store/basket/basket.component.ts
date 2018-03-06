@@ -32,12 +32,12 @@ export class BasketComponent implements OnInit {
   }
 
     itemQuantityChanged(item: IBasketItem) {
-      if (item.quantity === 0) {
-        const index = this.basket.items.indexOf(item, 0);
-        if (index > -1) {
-           this.basket.items.splice(index, 1);
-        }
-      }
+      // if (item.quantity === 0) {
+      //   const index = this.basket.items.indexOf(item, 0);
+      //   if (index > -1) {
+      //      this.basket.items.splice(index, 1);
+      //   }
+      // }
         this.calculateTotalPrice();
     }
 
@@ -52,6 +52,7 @@ export class BasketComponent implements OnInit {
             .subscribe(
             x => {
                 this.errorMessages = [];
+                this.cloneBasket();
             },
             errMessage => this.errorMessages = errMessage.messages);
         return setBasketObservable;

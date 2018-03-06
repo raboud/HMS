@@ -50,7 +50,7 @@ export class BasketService {
       });
     }
 
-    getItemCount(): number{
+    getItemCount(): number {
       let sum = 0;
       this.basket.items.forEach(element => {
         sum += element.quantity;
@@ -85,12 +85,16 @@ export class BasketService {
 
   public UpdateBasket(basket: IBasket): Observable<boolean> {
     this.basket = basket;
+    console.log(basket);
+    this.basket.items = this.basket.items.filter( x => x.quantity > 0);
     return this.setBasket();
   }
     private setBasket(): Observable<boolean> {
         const url = this.basketUrl + '/api/v1/basket/';
-        return this.service.post(url, this.basket).map(() => {
-            return true;
+        return this.service.post<IBasket>(url, this.basket).map((b) => {
+          this.basket = b.body;
+          this.basketUpdateSource.next(true);
+          return true;
         });
     }
 

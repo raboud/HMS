@@ -7,7 +7,7 @@ export interface IProduct extends ICrud {
   PictureUri: string;
   Brand: {
     Name: string;
-  }
+  };
   BrandId: number;
   Types: string[];
   Types2: string[];
@@ -18,7 +18,7 @@ export interface IProduct extends ICrud {
   UnitId: number;
   Vendor: {
     Name: string;
-  }
+  };
   VendorId: number;
   Count: number;
   InActive: boolean;

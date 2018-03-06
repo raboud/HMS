@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SecurityService } from '../../store/shared/services/security.service';
 import { Subscription } from 'rxjs/Subscription';
-import { IIdentity } from '../../store/shared/models/identity.model';
+
+import { SecurityService } from '../../store/shared/services/security.service';
 
 @Component({
   selector: 'app-header',

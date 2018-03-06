@@ -14,7 +14,7 @@ export class BaseListComponent<T extends ICrud> implements OnInit {
     PageIndex: 0,
     PageSize: 10,
     Data: [],
-  }
+  };
 
   ready: boolean = false;
 
@@ -71,7 +71,7 @@ export class BaseListComponent<T extends ICrud> implements OnInit {
   }
 
   onDelete(item: T) {
-    this.service.deleteItem(item).subscribe(() => {;
+    this.service.deleteItem(item).subscribe(() => {
       this.getItems(this.items.PageSize, this.page - 1);
     });
   }

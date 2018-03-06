@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { OrdersService } from '../orders.service';
 import { BasketService } from '../../basket/basket.service';
-import { IOrder }                                   from '../../shared/models/order.model';
+import { IOrder } from '../../shared/models/order.model';
 
-import { FormGroup, FormBuilder, Validators  }      from '@angular/forms';
-import { Router }                                   from '@angular/router';
+import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-orders_new',
+    selector: 'app-orders-new',
     styleUrls: ['./orders-new.component.scss'],
     templateUrl: './orders-new.component.html'
 })
@@ -44,9 +44,10 @@ export class OrdersNewComponent implements OnInit {
         this.order.cardnumber = this.newOrderForm.controls['cardnumber'].value;
         this.order.cardtypeid = 1;
         this.order.cardholdername = this.newOrderForm.controls['cardholdername'].value;
-        this.order.cardexpiration = new Date(20 + this.newOrderForm.controls['expirationdate'].value.split('/')[1], this.newOrderForm.controls['expirationdate'].value.split('/')[0]);
+        this.order.cardexpiration = new Date(20 + this.newOrderForm.controls['expirationdate'].value.split('/')[1],
+                                    this.newOrderForm.controls['expirationdate'].value.split('/')[0]);
         this.order.cardsecuritynumber = this.newOrderForm.controls['securitycode'].value;
-        let basketCheckout = this.basketService.mapBasketInfoCheckout(this.order);
+        const basketCheckout = this.basketService.mapBasketInfoCheckout(this.order);
         this.basketService.setBasketCheckout(basketCheckout)
             .catch((errMessage) => {
                 this.errorReceived = true;

@@ -10,8 +10,7 @@ import { ConfigurationService } from './services/configuration.service';
 import { StorageService } from './services/storage.service';
 
 // Components:
-import { Pager } from './components/pager/pager';
-import { Header } from './components/header/header';
+import { PagerComponent } from './components/pager/pager';
 import { IdentityComponent } from './components/identity/identity.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
@@ -32,7 +31,7 @@ import { BasketService } from '../basket/basket.service';
         HttpClientModule,
     ],
     declarations: [
-        Pager,
+        PagerComponent,
         PageNotFoundComponent,
         UppercasePipe
     ],
@@ -43,7 +42,7 @@ import { BasketService } from '../basket/basket.service';
         ReactiveFormsModule,
         RouterModule,
         // Providers, Components, directive, pipes
-        Pager,
+        PagerComponent,
         PageNotFoundComponent,
         UppercasePipe
     ]

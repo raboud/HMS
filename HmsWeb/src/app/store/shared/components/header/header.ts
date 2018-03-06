@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
     templateUrl: './header.html',
     styleUrls: ['./header.scss']
 })
-export class Header {
+export class Header2Component {
     @Input()
     url: string;
 }

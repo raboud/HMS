@@ -6,7 +6,6 @@ export * from './campaign.model';
 export * from './campaignItem.model';
 export * from './category.model';
 export * from './configuration.model';
-export * from './identity.model';
 export * from './order-detail.model';
 export * from './order.model';
 export * from './orderItem.model';
