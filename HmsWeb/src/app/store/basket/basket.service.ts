@@ -38,6 +38,10 @@ export class BasketService {
         this.basket.items = [];
         this.configurationService.load().subscribe(() => {
           this.basketUrl = this.configurationService.serverSettings.basketUrl;
+          if (this.authService.IsAuthorized){
+            this.basket.buyerId = this.authService.UserData.sub;
+            this.loadData();
+          }
           this.authService.authentication$.subscribe((auth) => {
             if (auth) {
               this.basket.buyerId = this.authService.UserData.sub;
@@ -52,9 +56,11 @@ export class BasketService {
 
     getItemCount(): number {
       let sum = 0;
-      this.basket.items.forEach(element => {
-        sum += element.quantity;
-      });
+      if (this.basket) {
+        this.basket.items.forEach(element => {
+          sum += element.quantity;
+        });
+      }
       return sum;
     }
 
@@ -85,10 +91,10 @@ export class BasketService {
 
   public UpdateBasket(basket: IBasket): Observable<boolean> {
     this.basket = basket;
-    console.log(basket);
     this.basket.items = this.basket.items.filter( x => x.quantity > 0);
     return this.setBasket();
   }
+
     private setBasket(): Observable<boolean> {
         const url = this.basketUrl + '/api/v1/basket/';
         return this.service.post<IBasket>(url, this.basket).map((b) => {
@@ -107,6 +113,7 @@ export class BasketService {
     }
 
     private getBasket(): Observable<IBasket> {
+      console.log('getBasket ' + this.basket.buyerId);
         const url = this.basketUrl + '/api/v1/basket/' + this.basket.buyerId;
         return this.service.getFullResp<IBasket>(url).map(resp => {
           if (resp.status === 204) {
@@ -145,7 +152,7 @@ export class BasketService {
     private loadData() {
         this.getBasket().subscribe(basket => {
             if (basket != null) {
-                this.basket = basket;
+              this.basket = basket;
             }
         });
     }

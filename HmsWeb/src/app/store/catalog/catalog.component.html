@@ -22,15 +22,15 @@
     <div class="col-md-4" *ngFor="let item of items?.Data">
       <div class="card">
         <div (click)=detail(item)>
-        <img class="foo-img" src="{{item.PictureUri}}" />
-        <div class="card-body">
-          <h5 class="card-title">{{item.Name}}</h5>
-          <div class="card-text">{{item.Price | number:'.2-2'}}</div>
-        </div>
+          <img class="foo-img" src="{{item.PictureUri}}" />
+          <div class="card-body">
+            <h5 class="card-title">{{item.Name}}</h5>
+            <div class="card-text">{{item.Price | number:'.2-2'}}</div>
+          </div>
+          <button [ngClass]="{'catalog-button': true, 'is-disabled': !authenticated}" (click)="addToCart(item, $event)">
+            [ ADD TO CART ]
+          </button>
       </div>
-      <button [ngClass]="{'catalog-button': true, 'is-disabled': !authenticated}" (click)="addToCart(item)">
-          [ ADD TO CART ]
-        </button>
       </div>
   </div>
   </div>

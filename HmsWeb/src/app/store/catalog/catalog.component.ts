@@ -74,9 +74,10 @@ export class CatalogComponent implements OnInit {
       this.getCatalog(this.items.PageSize, this.page - 1);
     }
 
-    addToCart(item: IProduct) {
+    addToCart(item: IProduct, event: Event) {
         this.basketService.addItemToBasket(item);
-    }
+        event.stopPropagation();
+      }
 
     getCatalog(pageSize: number, pageIndex: number, brand?: number, type?: number) {
         this.errorReceived = false;

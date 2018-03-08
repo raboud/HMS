@@ -20,11 +20,13 @@ export class DataService {
     constructor(private http: HttpClient, private securityService: SecurityService) { }
 
     getFullResp<type>(url: string): Observable<HttpResponse<type>> {
+      console.log('getFullResp ' + url);
       return this.http.get<type>(
         url, { observe: 'response' });
     }
 
     get<type>(url: string, params?: any): Observable<type> {
+      console.log('get ' + url);
        return this.http.get<type>(url)
           .map((d) => d )
           .catch(this.handleError);
@@ -49,22 +51,18 @@ export class DataService {
     private doPost<t>(url: string, data: any, needId: boolean, params?: any): Observable<HttpResponse<t>> {
       const options: HttpHeaders = new HttpHeaders();
 
-
-        if (this.securityService) {
-//            options.set('Authorization', this.securityService.getAuthorizationHeader());
-        }
         if (needId) {
             const guid = Guid.newGuid();
             options.append('x-requestid', guid);
         }
 
-        return this.http.post(url, data, {headers: options}).map(
+        return this.http.post(url, data, {headers: options,  observe: 'response' }).map(
             (res: HttpResponse<t>) => {
                 return res;
             }).catch(this.handleError);
     }
 
-    private doPut(url: string, data: any, needId: boolean, params?: any): Observable<Response> {
+    private doPut<t>(url: string, data: any, needId: boolean, params?: any): Observable<Response> {
       const options: HttpHeaders = new HttpHeaders();
 
         if (needId) {
@@ -72,8 +70,8 @@ export class DataService {
             options.append('x-requestid', guid);
         }
 
-        return this.http.put(url, data, {headers: options}).map(
-            (res: Response) => {
+        return this.http.put(url, data, {headers: options,  observe: 'response'}).map(
+            (res:  HttpResponse<t>) => {
                 return res;
             }).catch(this.handleError);
     }
