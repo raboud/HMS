@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -20,7 +24,6 @@ import { StaffElementComponent } from './main/team/staff-element/staff-element.c
 import { ExpectComponent } from './main/expect/expect.component';
 import { StoreModule } from './store/store.module';
 import { IdentityModule } from './identity/identity.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Expertise2Component } from './main/expertise2/expertise2.component';
 import { StoreComponent } from './store/store.component';
 import { SharedModule } from './store/shared/shared.module';
@@ -47,9 +50,11 @@ import { BasketModule } from './store/basket/basket.module';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    NgbModule.forRoot(),
+    FontAwesomeModule,
     StoreModule,
     IdentityModule,
-    NgbModule.forRoot(),
     SharedModule.forRoot(),
     AppRoutingModule,
     BasketModule,
