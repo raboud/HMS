@@ -1,42 +1,28 @@
 <div class="identity">
-    <section class="identity-section"
-             *ngIf="!authenticated">
-        <div class="identity-item"
-             (click)="login()">
+  <section class="identity-section" *ngIf="!authenticated">
+    <div class="identity-item" (click)="login()">
+      <div class="identity-name identity-name--upper">Login</div>
+    </div>
+  </section>
 
-            <div class="identity-name identity-name--upper">Login</div>
-        </div>
-    </section>
+  <section class="identity-section" *ngIf="authenticated">
+    <div class="identity-name">{{userName}}</div>
+  </section>
 
-    <section class="identity-section"
-         *ngIf="authenticated">
+  <section class="identity-drop" *ngIf="authenticated">
+    <div class="identity-item" [routerLink]="['orders']">
+      <div class="identity-name identity-name--upper">My orders</div>
+      <img class="identity-image" src="assets/images/my_orders.png">
+    </div>
 
-        <div class="identity-name">{{userName}}</div>
-        <img class="identity-image" src="assets/images/arrow-down.png">
-    </section>
+    <div class="identity-item" [routerLink]="['campaigns']">
+      <div class="identity-name identity-name--upper">My campaigns</div>
+      <img class="identity-image" src="assets/images/my_orders.png">
+    </div>
 
-    <section class="identity-drop"
-             *ngIf="authenticated">
-
-        <div class="identity-item"
-             [routerLink]="['orders']">
-
-            <div class="identity-name identity-name--upper">My orders</div>
-            <img class="identity-image" src="assets/images/my_orders.png">
-        </div>
-
-        <div class="identity-item"
-             [routerLink]="['campaigns']">
-
-            <div class="identity-name identity-name--upper">My campaigns</div>
-            <img class="identity-image" src="assets/images/my_orders.png">
-        </div>
-
-        <div class="identity-item"
-             (click)="logoutClicked($event)">
-
-            <div class="identity-name identity-name--upper">Log Out</div>
-            <img class="identity-image" src="assets/images/logout.png">
-        </div>
-    </section>
+    <div class="identity-item" (click)="logoutClicked($event)">
+      <div class="identity-name identity-name--upper">Log Out</div>
+      <img class="identity-image" src="assets/images/logout.png">
+    </div>
+  </section>
 </div>

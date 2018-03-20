@@ -1,4 +1,4 @@
-@import '../../variables';
+@import '../../../../variables';
 
 .orders_new {
     min-height: 80vh;
@@ -11,14 +11,14 @@
     }
 
     &-back {
-        color: rgba($color-foreground-brighter, .4);
+//        color: rgba($color-foreground-brighter, .4);
         line-height: $header-height;
         text-decoration: none;
         text-transform: uppercase;
         transition: color $animation-speed-default;
 
         &:hover {
-            color: $color-foreground-brighter;
+//            color: $color-foreground-brighter;
             transition: color $animation-speed-default;
         }
     }
@@ -32,10 +32,10 @@
     }
 
     &-placeOrder {
-        background-color: $color-secondary;
+//        background-color: $color-secondary;
         border: 0;
         border-radius: 0;
-        color: $color-foreground-brighter;
+//        color: $color-foreground-brighter;
         display: inline-block;
         font-size: 1rem;
         font-weight: $font-weight-normal;
@@ -46,7 +46,7 @@
         transition: all $animation-speed-default;
 
         &:hover {
-            background-color: $color-secondary-darker;
+//            background-color: $color-secondary-darker;
             transition: all $animation-speed-default;
         }
     }
@@ -63,7 +63,7 @@
 
     &-items {
         &--border {
-            border-bottom: $border-light solid $color-foreground-bright;
+            border-bottom: $border-light solid;
             padding: .5rem 0;
 
             &:last-of-type {
@@ -81,13 +81,13 @@
         &--middle {
             line-height: $item-height;
 
-            @media screen and (max-width: $media-screen-s) {
+            @media screen and (max-width: map-get($container-max-widths, "sm")) {
                 line-height: $font-size-m;
             }
         }
 
         &--mark {
-            color: $color-secondary;
+//            color: $color-secondary;
         }
     }
 

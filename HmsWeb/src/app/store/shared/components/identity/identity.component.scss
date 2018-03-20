@@ -27,7 +27,7 @@
     }
 
     &-drop {
-        background: $color-background-brighter;
+//        background: $color-background-brighter;
         height: 0;
         min-width: 14rem;
         overflow: hidden;
@@ -39,7 +39,7 @@
     }
 
     &:hover &-drop {
-        border: $border-light solid $color-foreground-bright;
+        border: $border-light solid;
         height: 7rem;
         transition: height $animation-speed-default;
     }
@@ -49,7 +49,7 @@
         transition: color $animation-speed-default;
 
         &:hover {
-            color: $color-secondary-dark;
+//            color: $color-secondary-dark;
             transition: color $animation-speed-default;
         }
     }

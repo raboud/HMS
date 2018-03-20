@@ -1,4 +1,4 @@
-@import '../../../variables';
+@import '../../../../../variables';
 
 .pager {
 
@@ -21,15 +21,15 @@
             display: inline-block;
 
             &:hover {
-                color: $color-secondary;
+//                color: $color-secondary;
             }
         }
 
-        @media screen and (max-width: $media-screen-l) {
+        @media screen and (max-width: map-get($container-max-widths, "lg")) {
             font-size: $font-size-s;
         }
 
-        @media screen and (max-width: $media-screen-m) {
+        @media screen and (max-width: map-get($container-max-widths, "md")) {
             margin: 0 $margin / 2;
         }
     }

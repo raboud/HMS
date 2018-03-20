@@ -1,4 +1,4 @@
-@import '../variables';
+@import '../../../variables';
 
 .orders {
     min-height: 80vh;
@@ -12,14 +12,14 @@
     }
 
     &-back {
-        color: rgba($color-foreground-brighter, .4);
+//        color: rgba($color-foreground-brighter, .4);
         line-height: $header-height;
         text-decoration: none;
         text-transform: uppercase;
         transition: color $animation-speed-default;
 
         &:hover {
-            color: $color-foreground-brighter;
+//            color: $color-foreground-brighter;
             transition: color $animation-speed-default;
         }
     }
@@ -41,7 +41,7 @@
 
         &:nth-of-type(2n + 1) {
             &:before {
-                background-color: $color-background-bright;
+//                background-color: $color-background-bright;
                 content: '';
                 height: 100%;
                 left: 0;
@@ -69,12 +69,12 @@
     }
 
     &-link {
-        color: $color-secondary;
+//        color: $color-secondary;
         text-decoration: none;
         transition: color $animation-speed-default;
 
         &:hover {
-            color: $color-secondary-dark;
+//            color: $color-secondary-dark;
             transition: color $animation-speed-default;
         }
     }

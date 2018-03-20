@@ -1,4 +1,4 @@
-@import '../../variables';
+@import '../../../../variables';
 
 .basketstatus {
     cursor: pointer;
@@ -18,10 +18,10 @@
     }
 
     &-badge {
-        $size: 1.5rem;
-        background-color: $color-secondary;
+        $size: 1.3rem;
+        background-color: white;
         border-radius: 50%;
-        color: $color-foreground-brighter;
+        color: $success;
         display: block;
         height: $size;
         left: 50%;
@@ -35,7 +35,7 @@
 
     &:hover &-badge {
         background-color: transparent;
-        color: $color-secondary-dark;
+//        color: $color-secondary-dark;
         transition: all $animation-speed-default;
     }
 }

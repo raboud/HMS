@@ -1,4 +1,4 @@
-﻿@import '../variables';
+﻿@import '../../../variables';
 
 .campaign {
     $banner-height: 260px;
@@ -19,11 +19,11 @@
         display: inline-block;
         float: none !important;
 
-        @media screen and (max-width: $media-screen-m) {
+        @media screen and (max-width: map-get($container-max-widths, "md")) {
             width: 50%;
         }
 
-        @media screen and (max-width: $media-screen-s) {
+        @media screen and (max-width: map-get($container-max-widths, "sm")) {
             width: 100%;
         }
     }
@@ -34,9 +34,9 @@
     }
 
     &-button {
-        background-color: $color-secondary;
+//        background-color: $color-secondary;
         border: 0;
-        color: $color-foreground-brighter;
+//        color: $color-foreground-brighter;
         cursor: pointer;
         font-size: $font-size-m;
         height: 3rem;
@@ -50,7 +50,7 @@
         }
 
         &:hover {
-            background-color: $color-secondary-darker;
+//            background-color: $color-secondary-darker;
             transition: all $animation-speed-default;
         }
     }

@@ -1,12 +1,12 @@
-@import './variables';
+@import '../..//variables';
 
 .app {
     &-footer {
         $margin: 2.5rem;
         $padding: 2.5rem;
 
-        background-color: $color-background-darker;
-        border-top: $border-light solid $color-foreground-bright;
+//        background-color: $color-background-darker;
+        border-top: $border-light solid;
         margin-top: $margin;
         padding-bottom: $padding;
         padding-top: $padding;

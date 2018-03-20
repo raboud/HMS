@@ -1,4 +1,4 @@
-@import '../../variables';
+@import '../../../../variables';
 
 .orders_detail {
     min-height: 80vh;
@@ -22,7 +22,7 @@
 
     &-items {
         &--border {
-            border-bottom: $border-light solid $color-foreground-bright;
+            border-bottom: $border-light solid;
             padding: .5rem 0;
 
             &:last-of-type {
@@ -40,13 +40,13 @@
         &--middle {
             line-height: $item-height;
 
-            @media screen and (max-width: $media-screen-s) {
+            @media screen and (max-width: map-get($container-max-widths, "sm")) {
                 line-height: $font-size-m;
             }
         }
 
         &--mark {
-            color: $color-secondary;
+//            color: $color-secondary;
         }
     }
 

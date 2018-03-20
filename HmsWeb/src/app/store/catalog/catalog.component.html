@@ -13,7 +13,7 @@
         <option *ngFor="let type of types" [value]="type.Id">{{type.Name}}</option>
       </select>
     </label>
-    <img class="catalog-send" (click)="onFilterApplied($event)" src="/assets/images/arrow-right.svg" />
+    <fa-icon (click)="onFilterApplied($event)" [icon]="['fas', 'angle-right']" size="4x"></fa-icon>
   </div>
 </section>
 

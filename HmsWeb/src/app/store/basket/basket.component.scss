@@ -1,4 +1,4 @@
-@import '../variables';
+@import '../../../variables';
 
 @mixin margin-left($distance) {
     margin-left: $distance;
@@ -23,7 +23,7 @@
 
     &-items {
         &--border {
-            border-bottom: $border-light solid $color-foreground-bright;
+            border-bottom: $border-light solid;
             padding: .5rem 0;
 
             &:last-of-type {
@@ -45,13 +45,13 @@
         &--middle {
             line-height: $item-height;
 
-            @media screen and (max-width: $media-screen-m) {
+            @media screen and (max-width: map-get($container-max-widths, "lg")) {
                 line-height: $font-size-m;
             }
         }
 
         &--mark {
-            color: $color-brand;
+//            color: $color-brand;
         }
     }
 
@@ -68,10 +68,10 @@
     }
 
     &-checkout {
-        background-color: $color-secondary;
+//        background-color: $color-secondary;
         border: 0;
         border-radius: 0;
-        color: $color-foreground-brighter;
+//        color: $color-foreground-brighter;
         display: inline-block;
         font-size: 1rem;
         font-weight: $font-weight-normal;
@@ -82,7 +82,7 @@
         transition: all $animation-speed-default;
 
         &:hover {
-            background-color: $color-secondary-darker;
+//            background-color: $color-secondary-darker;
             transition: all $animation-speed-default;
         }
     }
