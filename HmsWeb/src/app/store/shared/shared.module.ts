@@ -11,7 +11,6 @@ import { StorageService } from './services/storage.service';
 
 // Components:
 import { PagerComponent } from './components/pager/pager';
-import { IdentityComponent } from './components/identity/identity.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 // Pipes:

@@ -2,35 +2,14 @@
 @import "./variables";
 @import "../node_modules/bootswatch/dist/superhero/bootswatch";
 
-h1 {
-  color: $primary;
-}
-
-h2 {
-  color: $primary;
-}
-
-h3 {
-  color: $primary;
-}
-
-h4 {
-  color: $primary;
-}
-
-h5 {
-  color: $primary;
-}
 
 ul {
-  color: $primary;
   font-size: 30px;
   list-style-position: inside;
   text-align: center;
 }
 
 li {
-  color: white;
   font-size: 15px;
 }
 
