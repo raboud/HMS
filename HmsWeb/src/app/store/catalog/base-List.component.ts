@@ -3,8 +3,7 @@ import { OnInit, Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { SecurityService } from '../shared/services/security.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
+import { Subscription, Observable } from 'rxjs';
 
 @Injectable()
 export class BaseListComponent<T extends ICrud> implements OnInit {

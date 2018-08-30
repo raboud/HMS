@@ -8,10 +8,7 @@ import { IOrderDetail } from '../shared/models/order-detail.model';
 import { SecurityService } from '../shared/services/security.service';
 import { ConfigurationService } from '../shared/services/configuration.service';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import { Observer } from 'rxjs/Observer';
-import 'rxjs/add/operator/map';
+import { Observable, Observer } from 'rxjs';
 import { BasketService } from '../basket/basket.service';
 
 

@@ -1,10 +1,8 @@
 import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControlName } from '@angular/forms';
 
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/observable/merge';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/debounceTime';
+import { Observable, fromEvent, merge } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 import { GenericValidator } from '../generic-validator';
 
@@ -70,10 +68,10 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // Watch for the blur event from any input element on the form.
     const controlBlurs: Observable<any>[] = this.formInputElements
-        .map((formControl: ElementRef) => Observable.fromEvent(formControl.nativeElement, 'blur'));
+        .map((formControl: ElementRef) => fromEvent(formControl.nativeElement, 'blur'));
 
     // Merge the blur event observable with the valueChanges observable
-    Observable.merge(this.form.valueChanges, ...controlBlurs).debounceTime(800).subscribe(value => {
+    merge(this.form.valueChanges, ...controlBlurs).pipe(debounceTime(800)).subscribe(value => {
         this.displayMessage = this.genericValidator.processMessages(this.form);
     });
 }

@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/map';
+import { Observable, Observer } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { DataService } from '../shared/services/data.service';
 import { ConfigurationService } from '../shared/services/configuration.service';
@@ -19,10 +17,12 @@ export class BaseService<T extends ICrud> {
   ) { }
 
   load(): Observable<boolean> {
-    return this.configurationService.load().map( (x) => {
-      this.init();
-      return x;
-    });
+    return this.configurationService.load().pipe(
+      map( (x) => {
+        this.init();
+        return x;
+      })
+    );
   }
 
   init() {}

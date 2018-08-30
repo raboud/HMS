@@ -38,21 +38,21 @@
 
     <div class="container">
         <article class="basket-titles basket-titles--clean row">
-            <section class="basket-title col-xs-9"></section>
-            <section class="basket-title col-xs-2">Total</section>
+            <section class="basket-title col-9"></section>
+            <section class="basket-title col-2">Total</section>
         </article>
 
         <article class="basket-items row">
-            <section class="basket-item col-xs-9"></section>
-            <section class="basket-item basket-item--mark col-xs-2">$ {{totalPrice | number:'.2-2'}}</section>
+            <section class="basket-item col-9"></section>
+            <section class="basket-item basket-item--mark col-2">$ {{totalPrice | number:'.2-2'}}</section>
         </article>
 
         <article class="basket-items row">
-            <section class="basket-item col-xs-7"></section>
-            <section class="basket-item col-xs-2">
+            <section class="basket-item col-7"></section>
+            <section class="basket-item col-2">
                 <button [disabled]='!isDirty()' class="btn basket-checkout" (click)="update($event)">[ Update ]</button>
             </section>
-            <section class="basket-item col-xs-3">
+            <section class="basket-item col-3">
                 <button [disabled]='isDirty()' (click)="checkOut($event)" class="btn basket-checkout">[ Checkout ]</button>
             </section>
         </article>

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/map';
+import { Observable, Observer } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { DataService } from '../shared/services/data.service';
 import { ConfigurationService } from '../shared/services/configuration.service';
@@ -27,14 +25,15 @@ export class CatalogService {
   }
 
   load(): Observable<boolean> {
-    return  this.configurationService.load().map(() => {
+    return  this.configurationService.load().pipe(
+      map(() => {
       this.catalogUrl = this.configurationService.serverSettings.catalogUrl + '/api/v1/products/page';
       this.brandUrl = this.configurationService.serverSettings.catalogUrl + '/api/v1/brands';
       this.typesUrl = this.configurationService.serverSettings.catalogUrl + '/api/v1/categories';
       this.vendorUrl = this.configurationService.serverSettings.catalogUrl + '/api/v1/vendors';
       this.unitUrl = this.configurationService.serverSettings.catalogUrl + '/api/v1/units';
       return true;
-  });
+  }));
   }
 
 

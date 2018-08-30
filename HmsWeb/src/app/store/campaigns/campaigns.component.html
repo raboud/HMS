@@ -2,9 +2,9 @@
   <div class="alert alert-warning campaign-alert" role="alert" [hidden]="!errorReceived">
     Error requesting campaigns list, please try later on
   </div>
-  <div *ngIf="campaigns?.data?.length > 0">
+  <div *ngIf="items?.Data?.length > 0">
     <div class="card-group campaign-items row">
-      <div class="campaign-item col-md-4" *ngFor="let item of campaigns.data">
+      <div class="campaign-item col-md-4" *ngFor="let item of items.Data">
 
         <div class="card-block">
           <h4 class="card-title campaign-name">{{item.name}}</h4>
@@ -24,7 +24,7 @@
     <ngb-pagination [collectionSize]="items.Count" [pageSize]='items.PageSize' [(page)]="page" [maxSize]="5" [rotate]="true"
       [ellipses]="false" (pageChange)='onPageChange()' [boundaryLinks]="true"></ngb-pagination>
   </div>
-  <div *ngIf="campaigns?.data?.length == 0">
+  <div *ngIf="items?.Data?.length == 0">
     <span>THERE ARE NO RESULTS THAT MATCH YOUR SEARCH</span>
   </div>
 </div>

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
-import brands from '@fortawesome/fontawesome-free-brands';
-import regular from '@fortawesome/fontawesome-free-regular';
-import solid from '@fortawesome/fontawesome-free-solid';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome';
 
 import { ConfigurationService } from './store/shared/services/configuration.service';
@@ -25,9 +25,7 @@ export class AppComponent implements OnInit {
   constructor(private titleService: Title, private securityService: SecurityService, private config: ConfigurationService) {
     this.Authenticated = this.securityService.IsAuthorized;
 
-    library.add(solid);
-    library.add(regular);
-    library.add(brands);
+    library.add(fas, far, fab);
   }
 
   ngOnInit() {

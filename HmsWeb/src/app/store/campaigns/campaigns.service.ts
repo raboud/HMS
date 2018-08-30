@@ -1,14 +1,12 @@
 ﻿import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import { Observer } from 'rxjs/Observer';
-import 'rxjs/add/operator/map';
+import { Observable, Observer } from 'rxjs';
 
 import { DataService } from '../shared/services/data.service';
 import { ICampaign } from '../shared/models/campaign.model';
 import { ICampaignItem } from '../shared/models/campaignItem.model';
 import { SecurityService } from '../shared/services/security.service';
 import { ConfigurationService } from '../shared/services/configuration.service';
+import { IPage } from '../shared/models';
 
 @Injectable()
 export class CampaignsService {
@@ -31,11 +29,11 @@ export class CampaignsService {
         });
     }
 
-    getCampaigns(pageIndex: number, pageSize: number): Observable<ICampaign> {
+    getCampaigns(pageIndex: number, pageSize: number): Observable<IPage<ICampaignItem>> {
         let url = this.marketingUrl + '/api/v1/campaigns/user';
         url = url + '?pageIndex=' + pageIndex + '&pageSize=' + pageSize;
 
-        return this.service.get<ICampaign>(url);
+        return this.service.get<IPage<ICampaignItem>>(url);
     }
 
     getCampaign(id: number): Observable<ICampaignItem> {

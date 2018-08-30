@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { catchError} from 'rxjs/operators';
 
 import { OrdersService } from './orders.service';
 import { IOrderSummary } from '../shared/models';
@@ -40,11 +41,14 @@ export class OrdersComponent implements OnInit {
     getOrders() {
         this.errorReceived = false;
         this.service.getOrders()
-            .catch((err) => this.handleError(err))
-            .subscribe(orders => {
-                this.oldOrders = this.orders;
-                this.orders = orders;
-        });
+          .pipe(
+            catchError((err) => this.handleError(err))
+          )
+          .subscribe(orders => {
+            this.oldOrders = this.orders;
+            this.orders = orders;
+          }
+        );
     }
 
     private handleError(error: any) {

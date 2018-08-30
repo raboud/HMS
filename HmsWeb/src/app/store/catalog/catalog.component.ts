@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription, Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-
-import { Observable } from 'rxjs/Observable';
 
 import { CatalogService } from './catalog.service';
 import { IProduct } from '../shared/models/product.model';
@@ -82,7 +81,9 @@ export class CatalogComponent implements OnInit {
     getCatalog(pageSize: number, pageIndex: number, brand?: number, type?: number) {
         this.errorReceived = false;
         this.service.getCatalog(pageIndex, pageSize, brand, type)
-            .catch((err) => this.handleError(err))
+            .pipe(
+              catchError((err) => this.handleError(err))
+            )
             .subscribe(catalog => {
                 this.items = catalog;
         });

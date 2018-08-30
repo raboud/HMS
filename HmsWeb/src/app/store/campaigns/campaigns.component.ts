@@ -1,9 +1,9 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+import { Component, OnInit } from '@angular/core';
 import { CampaignsService } from './campaigns.service';
-import { ICampaign } from '../shared/models/campaign.model';
-import { IPager } from '../shared/models/pager.model';
 import { ConfigurationService } from '../shared/services/configuration.service';
-import { Observable } from 'rxjs/Observable';
 import { IPage } from '../shared/models/pagination.model';
 import { ICampaignItem } from '../shared/models/campaignItem.model';
 
@@ -14,9 +14,7 @@ import { ICampaignItem } from '../shared/models/campaignItem.model';
 })
 export class CampaignsComponent implements OnInit {
     private interval = null;
-//    paginationInfo: IPager;
     items: IPage<ICampaignItem>;
-    campaigns: ICampaign;
     isCampaignDetailFunctionEnabled: boolean = false;
     errorReceived: boolean;
     page: number = 0;
@@ -42,10 +40,11 @@ export class CampaignsComponent implements OnInit {
     getCampaigns(pageSize: number, pageIndex: number) {
         this.errorReceived = false;
         this.service.getCampaigns(pageIndex, pageSize)
-            .catch((err) => this.handleError(err))
+          .pipe(
+            catchError((err) => this.handleError(err))
+          )
             .subscribe(campaigns => {
               this.items = campaigns;
-                this.campaigns = campaigns;
         });
     }
 
