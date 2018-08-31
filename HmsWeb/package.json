@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "tslint app/*.ts -t verbose",
     "e2e": "ng e2e",
-    "prepare": "ng build --prod",
+    "prepare22": "ng build --prod",
     "deploy": "docker build -t hmsweb ."
   },
   "private": true,
@@ -32,9 +32,8 @@
     "bootstrap": "4.1.3",
     "@ng-bootstrap/ng-bootstrap": "3.2.0",
     "bootswatch": "4.1.3",
-    "classlist.js": "1.1.20150312",
     "core-js": "^2.4.1",
-    "rxjs": "^6.2.2",
+    "rxjs": "^6.3.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
